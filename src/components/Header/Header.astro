@@ -1,0 +1,45 @@
+---
+import { URL_LINKEDIN, URL_INSTAGRAM, URL_GITHUB } from "../../consts";
+import "./Header.scss";
+
+const internalLinks = [
+  {
+    link: "/experience",
+    text: "Experience",
+  },
+];
+
+const externalLinks = [
+  {
+    link: URL_LINKEDIN,
+    text: "LinkedIn",
+  },
+  {
+    link: URL_INSTAGRAM,
+    text: "Instagram",
+  },
+  {
+    link: URL_GITHUB,
+    text: "Github",
+  },
+];
+---
+
+<header>
+  <div class="root">
+    <div class="navBar">
+      <a href="/" class="homeLink">
+        <img class="logo" src="/logo/white.svg" alt="Alex Tuppen logo" />
+        <span class="homeLinkText">Alex Tuppen</span>
+      </a>
+      <div class="links">
+        <div class="toolbarInternal">
+          {internalLinks.map((link) => <a href={link.link}>{link.text}</a>)}
+        </div>
+        <div class="toolbarExternal">
+          {externalLinks.map((link) => <a href={link.link}>{link.text}</a>)}
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
