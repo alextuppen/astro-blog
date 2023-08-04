@@ -1,0 +1,129 @@
+@import "../../styles/globals";
+
+.button {
+  display: block;
+  color: $text;
+  background: none;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+}
+
+.button:active {
+  transform: translateY(0.2rem);
+}
+
+.textButton:hover,
+.textButton:active {
+  text-decoration: underline;
+  text-decoration-color: $primary;
+  text-decoration-style: double;
+}
+
+.icon {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.largeIcon {
+  width: 3rem;
+  height: 3rem;
+}
+
+.primary,
+.secondary {
+  white-space: nowrap;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  display: inline-flex;
+  gap: var(--padding-half);
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 8px 15px $base-colour;
+  border-radius: var(--border-radius);
+}
+
+.primary {
+  padding: calc(var(--padding-half) + var(--border-width))
+    calc(var(--padding) + var(--border-width));
+  background-color: $primary;
+  transition: background-color 0.25s ease-in-out;
+  color: $base-colour;
+}
+
+.primary:hover {
+  background-color: $primary-dark;
+}
+
+.primary:active {
+  background-color: $primary-light;
+}
+
+.secondary {
+  padding: var(--padding-half) var(--padding);
+  background-color: $base-colour;
+  border: var(--border-width) solid $primary;
+  transition: border 0.25s;
+}
+
+.secondary:hover {
+  background-color: rgba($color: $primary, $alpha: 0.1);
+  border-color: $primary-dark;
+}
+
+.secondary:active {
+  background-color: rgba($color: $primary, $alpha: 0.2);
+  border-color: $primary-light;
+}
+
+@include bp-small {
+  .icon {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
+  .largeIcon {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+}
+
+@include bp-medium {
+  .icon {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .largeIcon {
+    width: 4rem;
+    height: 4rem;
+  }
+}
+
+@include bp-large {
+  .icon {
+    width: 3.4rem;
+    height: 3.4rem;
+  }
+
+  .largeIcon {
+    width: 5rem;
+    height: 5rem;
+  }
+}
+
+@include bp-xl {
+  .icon {
+    width: 3.75rem;
+    height: 3.75rem;
+  }
+
+  .largeIcon {
+    width: 6rem;
+    height: 6rem;
+  }
+}

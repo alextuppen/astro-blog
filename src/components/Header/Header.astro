@@ -1,5 +1,6 @@
 ---
 import { URL_LINKEDIN, URL_INSTAGRAM, URL_GITHUB } from "../../consts";
+import Button, { ButtonVariants } from "../Button/Button.astro";
 import "./Header.scss";
 
 const internalLinks = [
@@ -28,16 +29,32 @@ const externalLinks = [
 <header>
   <div class="root">
     <div class="navBar">
-      <a href="/" class="homeLink">
+      <Button href="/" className="homeLink" variant={ButtonVariants.Text}>
         <img class="logo" src="/logo/white.svg" alt="Alex Tuppen logo" />
         <span class="homeLinkText">Alex Tuppen</span>
-      </a>
+      </Button>
       <div class="links">
         <div class="toolbarInternal">
-          {internalLinks.map((link) => <a href={link.link}>{link.text}</a>)}
+          {
+            internalLinks.map((link) => (
+              <Button href={link.link} variant={ButtonVariants.Text}>
+                {link.text}
+              </Button>
+            ))
+          }
         </div>
         <div class="toolbarExternal">
-          {externalLinks.map((link) => <a href={link.link}>{link.text}</a>)}
+          {
+            externalLinks.map((link) => (
+              <Button
+                href={link.link}
+                variant={ButtonVariants.Text}
+                external={true}
+              >
+                {link.text}
+              </Button>
+            ))
+          }
         </div>
       </div>
     </div>

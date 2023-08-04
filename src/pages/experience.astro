@@ -1,6 +1,7 @@
 ---
 import Header from "../components/Header/Header.astro";
 import BaseHead from "../components/BaseHead.astro";
+import Button, { ButtonVariants } from "../components/Button/Button.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 ---
 
@@ -12,5 +13,16 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
   <body>
     <Header title={SITE_TITLE} />
     <!-- <Footer /> -->
+    <Button id="button" className="test" variant={ButtonVariants.Primary}>
+      Text
+    </Button>
+    <p>blah blah blah</p>
+    <script>
+      const button = document.getElementById("button");
+
+      if (button) {
+        button.addEventListener("click", () => window.alert("test"));
+      }
+    </script>
   </body>
 </html>
