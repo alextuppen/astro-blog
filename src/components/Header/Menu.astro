@@ -1,0 +1,27 @@
+---
+import { internalLinks, externalLinks } from "./Header.astro";
+import MenuBurger from "./MenuBurger.astro";
+---
+
+<MenuBurger menuBurgerId={"menuBurger"} />
+
+<script>
+  let open = false;
+  const button = document.getElementById("menuBurger");
+
+  if (button) {
+    button.dataset.open = "false";
+
+    button.addEventListener("click", () => {
+      if (open) {
+        open = false;
+        button.dataset.open = "false";
+      } else {
+        open = true;
+        button.dataset.open = "true";
+      }
+    });
+  } else {
+    console.error("menuBurger button not found!");
+  }
+</script>

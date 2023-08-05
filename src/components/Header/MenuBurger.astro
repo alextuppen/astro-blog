@@ -1,0 +1,134 @@
+---
+import Button from "../Button/Button.astro";
+
+interface Props {
+  menuBurgerId: string;
+}
+
+const { menuBurgerId } = Astro.props;
+---
+
+<Button id={menuBurgerId} className="root">
+  <div id="menuBurgerFirst" class="first"></div>
+  <div id="menuBurgerMiddle" class="middle"></div>
+  <div id="menuBurgerHidden" class="hidden"></div>
+  <div id="menuBurgerLast" class="last"></div>
+</Button>
+
+<script>
+  const button = document.getElementById("menuBurger");
+  const buttonElements = [
+    document.getElementById("menuBurgerFirst"),
+    document.getElementById("menuBurgerMiddle"),
+    document.getElementById("menuBurgerHidden"),
+    document.getElementById("menuBurgerLast"),
+  ];
+
+  if (button) {
+    button.addEventListener("click", () => {
+      if (button.dataset.open === "true") {
+        buttonElements.map((element) => {
+          if (element) {
+            element.classList.add("menuBurgerOpen");
+          }
+        });
+      } else {
+        buttonElements.map((element) => {
+          if (element) {
+            element.classList.remove("menuBurgerOpen");
+          }
+        });
+      }
+    });
+  }
+</script>
+
+<style lang="scss">
+  @import "../../styles/globals";
+
+  .root {
+    width: 2rem;
+    height: 100%;
+    padding: 0;
+    position: relative;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transition: 0.5s ease-in-out;
+    -moz-transition: 0.5s ease-in-out;
+    -o-transition: 0.5s ease-in-out;
+    transition: 0.5s ease-in-out;
+  }
+
+  .first,
+  .middle,
+  .hidden,
+  .last {
+    position: absolute;
+    height: 15%;
+    width: 100%;
+    border-radius: var(--border-radius);
+    opacity: 1;
+    left: 0;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transition: 0.25s ease-in-out;
+    -moz-transition: 0.25s ease-in-out;
+    -o-transition: 0.25s ease-in-out;
+    transition: 0.25s ease-in-out;
+  }
+
+  .first,
+  .last {
+    background: $text;
+  }
+
+  .middle,
+  .hidden {
+    background: $primary;
+  }
+
+  .first {
+    top: 10%;
+  }
+
+  .middle,
+  .hidden {
+    top: 42.5%;
+  }
+
+  .last {
+    bottom: 10%;
+  }
+
+  .menuBurgerOpen {
+    &.first {
+      top: 42.5%;
+      width: 0%;
+      left: 50%;
+    }
+
+    &.middle {
+      -webkit-transform: rotate(45deg);
+      -moz-transform: rotate(45deg);
+      -o-transform: rotate(45deg);
+      transform: rotate(45deg);
+    }
+
+    &.hidden {
+      -webkit-transform: rotate(-45deg);
+      -moz-transform: rotate(-45deg);
+      -o-transform: rotate(-45deg);
+      transform: rotate(-45deg);
+    }
+
+    &.last {
+      top: 42.5%;
+      width: 0%;
+      left: 50%;
+    }
+  }
+</style>
