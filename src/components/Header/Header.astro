@@ -36,30 +36,30 @@ export const externalLinks = [
       <div class="links">
         <div class="toolbarInternal">
           {
-            internalLinks.map((link) => (
-              <Button href={link.link} variant={ButtonVariants.Text}>
-                {link.text}
+            internalLinks.map(({ link, text }) => (
+              <Button href={link} variant={ButtonVariants.Text}>
+                {text}
               </Button>
             ))
           }
         </div>
         <div class="toolbarExternal">
           {
-            externalLinks.map((link) => (
+            externalLinks.map(({ link, text }) => (
               <>
                 <hr class="toolbarSeperator" />
                 <Button
-                  href={link.link}
+                  href={link}
                   variant={ButtonVariants.Text}
                   external={true}
                 >
-                  {link.text}
+                  {text}
                 </Button>
               </>
             ))
           }
         </div>
-        <div>
+        <div class="buttonWrapper">
           <Menu />
         </div>
       </div>
@@ -68,7 +68,7 @@ export const externalLinks = [
 </header>
 
 <style lang="scss">
-  @import "../../styles/globals";
+  @import "../../styles/_globals.scss";
 
   .root {
     @include elev-9();
@@ -128,6 +128,10 @@ export const externalLinks = [
   .toolbarSeperator {
     height: 100%;
     border-right-color: $text;
+  }
+
+  .buttonWrapper {
+    display: block;
   }
 
   .menu {
