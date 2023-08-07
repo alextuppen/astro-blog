@@ -5,44 +5,60 @@ import MenuBurger from "./MenuBurger.astro";
 ---
 
 <MenuBurger menuBurgerId={"menuBurger"} />
-<div class="menu">
-  <div class="menuInternal">
-    {
-      internalLinks.map(({ link, text }) => (
-        <Button href={link} variant={ButtonVariants.Text}>
+<div id="menu" class="menu">
+  {
+    internalLinks.map(({ link, text }, index) => (
+      <>
+        <Button href={link} variant={ButtonVariants.Text} className="internal">
           {text}
         </Button>
-      ))
-    }
-  </div>
-  <hr />
+        {index < internalLinks.length - 1 ? (
+          <hr class:list={["menuSeparator", "internal"]} />
+        ) : null}
+      </>
+    ))
+  }
+  <hr class:list={["primarySeparator", "internal"]} />
   {
-    externalLinks.map(({ link, text }) => {
-      <Button href={link} variant={ButtonVariants.Text} external>
-        {text}
-      </Button>;
-    })
+    externalLinks.map(({ link, text }, index) => (
+      <>
+        <Button href={link} variant={ButtonVariants.Text} external>
+          {text}
+        </Button>
+        {index < externalLinks.length - 1 ? <hr class="menuSeparator" /> : null}
+      </>
+    ))
   }
 </div>
 
 <script>
   let open = false;
   const button = document.getElementById("menuBurger");
+  const menu = document.getElementById("menu");
 
-  if (button) {
-    button.dataset.open = "false";
+  if (button && menu) {
+    const setElementsData = (value: "true" | "false") => {
+      button.dataset.open = value;
+      menu.dataset.open = value;
+    };
 
-    button.addEventListener("click", () => {
+    const toggleOpen = () => {
       if (open) {
         open = false;
-        button.dataset.open = "false";
+        setElementsData("false");
       } else {
         open = true;
-        button.dataset.open = "true";
+        setElementsData("true");
       }
+    };
+
+    setElementsData("false");
+
+    button.addEventListener("click", () => {
+      toggleOpen();
     });
   } else {
-    console.error("menuBurger button not found!");
+    console.error("menuBurger button and menu not found!");
   }
 </script>
 
@@ -50,42 +66,51 @@ import MenuBurger from "./MenuBurger.astro";
   @import "../../styles/_globals.scss";
 
   .menu {
-    @include elev-8();
-    margin-top: calc(var(--padding-half) + var(--border-width));
-    padding: var(--padding-half);
+    position: absolute;
+    top: calc(var(--padding-half) + 100%);
+    right: calc(100% - var(--burger-width) - var(--border-radius));
+    @include elev-9();
+    padding: var(--padding-half) var(--padding-half) var(--padding)
+      var(--padding-half);
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: var(--padding-half);
     border-bottom-left-radius: var(--border-radius);
-    border-bottom-right-radius: var(--border-radius);
-    border-left: var(--border-width) solid $primary;
-    border-bottom: var(--border-width) solid $primary;
-    border-right: var(--border-width) solid $primary;
     transition: opacity 250ms ease-in-out, transform 250ms ease-in-out;
     opacity: 0;
     transform-origin: top center;
     transform: scaleY(0);
-    [data-enter] & {
-      opacity: 1;
-      transform: scaleY(1);
-    }
   }
 
-  .menuInternal {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--padding-half);
+  .menu[data-open="true"] {
+    opacity: 1;
+    transform: scaleY(1);
   }
 
-  .menuSeperator {
+  .menuSeparator,
+  .primarySeparator {
     width: 100%;
+  }
+
+  .menuSeparator {
     border-bottom-color: $text;
   }
 
+  .primarySeparator {
+    border-bottom-color: $primary;
+  }
+
   @include bp-small {
-    .menuInternal {
+    .menu {
+      border-bottom-right-radius: var(--border-radius);
+    }
+
+    .internal {
+      display: none;
+    }
+
+    .internalLink {
       display: none;
     }
   }

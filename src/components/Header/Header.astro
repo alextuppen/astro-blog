@@ -5,6 +5,14 @@ import Menu from "./Menu.astro";
 
 export const internalLinks = [
   {
+    link: "/recipes",
+    text: "Recipes",
+  },
+  {
+    link: "/blog",
+    text: "Blog",
+  },
+  {
     link: "/experience",
     text: "Experience",
   },
@@ -34,31 +42,40 @@ export const externalLinks = [
         <span class="homeLinkText">Alex Tuppen</span>
       </Button>
       <div class="links">
-        <div class="toolbarInternal">
-          {
-            internalLinks.map(({ link, text }) => (
-              <Button href={link} variant={ButtonVariants.Text}>
+        {
+          internalLinks.map(({ link, text }, index) => (
+            <>
+              <Button
+                href={link}
+                variant={ButtonVariants.Text}
+                className="internal"
+              >
                 {text}
               </Button>
-            ))
-          }
-        </div>
-        <div class="toolbarExternal">
-          {
-            externalLinks.map(({ link, text }) => (
-              <>
-                <hr class="toolbarSeperator" />
-                <Button
-                  href={link}
-                  variant={ButtonVariants.Text}
-                  external={true}
-                >
-                  {text}
-                </Button>
-              </>
-            ))
-          }
-        </div>
+              {index < internalLinks.length - 1 ? (
+                <hr class:list={["toolbarSeperator", "internal"]} />
+              ) : null}
+            </>
+          ))
+        }
+        <hr class:list={["primarySeperator", "external"]} />
+        {
+          externalLinks.map(({ link, text }, index) => (
+            <>
+              <Button
+                href={link}
+                variant={ButtonVariants.Text}
+                external={true}
+                className="external"
+              >
+                {text}
+              </Button>
+              {index < externalLinks.length - 1 ? (
+                <hr class:list={["toolbarSeperator", "external"]} />
+              ) : null}
+            </>
+          ))
+        }
         <div class="buttonWrapper">
           <Menu />
         </div>
@@ -115,59 +132,33 @@ export const externalLinks = [
 
   .links {
     display: flex;
+    align-items: center;
     gap: var(--padding-half);
   }
 
-  .toolbarInternal,
-  .toolbarExternal {
+  .internal,
+  .external {
     display: none;
-    align-items: center;
-    gap: var(--padding-half);
+  }
+
+  .toolbarSeperator,
+  .primarySeperator {
+    height: 100%;
   }
 
   .toolbarSeperator {
-    height: 100%;
     border-right-color: $text;
   }
 
+  .primarySeperator {
+    border-right-color: $primary;
+  }
+
   .buttonWrapper {
+    --burger-width: 2rem;
+    position: relative;
     display: block;
-  }
-
-  .menu {
-    @include elev-8();
-    margin-top: calc(var(--padding-half) + var(--border-width));
-    padding: var(--padding-half);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--padding-half);
-    border-bottom-left-radius: var(--border-radius);
-    border-bottom-right-radius: var(--border-radius);
-    border-left: var(--border-width) solid $primary;
-    border-bottom: var(--border-width) solid $primary;
-    border-right: var(--border-width) solid $primary;
-    transition: opacity 250ms ease-in-out, transform 250ms ease-in-out;
-    opacity: 0;
-    transform-origin: top center;
-    transform: scaleY(0);
-    [data-enter] & {
-      opacity: 1;
-      transform: scaleY(1);
-    }
-  }
-
-  .menuInternal,
-  .menuExternal {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--padding-half);
-  }
-
-  .menuSeperator {
-    width: 100%;
-    border-bottom-color: $text;
+    height: 100%;
   }
 
   @include bp-small {
@@ -175,21 +166,13 @@ export const externalLinks = [
       --logo-height: 2.25rem;
     }
 
-    .menuInternal {
-      display: none;
-    }
-
-    .toolbarInternal {
+    .internal {
       display: flex;
     }
   }
 
   @include bp-medium {
-    .menuExternal {
-      display: none;
-    }
-
-    .toolbarExternal {
+    .external {
       display: flex;
     }
 
