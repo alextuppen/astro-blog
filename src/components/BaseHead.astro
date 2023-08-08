@@ -61,12 +61,14 @@ const { title, description, image = "/blog-placeholder-1.jpg" } = Astro.props;
     --border-width: 0.1rem;
     --border-radius: 0.5rem;
     --border-radius-double: calc(var(--border-radius) * 2);
+    --page-max-width: 100%;
     --content-max-width: 100%;
+    --padding-quarter: calc(var(--padding) / 4);
     --padding-half: calc(var(--padding) / 2);
     --padding: 1rem;
     --padding-double: calc(var(--padding) * 2);
     --padding-triple: calc(var(--padding) * 3);
-    --font-size: 1rem;
+    --font-size: 1.2rem;
   }
 
   body {
@@ -81,9 +83,9 @@ const { title, description, image = "/blog-placeholder-1.jpg" } = Astro.props;
     html {
       --border-width: 0.125rem;
       --border-radius: 0.75rem;
-      --content-max-width: 95%;
+      --page-max-width: 95%;
+      --content-max-width: 45rem;
       --padding: 1.125rem;
-      --font-size: 1.1rem;
     }
   }
 
@@ -92,20 +94,12 @@ const { title, description, image = "/blog-placeholder-1.jpg" } = Astro.props;
       --border-width: 0.15rem;
       --border-radius: 1rem;
       --padding: 1.25rem;
-      --font-size: 1.2rem;
     }
   }
 
   @include bp-large {
     html {
-      --content-max-width: 70rem;
-      --font-size: 1.3rem;
-    }
-  }
-
-  @include bp-xl {
-    html {
-      --content-max-width: 90rem;
+      --page-max-width: 70rem;
     }
   }
 </style>

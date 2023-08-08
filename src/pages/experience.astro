@@ -2,6 +2,7 @@
 import Header from "../components/Header/Header.astro";
 import BaseHead from "../components/BaseHead.astro";
 import Button, { ButtonVariants } from "../components/Button/Button.astro";
+import Footer from "../components/Footer.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 ---
 
@@ -12,11 +13,11 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
   </head>
   <body>
     <Header title={SITE_TITLE} />
-    <!-- <Footer /> -->
     <Button id="button" className="test" variant={ButtonVariants.Primary}>
       Text
     </Button>
     <p>blah blah blah</p>
+    <Footer />
     <script>
       const button = document.getElementById("button");
 

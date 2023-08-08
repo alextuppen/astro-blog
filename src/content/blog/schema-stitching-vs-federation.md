@@ -2,16 +2,17 @@
 title: "GraphQL Schema Stitching vs Apollo Federation in a startup"
 description: "Lorem ipsum dolor sit amet"
 pubDate: "2023/02/01"
-heroImage: "/blog-placeholder-5.jpg"
+heroImage: "/large_clusters_of_bright_dots_and_connecting_lines_on_a_field_of_inky_black.webp"
+heroImageText: "An image generated using DALL.E with the prompt; large clusters of bright dots and connecting lines on a field of inky black"
 ---
 
 ## Existing architecture
 
 HeadBox is a small event tech startup with multiple micro front and back end services and a long history of using GraphQL in production. Unfortunately that GraphQL use has historically been, as coined by my friend Kai “REST over GraphQL”. Each back end service published its own graph and front end services then consumed each graph individually, historically this was not an issue because both services would be built at the same time to solve a single problem. However as products matured and the commercial requirements evolved front ends would start to need data from more than one back end, a problem because GraphQL client libraries are designed to only communicate with one graph at a time.
 
-To avoid this problem some of the back end services evolved from being just a micro service, to being a micro service and a back end for front end service. When a front end (A) required some data that was not held by the back end service it was tightly coupled with (B), that back end would make a GraphQL request to the back end service that did hold the data (C), the initial back end service (B) would then return that data to the front end (A) in its own graph.
+To avoid this problem some of the back end services evolved from being a micro service, to being a micro service and a back end for front end service. When a front end (A) required some data that was not held by the back end service it was tightly coupled with (B), that back end would make a GraphQL request to the back end service that did hold the data (C), the initial back end service (B) would then return that data to the front end (A) in its own graph.
 
-<diagram of the above here>
+<!-- <diagram of the above here> -->
 
 Over time technical debt built up as some services were accessed directly while others were accessed by proxy with different front ends all adopting their own unique behaviours. Because of the lack of cohesion across services a number of undesirable behaviours developed.
 
@@ -84,7 +85,6 @@ export const filterGatewayExcludedTransforms = [
   new FilterObjectFields(filterGatewayExcluded),
   new FilterRootFields(filterGatewayExcluded),
 ]
-
 ```
 
 First we make sure that all fields without the @deprecated directive are included in the schema:
