@@ -2,7 +2,8 @@
 title: "How to structure directories in React"
 description: "Lorem ipsum dolor sit amet"
 pubDate: "2023/01/23"
-heroImage: "/blog-placeholder-5.jpg"
+heroImage: "/fraught_stickman_overwhelmed_by_multiple_giant_piles_of_paper.webp"
+heroImageText: "An image generated using DALL.E with the prompt: fraught stickman overwhelmed by multiple giant piles of paper"
 ---
 
 ## Why does directory structure matter?
