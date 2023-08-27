@@ -33,7 +33,7 @@ ComponentName
 └── ComponentName.test.tsx
 ```
 
-##### index.ts
+#### index.ts
 
 The index file is how the component interacts with the outside world, often the only export from this file will be the component itself but it could also include things like a type describing the components props. Using an index file reduces the length of the import when the component is used from:
 
@@ -49,15 +49,15 @@ import { ComponentName } from ../../ComponentName
 
 Which is a small difference but in a large code base adds up quickly.
 
-##### ComponentName.tsx
+#### ComponentName.tsx
 
 Contains the component itself, the core logic and the JSX markup.
 
-##### ComponentName.styles.tsx
+#### ComponentName.styles.tsx
 
 The styles file could be styled components, CSS in JS, SASS, CSS etc, but it is split out from the main component because styling often generates a lot of lines of code and a single file containing logic, styling and markup can get very large very quickly.
 
-##### ComponentName.test.tsx
+#### ComponentName.test.tsx
 
 The test file contains the unit tests for the component, some people prefer to group their test files together away from the code being tested, but that breaks the rule that a component is an object that is isolated and independent; everything about the component should be grouped together in one place.
 

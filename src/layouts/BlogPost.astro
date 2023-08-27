@@ -22,6 +22,18 @@ const { title, description, pubDate, updatedDate, heroImage, heroImageText } =
         margin: auto;
       }
 
+      .heroWrapper {
+        display: flex;
+        padding-top: var(--padding);
+      }
+
+      .heroImage {
+        width: 80%;
+        height: 80%;
+        margin: auto;
+        border-radius: var(--border-radius-double);
+      }
+
       .wrapper {
         width: calc(100% - var(--padding-double));
         margin: auto;
@@ -54,6 +66,15 @@ const { title, description, pubDate, updatedDate, heroImage, heroImageText } =
         max-width: var(--content-max-width);
         margin: auto;
       }
+
+      @include bp-small {
+        .heroImage {
+          width: 50%;
+          height: 50%;
+          margin: auto;
+          border-radius: var(--border-radius-double);
+        }
+      }
     </style>
     <style is:global lang="scss">
       @import "../styles/_globals.scss";
@@ -62,8 +83,8 @@ const { title, description, pubDate, updatedDate, heroImage, heroImageText } =
         margin-top: var(--padding-triple);
       }
 
-      .content > h5 {
-        margin-top: var(--padding-half);
+      .content > h4 {
+        margin-top: var(--padding-double);
       }
 
       .content > pre {
@@ -81,15 +102,16 @@ const { title, description, pubDate, updatedDate, heroImage, heroImageText } =
     <Header />
     <main>
       <article>
-        <div class="hero-image">
+        <div class="heroWrapper">
           {
             heroImage && (
               <img
-                width={100}
-                height={100}
+                width="300"
+                height="300"
                 src={heroImage}
                 alt={heroImageText}
                 title={heroImageText}
+                class="heroImage"
               />
             )
           }
