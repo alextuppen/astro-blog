@@ -1,8 +1,8 @@
 ---
-title: "GraphQL Schema Stitching vs Apollo Federation in a startup"
+title: "GraphQL Schema Stitching vs Apollo Federation"
 description: "Lorem ipsum dolor sit amet"
 pubDate: "2023/02/01"
-heroImage: "/large_clusters_of_bright_dots_and_connecting_lines_on_a_field_of_inky_black.webp"
+heroImage: "/blog/large_clusters_of_bright_dots_and_connecting_lines_on_a_field_of_inky_black.webp"
 heroImageText: "An image generated using DALL.E with the prompt: large clusters of bright dots and connecting lines on a field of inky black"
 ---
 

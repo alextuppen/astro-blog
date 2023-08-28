@@ -1,6 +1,6 @@
 ---
-import { URL_LINKEDIN, URL_INSTAGRAM, URL_GITHUB } from "../../consts";
-import Button, { ButtonVariants } from "../Button/Button.astro";
+import { URL_LINKEDIN, URL_INSTAGRAM, URL_GITHUB } from "../../../consts";
+import { Button, ButtonVariants } from "../../Input";
 import Menu from "./Menu.astro";
 
 export const internalLinks = [
@@ -32,9 +32,11 @@ export const externalLinks = [
     text: "Github",
   },
 ];
+
+const { className } = Astro.props;
 ---
 
-<header>
+<header class:list={[className]}>
   <div class="root">
     <div class="navBar">
       <Button href="/" className="homeLink" variant={ButtonVariants.Text}>
@@ -85,7 +87,7 @@ export const externalLinks = [
 </header>
 
 <style lang="scss">
-  @import "../../styles/_globals.scss";
+  @import "../../../styles/_globals.scss";
 
   .root {
     @include elev-9();

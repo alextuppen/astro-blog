@@ -1,0 +1,42 @@
+---
+import { BaseHead, Header, Footer } from "../components/Layout";
+
+const { title, description } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <BaseHead title={title} description={description} />
+    <style>
+      body {
+        height: 100%;
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        grid-template-areas:
+          "header"
+          "main"
+          "footer";
+      }
+
+      .header {
+        grid-area: header;
+      }
+
+      main {
+        grid-area: main;
+      }
+
+      .footer {
+        grid-area: footer;
+      }
+    </style>
+  </head>
+
+  <body>
+    <Header className="header" />
+    <main>
+      <slot />
+    </main>
+    <Footer className="footer" />
+  </body>
+</html>

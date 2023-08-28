@@ -1,9 +1,7 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import BaseHead from "../components/BaseHead.astro";
-import Header from "../components/Header/Header.astro";
-import Footer from "../components/Footer.astro";
-import FormattedDate from "../components/FormattedDate.astro";
+import Root from "../layouts/Root.astro";
+import { FormattedDate } from "../components/Display";
 
 type Props = CollectionEntry<"blog">["data"];
 
@@ -11,132 +9,124 @@ const { title, description, pubDate, updatedDate, heroImage, heroImageText } =
   Astro.props;
 ---
 
-<html lang="en">
-  <head>
-    <BaseHead title={title} description={description} />
-    <style lang="scss">
-      @import "../styles/_globals.scss";
-
-      article {
-        max-width: var(--page-max-width);
-        margin: auto;
+<Root title={title} description={description}>
+  <article>
+    <div class="heroWrapper">
+      {
+        heroImage && (
+          <img
+            width="300"
+            height="300"
+            src={heroImage}
+            alt={heroImageText}
+            title={heroImageText}
+            class="heroImage"
+          />
+        )
       }
-
-      .heroWrapper {
-        display: flex;
-        padding-top: var(--padding);
-      }
-
-      .heroImage {
-        width: 80%;
-        height: 80%;
-        margin: auto;
-        border-radius: var(--border-radius-double);
-      }
-
-      .wrapper {
-        width: calc(100% - var(--padding-double));
-        margin: auto;
-        padding: var(--padding);
-      }
-
-      .titleWrapper {
-        display: flex;
-        flex-direction: column;
-        padding-top: var(--padding);
-        padding-bottom: var(--padding);
-        text-align: center;
-      }
-
-      .title {
-        margin-bottom: var(--padding-double);
-      }
-
-      .date {
-        margin-bottom: var(--padding);
-        color: $text-medium-emphasis;
-      }
-
-      .separator {
-        border-bottom-color: $text;
-        margin: 0 var(--padding-double);
-      }
-
-      .content {
-        max-width: var(--content-max-width);
-        margin: auto;
-      }
-
-      @include bp-small {
-        .heroImage {
-          width: 50%;
-          height: 50%;
-          margin: auto;
-          border-radius: var(--border-radius-double);
-        }
-      }
-    </style>
-    <style is:global lang="scss">
-      @import "../styles/_globals.scss";
-
-      .content > h2 {
-        margin-top: var(--padding-triple);
-      }
-
-      .content > h4 {
-        margin-top: var(--padding-double);
-      }
-
-      .content > pre {
-        border-radius: var(--border-radius);
-        padding: var(--padding-half);
-      }
-
-      .content > pre > code > span > span {
-        font-family: monospace;
-      }
-    </style>
-  </head>
-
-  <body>
-    <Header />
-    <main>
-      <article>
-        <div class="heroWrapper">
+    </div>
+    <div class="wrapper">
+      <div class="titleWrapper">
+        <div class="date">
+          <FormattedDate date={pubDate} />
           {
-            heroImage && (
-              <img
-                width="300"
-                height="300"
-                src={heroImage}
-                alt={heroImageText}
-                title={heroImageText}
-                class="heroImage"
-              />
+            updatedDate && (
+              <div>
+                Last updated on <FormattedDate date={updatedDate} />
+              </div>
             )
           }
         </div>
-        <div class="wrapper">
-          <div class="titleWrapper">
-            <div class="date">
-              <FormattedDate date={pubDate} />
-              {
-                updatedDate && (
-                  <div>
-                    Last updated on <FormattedDate date={updatedDate} />
-                  </div>
-                )
-              }
-            </div>
-            <h1 class="title">{title}</h1>
-            <hr class="separator" />
-          </div>
-          <div class="content">
-            <slot />
-          </div>
-        </div>
-      </article>
-    </main>
-    <Footer />
-  </body>
-</html>
+        <h1 class="title">{title}</h1>
+        <hr class="separator" />
+      </div>
+      <div class="content">
+        <slot />
+      </div>
+    </div>
+  </article>
+</Root>
+
+<style lang="scss">
+  @import "../styles/_globals.scss";
+
+  article {
+    max-width: var(--page-max-width);
+    margin: auto;
+  }
+
+  .heroWrapper {
+    display: flex;
+    padding-top: var(--padding);
+  }
+
+  .heroImage {
+    width: 80%;
+    height: 80%;
+    margin: auto;
+    border-radius: var(--border-radius-double);
+  }
+
+  .wrapper {
+    width: calc(100% - var(--padding-double));
+    margin: auto;
+    padding: var(--padding);
+  }
+
+  .titleWrapper {
+    display: flex;
+    flex-direction: column;
+    padding-top: var(--padding);
+    padding-bottom: var(--padding);
+    text-align: center;
+  }
+
+  .title {
+    margin-bottom: var(--padding-double);
+  }
+
+  .date {
+    margin-bottom: var(--padding);
+    color: $text-medium-emphasis;
+  }
+
+  .separator {
+    border-bottom-color: $text;
+    margin: 0 var(--padding-double);
+  }
+
+  .content {
+    max-width: var(--content-max-width);
+    margin: auto;
+  }
+
+  @include bp-small {
+    .heroImage {
+      width: 50%;
+      height: 50%;
+      margin: auto;
+      border-radius: var(--border-radius-double);
+    }
+  }
+</style>
+<style is:global lang="scss">
+  @import "../styles/_globals.scss";
+
+  .content > h2 {
+    margin-top: var(--padding-triple);
+  }
+
+  .content > h4 {
+    margin-top: var(--padding-double);
+  }
+
+  .content > pre {
+    @include elev-9();
+    border-radius: var(--border-radius);
+    padding: var(--padding-half);
+  }
+
+  .content > pre > code > span > span {
+    font-family: monospace;
+  }
+</style>

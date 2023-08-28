@@ -1,8 +1,8 @@
 ---
-title: "How to structure directories in React"
+title: "React directory structure"
 description: "Lorem ipsum dolor sit amet"
 pubDate: "2023/01/23"
-heroImage: "/fraught_stickman_overwhelmed_by_multiple_giant_piles_of_paper.webp"
+heroImage: "/blog/fraught_stickman_overwhelmed_by_multiple_giant_piles_of_paper.webp"
 heroImageText: "An image generated using DALL.E with the prompt: fraught stickman overwhelmed by multiple giant piles of paper"
 ---
 

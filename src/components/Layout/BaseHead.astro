@@ -9,13 +9,13 @@ interface Props {
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { title, description, image = "/blog-placeholder-1.jpg" } = Astro.props;
+const { title, description, image = "/logo/white.svg" } = Astro.props;
 ---
 
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<link rel="icon" type="image/svg+xml" href="logo/grey.svg" />
+<link rel="icon" type="image/svg+xml" href="/logo/white.svg" />
 <meta name="generator" content={Astro.generator} />
 
 <!-- Font preloads -->
@@ -50,14 +50,15 @@ const { title, description, image = "/blog-placeholder-1.jpg" } = Astro.props;
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
 
 <style lang="scss">
-  @import "../styles/_globals.scss";
-  @import "../styles/typography.scss";
+  @import "../../styles/_globals.scss";
+  @import "../../styles/typography.scss";
 
   * {
     box-sizing: border-box;
   }
 
   html {
+    height: 100%;
     --border-width: 0.1rem;
     --border-radius: 0.5rem;
     --border-radius-double: calc(var(--border-radius) * 2);
