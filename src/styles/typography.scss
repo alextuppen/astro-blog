@@ -55,6 +55,14 @@ time {
   font-size: var(--font-size);
 }
 
+a:link {
+  color: $primary-light;
+}
+
+a:visited {
+  color: $secondary-light;
+}
+
 @include bp-small {
   h1 {
     font-size: 2.6rem;

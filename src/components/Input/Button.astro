@@ -26,7 +26,6 @@ const { id, className, variant, href, external = false } = Astro.props;
 const classList = [
   "button",
   {
-    // @ts-expect-error
     [className]: className ? className : null,
     primary: variant === ButtonVariants.Primary,
     secondary: variant === ButtonVariants.Secondary,
@@ -58,7 +57,7 @@ const classList = [
 
   .button {
     display: block;
-    color: $text;
+    color: $text !important;
     background: none;
     border: none;
     text-decoration: none;
