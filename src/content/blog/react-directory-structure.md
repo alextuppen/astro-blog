@@ -1,6 +1,6 @@
 ---
 title: "React directory structure"
-description: "Lorem ipsum dolor sit amet"
+description: "Discussing how a React component's logical structure can be reflected in its file structure to improve developer experience."
 pubDate: "2023/01/23"
 heroImage: "/blog/fraught_stickman_overwhelmed_by_multiple_giant_piles_of_paper.webp"
 heroImageText: "An image generated using DALL.E with the prompt: fraught stickman overwhelmed by multiple giant piles of paper"
@@ -63,7 +63,7 @@ The test file contains the unit tests for the component, some people prefer to g
 
 ## Parents and children
 
-Sometimes you need to break the rule that a component must be independent, when creating a complex component, especially one with a repeating element, it is often good practice to create a tightly coupled child component. As our previously described directory structure pattern is intended to describe what everything in the directory does at a glance we need a way to show the tightly coupled relationship between a parent and a child component. Fortunately the existing pattern is recursive.
+Sometimes you need to break the rule that a component must be independent. When creating a complex component, especially one with a repeating element, it is often good practice to create a tightly coupled child component. As our previously described directory structure pattern is intended to describe what everything in the directory does at a glance we need a way to show the tightly coupled relationship between a parent and a child component. Fortunately the existing pattern is recursive.
 
 ```
 Components
