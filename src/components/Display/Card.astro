@@ -1,0 +1,14 @@
+<div class="card">
+  <slot />
+</div>
+
+<style lang="scss">
+  .card {
+    width: 100%;
+    padding: var(--padding-double) var(--padding);
+    display: grid;
+    place-items: center center;
+    grid-template-columns: 1fr;
+    gap: var(--padding-double);
+  }
+</style>

@@ -1,3 +1,4 @@
 import FormattedDate from "./FormattedDate.astro";
+import Card from "./Card.astro";
 
-export { FormattedDate };
+export { Card, FormattedDate };
