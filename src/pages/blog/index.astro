@@ -3,7 +3,6 @@ import Root from "../../layouts/Root.astro";
 import { SITE_DESCRIPTION } from "../../consts";
 import { getCollection } from "astro:content";
 import FormattedDate from "../../components/Display/FormattedDate.astro";
-import { Card } from "../../components/Display";
 
 const posts = (await getCollection("blog")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
@@ -11,25 +10,27 @@ const posts = (await getCollection("blog")).sort(
 ---
 
 <Root title="Blog" description={SITE_DESCRIPTION}>
+  <div class="title-wrapper">
+    <h1>Blog</h1>
+  </div>
   <section>
     <ol>
       {
         posts.map((post) => (
           <li>
             <a href={`/blog/${post.slug}/`}>
-              <Card>
-                <img
-                  width={720}
-                  height={360}
-                  src={post.data.heroImage}
-                  alt=""
-                />
-                <h4 class="title">{post.data.title}</h4>
-                <p>{post.data.description}</p>
-                <p class="date">
-                  <FormattedDate date={post.data.pubDate} />
-                </p>
-              </Card>
+              <h2 class="title">{post.data.title}</h2>
+              <p class="date">
+                <FormattedDate date={post.data.pubDate} className="time" />
+              </p>
+              <img
+                class="image"
+                width={300}
+                height={300}
+                src={post.data.heroImage}
+                alt={post.data.heroImageText}
+              />
+              <p class="description">{post.data.description}</p>
             </a>
           </li>
         ))
@@ -38,4 +39,82 @@ const posts = (await getCollection("blog")).sort(
   </section>
 </Root>
 
-<style></style>
+<style lang="scss">
+  @import "../../styles/_globals.scss";
+
+  .title-wrapper {
+    display: flex;
+    padding-top: var(--padding-double);
+  }
+
+  h1 {
+    margin: auto;
+  }
+
+  section {
+    max-width: var(--page-max-width);
+    margin: auto;
+  }
+
+  ol {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-double);
+    margin: unset;
+    padding: var(--padding-double) 0;
+  }
+
+  li {
+    @include elev-1();
+    padding: unset;
+  }
+
+  a:link,
+  a:visited {
+    color: unset;
+  }
+
+  a {
+    padding: var(--padding) 0;
+    display: grid;
+    grid-template-areas:
+      "title"
+      "date"
+      "image"
+      "description";
+    justify-items: center;
+    text-align: center;
+    text-decoration: unset;
+  }
+
+  .a:active > title,
+  a:hover > .title {
+    text-decoration: underline;
+    text-decoration-color: $primary;
+  }
+
+  .title {
+    grid-area: title;
+    margin: unset;
+  }
+
+  .date {
+    grid-area: date;
+  }
+
+  .time {
+    color: $text-medium-emphasis;
+  }
+
+  .image {
+    grid-area: image;
+    border-radius: var(--border-radius);
+    margin: var(--padding) 0;
+  }
+
+  .description {
+    grid-area: description;
+    // padding-bottom: var(--padding-double);
+  }
+</style>
