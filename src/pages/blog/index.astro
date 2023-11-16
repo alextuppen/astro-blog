@@ -70,11 +70,6 @@ const posts = (await getCollection("blog")).sort(
     padding: unset;
   }
 
-  a:link,
-  a:visited {
-    color: unset;
-  }
-
   a {
     padding: var(--padding) 0;
     display: grid;
@@ -85,6 +80,7 @@ const posts = (await getCollection("blog")).sort(
       "description";
     justify-items: center;
     text-align: center;
+    color: unset;
     text-decoration: unset;
   }
 
@@ -115,6 +111,5 @@ const posts = (await getCollection("blog")).sort(
 
   .description {
     grid-area: description;
-    // padding-bottom: var(--padding-double);
   }
 </style>
