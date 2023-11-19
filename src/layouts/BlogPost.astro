@@ -70,7 +70,6 @@ const { title, description, pubDate, updatedDate, heroImage, heroImageText } =
   .wrapper {
     width: calc(100% - var(--padding-double));
     margin: auto;
-    padding: var(--padding);
   }
 
   .titleWrapper {
@@ -107,6 +106,10 @@ const { title, description, pubDate, updatedDate, heroImage, heroImageText } =
       margin: auto;
       border-radius: var(--border-radius-double);
     }
+
+    .wrapper {
+      padding: var(--padding);
+    }
   }
 </style>
 <style is:global lang="scss">
@@ -120,10 +123,16 @@ const { title, description, pubDate, updatedDate, heroImage, heroImageText } =
     margin-top: var(--padding-double);
   }
 
+  .content > ul {
+    padding-left: var(--padding);
+    list-style-image: url("/logo/bulletPoints/white.svg");
+  }
+
   .content > pre {
     @include elev-9();
     border-radius: var(--border-radius);
     padding: var(--padding-half);
+    max-width: calc(100vw - var(--padding));
   }
 
   .content > pre > code > span > span {
