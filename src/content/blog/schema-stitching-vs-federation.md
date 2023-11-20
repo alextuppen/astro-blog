@@ -1,6 +1,6 @@
 ---
 title: "GraphQL Schema Stitching vs Apollo Federation"
-description: "Evaluating the two approaches to combining multiple GraphQL APIs in a startup environment with multiple existing APIs and consumers."
+description: "Evaluating the two approaches to combining multiple micro GraphQL APIs in a startup environment without impacting product timelines."
 pubDate: "2023/02/01"
 heroImage: "/blog/large_clusters_of_bright_dots_and_connecting_lines_on_a_field_of_inky_black.webp"
 heroImageText: "An image generated using DALL.E with the prompt: large clusters of bright dots and connecting lines on a field of inky black"
