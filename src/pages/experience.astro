@@ -1,12 +1,38 @@
 ---
 import Root from "../layouts/Root.astro";
-import { Button, ButtonVariants } from "../components/Input";
 import { SITE_DESCRIPTION } from "../consts";
+
+import { experiences } from "../content/static-content";
 ---
 
 <Root title="Experience" description={SITE_DESCRIPTION}>
-  <Button id="button" className="test" variant={ButtonVariants.Primary}>
-    Text
-  </Button>
-  <p>blah blah blah</p>
+  <div>
+    <h1>Experience</h1>
+  </div>
+  {
+    experiences.map(
+      ({
+        title,
+        details: { organisation, location, startDate, endDate, roleType },
+        technologies,
+        description,
+      }) => (
+        <div>
+          <h3>{title}</h3>
+          <div>
+            <span>{organisation}</span>
+            <span>{location}</span>
+            <span>{startDate}</span>
+            <span>{endDate}</span>
+            <span>{roleType}</span>
+          </div>
+          {technologies &&
+            technologies.map((technology) => {
+              <span>{technology}</span>;
+            })}
+          <span>{description[0]}</span>
+        </div>
+      )
+    )
+  }
 </Root>
