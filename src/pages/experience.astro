@@ -1,38 +1,144 @@
 ---
-import Root from "../layouts/Root.astro";
+import { Root } from "../layouts";
+import { Section } from "../components";
 import { SITE_DESCRIPTION } from "../consts";
 
-import { experiences } from "../content/static-content";
+import { experiences, education } from "../content/experience";
 ---
 
 <Root title="Experience" description={SITE_DESCRIPTION}>
-  <div>
+  <Section>
     <h1>Experience</h1>
-  </div>
-  {
-    experiences.map(
-      ({
-        title,
-        details: { organisation, location, startDate, endDate, roleType },
-        technologies,
-        description,
-      }) => (
-        <div>
-          <h3>{title}</h3>
-          <div>
-            <span>{organisation}</span>
-            <span>{location}</span>
-            <span>{startDate}</span>
-            <span>{endDate}</span>
-            <span>{roleType}</span>
+    {
+      experiences.map(
+        ({
+          title,
+          organisation,
+          details: { location, startDate, endDate, roleType },
+          technologies,
+          description,
+        }) => (
+          <div class="wrapper">
+            <div class="title-wrapper">
+              <h3 class="title">{title}</h3>
+              <span class="organisation">{organisation}</span>
+            </div>
+            <div class="details">
+              <span class="start-date">{startDate}</span>
+              <span class="upper-divider">-</span>
+              <span class="end-date">{endDate}</span>
+              <span class="location">{location}</span>
+              <span class="lower-divider">-</span>
+              <span class="role-type">{roleType}</span>
+            </div>
+            {technologies &&
+              technologies.map((technology) => {
+                <span>{technology}</span>;
+              })}
+            {description.length > 0 ? (
+              <p class="description">{description.join("")}</p>
+            ) : (
+              <p class="description">Description coming soon!</p>
+            )}
           </div>
-          {technologies &&
-            technologies.map((technology) => {
-              <span>{technology}</span>;
-            })}
-          <span>{description[0]}</span>
-        </div>
+        )
       )
-    )
-  }
+    }
+  </Section>
+  <Section>
+    <h2>Education</h2>
+    {
+      education.map(
+        ({
+          title,
+          organisation,
+          details: { location, startDate, endDate, roleType },
+        }) => (
+          <div>
+            <div>
+              <h3>{title}</h3>
+              <span>{organisation}</span>
+            </div>
+            <div>
+              <span>{location}</span>
+              <span>{startDate}</span>
+              <span>{endDate}</span>
+              <span>{roleType}</span>
+            </div>
+          </div>
+        )
+      )
+    }
+  </Section>
 </Root>
+
+<style lang="scss">
+  @import "../styles/_globals.scss";
+
+  .wrapper {
+    @include elev-1();
+    padding: var(--padding-half);
+  }
+
+  .title-wrapper {
+    margin: var(--padding) auto;
+  }
+
+  .title {
+    margin: var(--padding-half) auto;
+  }
+
+  .details > span,
+  .organisation {
+    color: $text-medium-emphasis;
+  }
+
+  .details {
+    margin: auto;
+    display: grid;
+    grid-template-areas:
+      "start-date upper-divider end-date"
+      "location lower-divider role-type";
+    grid-template-columns: 47% 1fr 47%;
+  }
+
+  .start-date,
+  .location {
+    justify-self: right;
+    text-align: right;
+  }
+
+  .end-date,
+  .role-type {
+    justify-self: left;
+    text-align: left;
+  }
+
+  .start-date {
+    grid-area: start-date;
+  }
+
+  .upper-divider {
+    grid-area: upper-divider;
+  }
+
+  .end-date {
+    grid-area: end-date;
+  }
+
+  .location {
+    grid-area: location;
+  }
+
+  .lower-divider {
+    grid-area: lower-divider;
+  }
+
+  .role-type {
+    grid-area: role-type;
+  }
+
+  .description {
+    margin: var(--padding) auto;
+  }
+</style>

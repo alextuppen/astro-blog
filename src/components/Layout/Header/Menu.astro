@@ -1,5 +1,5 @@
 ---
-import { Button, ButtonVariants } from "../../Input";
+import { Button } from "../../Input";
 import { internalLinks, externalLinks } from "./Header.astro";
 import MenuBurger from "./MenuBurger.astro";
 ---
@@ -9,7 +9,7 @@ import MenuBurger from "./MenuBurger.astro";
   {
     internalLinks.map(({ link, text }, index) => (
       <>
-        <Button href={link} variant={ButtonVariants.Text} className="internal">
+        <Button href={link} variant="text" className="internal">
           {text}
         </Button>
         {index < internalLinks.length - 1 ? (
@@ -22,7 +22,7 @@ import MenuBurger from "./MenuBurger.astro";
   {
     externalLinks.map(({ link, text }, index) => (
       <>
-        <Button href={link} variant={ButtonVariants.Text} external>
+        <Button href={link} variant="text" external>
           {text}
         </Button>
         {index < externalLinks.length - 1 ? <hr class="menuSeparator" /> : null}

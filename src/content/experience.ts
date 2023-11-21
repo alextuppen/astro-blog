@@ -1,12 +1,38 @@
 export const experiences = [
   {
     title: "Senior full stack engineer",
+    organisation: "Private Healthcare Information Network (PHIN)",
     details: {
-      organisation: "HeadBox",
       location: "London",
-      dateRange: "June 2022 - Present",
-      startDate: "June 2022",
+      startDate: "February 2023",
       endDate: "Present",
+      roleType: "Permanent",
+    },
+    technologies: [
+      "azure",
+      "devops",
+      "node",
+      "fastify",
+      "git",
+      "npm",
+      "yarn",
+      "eslint",
+      "prettier",
+      "react",
+      "javascript",
+      "typescript",
+      "html",
+      "css",
+    ],
+    description: [],
+  },
+  {
+    title: "Senior full stack engineer",
+    organisation: "HeadBox",
+    details: {
+      location: "London",
+      startDate: "June 2022",
+      endDate: "February 2023",
       roleType: "Permanent",
     },
     technologies: [
@@ -28,12 +54,21 @@ export const experiences = [
       "html",
       "css",
     ],
-    description: [],
+    description: [
+      "Provided technical leadership, line management and mentoring to my team developing a web application for ",
+      "internal and external customers to facilitate event management and venue sourcing. Lead the architecture, ",
+      "design and implementation of an 8 month long project to retire two existing products and replace them with ",
+      "a new product better suited to the current business needs. The project saw extensive changes and upgrades ",
+      "to over half of the entire HeadBox technical estate including the creation of 2 new back services and a new ",
+      'front end application. Introduced GraphQL schema stitching to replace the existing "REST over GraphQL" pattern ',
+      "of tightly coupled front and back ends. This represented a signifanct reduction in technical debt, a signifcant ",
+      "improvement in development speed and was done without any impact on product timelines.",
+    ],
   },
   {
     title: "Full stack engineer",
+    organisation: "HeadBox",
     details: {
-      organisation: "HeadBox",
       location: "London",
       startDate: "October 2021",
       endDate: "June 2022",
@@ -58,12 +93,20 @@ export const experiences = [
       "html",
       "css",
     ],
-    description: [],
+    description: [
+      "Member of a small team building B2B event technology assisting internal and external customers with venue sourcing, ",
+      "event management and financing. Duties included building front end React components with AntD to designs and the ",
+      "extension of existing back end services. Worked with my team to integrate two systems with very different data ",
+      "schemas; completely rebuilt the most affected front end service with GraphQL code generator to make working with the ",
+      "complex data schemas easier and more stable. In January I was given the opportunity to grow into the team senior, I ",
+      "gradually took on more responsibilities within the team and the wider department. In May I received feedback from my ",
+      "team and management that I was the senior in all but name and was formally promoted in June.",
+    ],
   },
   {
     title: "Full stack engineer",
+    organisation: "WorldRemit",
     details: {
-      organisation: "WorldRemit",
       location: "London",
       startDate: "March 2020",
       endDate: "October 2021",
@@ -102,8 +145,8 @@ export const experiences = [
   },
   {
     title: "Founder",
+    organisation: "Armicus",
     details: {
-      organisation: "Armicus",
       location: "London",
       startDate: "August 2018",
       endDate: "March 2020",
@@ -138,8 +181,8 @@ export const experiences = [
   },
   {
     title: "Developer",
+    organisation: "PowerON Platforms",
     details: {
-      organisation: "PowerON Platforms",
       location: "London",
       startDate: "September 2016",
       endDate: "August 2018",
@@ -170,8 +213,8 @@ export const experiences = [
   },
   {
     title: "Support Engineer",
+    organisation: "Cireson",
     details: {
-      organisation: "Cireson",
       location: "London",
       startDate: "August 2015",
       endDate: "September 2016",
@@ -188,8 +231,8 @@ export const experiences = [
   },
   {
     title: "Senior Technical analyst",
+    organisation: "Rocksteady Studios Ltd",
     details: {
-      organisation: "Rocksteady Studios Ltd",
       location: "London",
       startDate: "May 2013",
       endDate: "August 2015",
@@ -227,8 +270,8 @@ export const projects = [
 export const education = [
   {
     title: "BA Hons Business Management",
+    organisation: "The University of Derby",
     details: {
-      organisation: "The University of Derby",
       location: "Derby",
       startDate: "2009",
       endDate: "2013",
@@ -237,8 +280,8 @@ export const education = [
   },
   {
     title: "Economics, Business Studies, Physics, Chemistry and Maths",
+    organisation: "Colchester Sixth College",
     details: {
-      organisation: "Colchester Sixth College",
       location: "Colchester",
       startDate: "2006",
       endDate: "2008",

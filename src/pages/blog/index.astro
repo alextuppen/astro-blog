@@ -1,8 +1,8 @@
 ---
-import Root from "../../layouts/Root.astro";
+import { Root } from "../../layouts";
 import { SITE_DESCRIPTION } from "../../consts";
 import { getCollection } from "astro:content";
-import FormattedDate from "../../components/Display/FormattedDate.astro";
+import { FormattedDate, Section } from "../../components";
 
 const posts = (await getCollection("blog")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
@@ -10,10 +10,8 @@ const posts = (await getCollection("blog")).sort(
 ---
 
 <Root title="Blog" description={SITE_DESCRIPTION}>
-  <div class="page-title-wrapper">
-    <h1 class="page-title">Blog</h1>
-  </div>
-  <section>
+  <Section>
+    <h1>Blog</h1>
     <ol>
       {
         posts.map((post) => (
@@ -21,9 +19,9 @@ const posts = (await getCollection("blog")).sort(
             <a href={`/blog/${post.slug}/`}>
               <div class="title-date">
                 <h2 class="title">{post.data.title}</h2>
-                <p>
+                <span>
                   <FormattedDate date={post.data.pubDate} className="time" />
-                </p>
+                </span>
               </div>
               <img
                 class="image"
@@ -32,26 +30,17 @@ const posts = (await getCollection("blog")).sort(
                 src={post.data.heroImage}
                 alt={post.data.heroImageText}
               />
-              <p class="description">{post.data.description}</p>
+              <span class="description">{post.data.description}</span>
             </a>
           </li>
         ))
       }
     </ol>
-  </section>
+  </Section>
 </Root>
 
 <style lang="scss">
   @import "../../styles/_globals.scss";
-
-  .page-title-wrapper {
-    display: flex;
-    padding-top: var(--padding-double);
-  }
-
-  .page-title {
-    margin: auto;
-  }
 
   section {
     max-width: var(--page-max-width);
@@ -64,7 +53,7 @@ const posts = (await getCollection("blog")).sort(
     flex-direction: column;
     gap: var(--padding-double);
     margin: unset;
-    padding: var(--padding-double) 0;
+    padding: unset;
   }
 
   li {
@@ -76,8 +65,8 @@ const posts = (await getCollection("blog")).sort(
     padding: var(--padding) 0;
     display: grid;
     grid-template-areas:
-      "image"
       "title-date"
+      "image"
       "description";
     justify-items: center;
     text-align: center;
@@ -93,7 +82,6 @@ const posts = (await getCollection("blog")).sort(
 
   .title-date {
     grid-area: title-date;
-    padding: var(--padding) 0;
   }
 
   .title {
@@ -107,6 +95,7 @@ const posts = (await getCollection("blog")).sort(
   .image {
     grid-area: image;
     border-radius: var(--border-radius);
+    padding: var(--padding) 0;
   }
 
   .description {
@@ -135,6 +124,7 @@ const posts = (await getCollection("blog")).sort(
       border-top-right-radius: unset;
       border-bottom-right-radius: unset;
       margin: 0;
+      padding: unset;
     }
 
     .description {

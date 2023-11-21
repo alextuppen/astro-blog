@@ -1,6 +1,6 @@
 ---
 import { URL_LINKEDIN, URL_INSTAGRAM, URL_GITHUB } from "../../../consts";
-import { Button, ButtonVariants } from "../../Input";
+import { Button } from "../../Input";
 import Menu from "./Menu.astro";
 
 export const internalLinks = [
@@ -39,7 +39,7 @@ const { className } = Astro.props;
 <header class:list={[className]}>
   <div class="root">
     <div class="navBar">
-      <Button href="/" className="homeLink" variant={ButtonVariants.Text}>
+      <Button href="/" className="homeLink" variant="text">
         <img class="logo" src="/logo/white.svg" alt="Alex Tuppen logo" />
         <span class="homeLinkText">Alex Tuppen</span>
       </Button>
@@ -47,11 +47,7 @@ const { className } = Astro.props;
         {
           internalLinks.map(({ link, text }, index) => (
             <>
-              <Button
-                href={link}
-                variant={ButtonVariants.Text}
-                className="internal"
-              >
+              <Button href={link} variant="text" className="internal">
                 {text}
               </Button>
               {index < internalLinks.length - 1 ? (
@@ -66,7 +62,7 @@ const { className } = Astro.props;
             <>
               <Button
                 href={link}
-                variant={ButtonVariants.Text}
+                variant="text"
                 external={true}
                 className="external"
               >

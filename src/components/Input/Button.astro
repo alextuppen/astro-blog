@@ -1,24 +1,11 @@
 ---
-// export enum ButtonSize {
-//   Default,
-//   Large,
-// }
-
-export enum ButtonVariants {
-  Primary,
-  Secondary,
-  Text,
-}
-
 interface Props {
-  //   size?: ButtonSize;
   id?: string;
   className?: string;
-  variant?: ButtonVariants;
+  variant?: "primary" | "secondary" | "text";
   handleClick?: (this: HTMLElement, ev: MouseEvent) => any;
   href?: string;
   external?: boolean;
-  //   icon?: ReactNode;
 }
 
 const { id, className, variant, href, external = false } = Astro.props;
@@ -27,9 +14,7 @@ const classList = [
   "button",
   {
     [className]: className ? className : null,
-    primary: variant === ButtonVariants.Primary,
-    secondary: variant === ButtonVariants.Secondary,
-    text: variant === ButtonVariants.Text,
+    variant,
   },
 ];
 ---
