@@ -1,9 +1,9 @@
 ---
 import { Root } from "../layouts";
-import { Section } from "../components";
+import { Section, Technologies } from "../components";
 import { SITE_DESCRIPTION } from "../consts";
 
-import { experiences, education } from "../content/experience";
+import { experiences, education } from "../content/_experience";
 ---
 
 <Root title="Experience" description={SITE_DESCRIPTION}>
@@ -19,27 +19,28 @@ import { experiences, education } from "../content/experience";
           description,
         }) => (
           <div class="wrapper">
-            <div class="title-wrapper">
-              <h3 class="title">{title}</h3>
-              <span class="organisation">{organisation}</span>
+            <div class="head-wrapper">
+              <div class="title-wrapper">
+                <h3 class="title">{title}</h3>
+                <span class="organisation">{organisation}</span>
+              </div>
+              <span>{location}</span>
+              <span>{roleType}</span>
+              <div class="details">
+                <span class="start-date">{startDate}</span>
+                <span class="upper-divider">-</span>
+                <span class="end-date">{endDate}</span>
+                <span class="location">{location}</span>
+                <span class="lower-divider">-</span>
+                <span class="role-type">{roleType}</span>
+              </div>
             </div>
-            <div class="details">
-              <span class="start-date">{startDate}</span>
-              <span class="upper-divider">-</span>
-              <span class="end-date">{endDate}</span>
-              <span class="location">{location}</span>
-              <span class="lower-divider">-</span>
-              <span class="role-type">{roleType}</span>
-            </div>
-            {technologies &&
-              technologies.map((technology) => {
-                <span>{technology}</span>;
-              })}
-            {description.length > 0 ? (
+            {description && description.length > 0 ? (
               <p class="description">{description.join("")}</p>
             ) : (
               <p class="description">Description coming soon!</p>
             )}
+            {technologies && <Technologies technologies={technologies} />}
           </div>
         )
       )
@@ -77,6 +78,11 @@ import { experiences, education } from "../content/experience";
 
   .wrapper {
     @include elev-1();
+    text-align: left;
+  }
+
+  .head-wrapper {
+    @include elev-4();
     padding: var(--padding-half);
   }
 
@@ -85,7 +91,11 @@ import { experiences, education } from "../content/experience";
   }
 
   .title {
-    margin: var(--padding-half) auto;
+    margin: 0 auto var(--padding-half);
+  }
+
+  .organisation {
+    padding: unset;
   }
 
   .details > span,
@@ -94,7 +104,7 @@ import { experiences, education } from "../content/experience";
   }
 
   .details {
-    margin: auto;
+    margin: var(--padding) auto;
     display: grid;
     grid-template-areas:
       "start-date upper-divider end-date"
@@ -139,6 +149,6 @@ import { experiences, education } from "../content/experience";
   }
 
   .description {
-    margin: var(--padding) auto;
+    padding: var(--padding-double) var(--padding-half);
   }
 </style>

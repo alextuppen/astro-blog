@@ -1,4 +1,19 @@
-export const experiences = [
+import type { Technologies } from "../components/Display/Technologies/technologies.types";
+
+interface Experience {
+  title: string;
+  organisation: string;
+  details: {
+    location: string;
+    startDate: string;
+    endDate: string;
+    roleType: string;
+  };
+  technologies?: Technologies;
+  description?: string[];
+}
+
+export const experiences: Experience[] = [
   {
     title: "Senior full stack engineer",
     organisation: "Private Healthcare Information Network (PHIN)",
@@ -10,9 +25,9 @@ export const experiences = [
     },
     technologies: [
       "azure",
-      "devops",
+      // "devops",
       "node",
-      "fastify",
+      // "fastify",
       "git",
       "npm",
       "yarn",
@@ -122,7 +137,7 @@ export const experiences = [
       "gatsby",
       "react",
       {
-        lookUp: "react",
+        key: "react",
         title: "React Native",
         alt: "React Native logo",
       },
@@ -193,7 +208,7 @@ export const experiences = [
       "sccm",
       "dotNet",
       {
-        lookUp: "dotNet",
+        key: "dotNet",
         title: ".Net WPF",
         alt: ".Net WPF logo",
       },

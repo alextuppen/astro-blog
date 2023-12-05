@@ -1,0 +1,64 @@
+---
+import { technologyDictionary } from "./technologyDictionary";
+import type { Technologies } from "./technologies.types";
+
+interface Props {
+  technologies: Technologies;
+}
+
+const { technologies } = Astro.props;
+
+const lookUpTechnologies = (technologies: Technologies) =>
+  technologies.map((tech) => {
+    if (typeof tech === "string") {
+      return {
+        src: technologyDictionary[tech].src,
+        title: technologyDictionary[tech].title,
+        alt: technologyDictionary[tech].alt,
+      };
+    }
+    return {
+      src: technologyDictionary[tech.key].src,
+      title: tech.title,
+      alt: tech.alt,
+    };
+  });
+
+const lookedUpTechs = lookUpTechnologies(technologies);
+---
+
+<ul>
+  {
+    lookedUpTechs.map(({ title, src, alt }) => (
+      <li>
+        <img src={src} alt={alt} />
+        <span>{title}</span>
+      </li>
+    ))
+  }
+</ul>
+
+<style lang="scss">
+  @import "../../../styles/_globals.scss";
+
+  ul {
+    @include elev-4();
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--padding);
+    padding: var(--padding) var(--padding-half);
+    margin: unset;
+  }
+
+  li {
+    display: flex;
+    gap: var(--padding-half);
+    align-items: center;
+  }
+
+  span {
+    padding: unset;
+    font-size: var(--font-size-small);
+  }
+</style>
