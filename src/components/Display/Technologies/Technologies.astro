@@ -43,6 +43,9 @@ const lookedUpTechs = lookUpTechnologies(technologies);
 
   ul {
     @include elev-4();
+    border-top-color: $primary;
+    border-top-width: var(--border-width);
+    border-top-style: solid;
     list-style: none;
     display: flex;
     flex-wrap: wrap;
@@ -60,5 +63,13 @@ const lookedUpTechs = lookUpTechnologies(technologies);
   span {
     padding: unset;
     font-size: var(--font-size-small);
+  }
+
+  @include bp-small {
+    ul {
+      padding: var(--padding) var(--padding-double);
+      border-bottom-left-radius: var(--border-radius);
+      border-bottom-right-radius: var(--border-radius);
+    }
   }
 </style>

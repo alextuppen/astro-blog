@@ -19,21 +19,15 @@ import { experiences, education } from "../content/_experience";
           description,
         }) => (
           <div class="wrapper">
-            <div class="head-wrapper">
-              <div class="title-wrapper">
-                <h3 class="title">{title}</h3>
-                <span class="organisation">{organisation}</span>
-              </div>
-              <span>{location}</span>
-              <span>{roleType}</span>
-              <div class="details">
-                <span class="start-date">{startDate}</span>
-                <span class="upper-divider">-</span>
-                <span class="end-date">{endDate}</span>
-                <span class="location">{location}</span>
-                <span class="lower-divider">-</span>
-                <span class="role-type">{roleType}</span>
-              </div>
+            <div class="title-wrapper">
+              <h3 class="title">{title}</h3>
+              <span class="organisation">{organisation}</span>
+              <span class="date">
+                {startDate} - {endDate}
+              </span>
+              <span class="location-role">
+                {location} - {roleType}
+              </span>
             </div>
             {description && description.length > 0 ? (
               <p class="description">{description.join("")}</p>
@@ -55,16 +49,16 @@ import { experiences, education } from "../content/_experience";
           organisation,
           details: { location, startDate, endDate, roleType },
         }) => (
-          <div>
-            <div>
-              <h3>{title}</h3>
-              <span>{organisation}</span>
-            </div>
-            <div>
-              <span>{location}</span>
-              <span>{startDate}</span>
-              <span>{endDate}</span>
-              <span>{roleType}</span>
+          <div class="wrapper">
+            <div class="title-wrapper">
+              <h3 class="title">{title}</h3>
+              <span class="organisation">{organisation}</span>
+              <span class="date">
+                {startDate} - {endDate}
+              </span>
+              <span class="location-role">
+                {location} - {roleType}
+              </span>
             </div>
           </div>
         )
@@ -81,74 +75,48 @@ import { experiences, education } from "../content/_experience";
     text-align: left;
   }
 
-  .head-wrapper {
-    @include elev-4();
-    padding: var(--padding-half);
-  }
-
   .title-wrapper {
-    margin: var(--padding) auto;
+    padding: var(--padding-double) var(--padding-half) var(--padding-half);
+    display: flex;
+    flex-direction: column;
   }
 
   .title {
-    margin: 0 auto var(--padding-half);
+    padding-bottom: var(--padding-half);
   }
 
   .organisation {
-    padding: unset;
+    padding: 0 0 var(--padding);
   }
 
-  .details > span,
-  .organisation {
+  .organisation,
+  .location-role,
+  .date {
     color: $text-medium-emphasis;
   }
 
-  .details {
-    margin: var(--padding) auto;
-    display: grid;
-    grid-template-areas:
-      "start-date upper-divider end-date"
-      "location lower-divider role-type";
-    grid-template-columns: 47% 1fr 47%;
-  }
-
-  .start-date,
-  .location {
-    justify-self: right;
-    text-align: right;
-  }
-
-  .end-date,
-  .role-type {
-    justify-self: left;
-    text-align: left;
-  }
-
-  .start-date {
-    grid-area: start-date;
-  }
-
-  .upper-divider {
-    grid-area: upper-divider;
-  }
-
-  .end-date {
-    grid-area: end-date;
-  }
-
-  .location {
-    grid-area: location;
-  }
-
-  .lower-divider {
-    grid-area: lower-divider;
-  }
-
-  .role-type {
-    grid-area: role-type;
+  .location-role,
+  .date {
+    padding: unset;
+    font-size: var(--font-size-small);
   }
 
   .description {
     padding: var(--padding-double) var(--padding-half);
+  }
+
+  @include bp-small {
+    .wrapper {
+      border-radius: var(--border-radius);
+      max-width: calc(var(--content-max-width) + var(--padding-double) * 2);
+    }
+
+    .title-wrapper {
+      padding: var(--padding-double) var(--padding-double) var(--padding);
+    }
+
+    .description {
+      padding: var(--padding) var(--padding-double) var(--padding-double);
+    }
   }
 </style>
