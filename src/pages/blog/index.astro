@@ -62,7 +62,7 @@ const posts = (await getCollection("blog")).sort(
   }
 
   a {
-    padding: var(--padding) 0;
+    padding: var(--padding-double) 0;
     display: grid;
     grid-template-areas:
       "title-date"
@@ -95,7 +95,7 @@ const posts = (await getCollection("blog")).sort(
   .image {
     grid-area: image;
     border-radius: var(--border-radius);
-    padding: var(--padding) 0;
+    margin: var(--padding-double) 0;
   }
 
   .description {
@@ -117,7 +117,7 @@ const posts = (await getCollection("blog")).sort(
     }
 
     .title-date {
-      padding: var(--padding);
+      padding: var(--padding-double);
     }
 
     .image {
@@ -128,7 +128,7 @@ const posts = (await getCollection("blog")).sort(
     }
 
     .description {
-      padding: var(--padding);
+      padding: 0 var(--padding-double) var(--padding);
     }
   }
 </style>
