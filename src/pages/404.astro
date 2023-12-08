@@ -1,23 +1,22 @@
 ---
 import { Root } from "../layouts";
 import { Section } from "../components";
+import { SITE_DESCRIPTION } from "../consts";
 
 const code = "404";
 const description = "Page not found";
 ---
 
-<Root title={code} description={description}>
+<Root title={code} description={SITE_DESCRIPTION}>
   <Section>
     <div class="grid">
-      <div class="logoWrapper">
-        <img
-          width="160"
-          height="240"
-          src="/logo/white.svg"
-          alt="Alex Tuppen logo"
-          class="logo"
-        />
-      </div>
+      <img
+        width="160"
+        height="240"
+        src="/logo/white.svg"
+        alt="Alex Tuppen logo"
+        class="logo"
+      />
       <div class="textWrapper">
         <h1 class="code">{code}</h1>
         <h2 class="text">{description}</h2>
@@ -40,6 +39,7 @@ const description = "Page not found";
     justify-items: center;
     gap: var(--padding-double);
     text-align: center;
+    min-height: 100vh;
   }
 
   .logo {
