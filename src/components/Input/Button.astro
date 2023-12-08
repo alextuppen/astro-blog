@@ -2,7 +2,7 @@
 interface Props {
   id?: string;
   className?: string;
-  variant?: "primary" | "secondary" | "text";
+  variant?: "primary" | "secondary" | "icon" | "large-icon" | "text";
   handleClick?: (this: HTMLElement, ev: MouseEvent) => any;
   href?: string;
   external?: boolean;
@@ -12,9 +12,9 @@ const { id, className, variant, href, external = false } = Astro.props;
 
 const classList = [
   "button",
+  variant,
   {
     [className]: className ? className : null,
-    variant,
   },
 ];
 ---
@@ -66,7 +66,7 @@ const classList = [
     height: 2.5rem;
   }
 
-  .largeIcon {
+  .large-icon {
     width: 3rem;
     height: 3rem;
   }
@@ -126,7 +126,7 @@ const classList = [
       height: 2.75rem;
     }
 
-    .largeIcon {
+    .large-icon {
       width: 3.5rem;
       height: 3.5rem;
     }
@@ -138,7 +138,7 @@ const classList = [
       height: 3rem;
     }
 
-    .largeIcon {
+    .large-icon {
       width: 4rem;
       height: 4rem;
     }
@@ -150,7 +150,7 @@ const classList = [
       height: 3.4rem;
     }
 
-    .largeIcon {
+    .large-icon {
       width: 5rem;
       height: 5rem;
     }
@@ -162,7 +162,7 @@ const classList = [
       height: 3.75rem;
     }
 
-    .largeIcon {
+    .large-icon {
       width: 6rem;
       height: 6rem;
     }
