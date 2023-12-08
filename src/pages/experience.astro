@@ -42,14 +42,14 @@ import { experiences, education } from "../content/_experience";
   </Section>
   <Section>
     <h2>Education</h2>
-    {
-      education.map(
-        ({
-          title,
-          organisation,
-          details: { location, startDate, endDate, roleType },
-        }) => (
-          <div class="wrapper">
+    <div class="education wrapper">
+      {
+        education.map(
+          ({
+            title,
+            organisation,
+            details: { location, startDate, endDate, roleType },
+          }) => (
             <div class="title-wrapper">
               <h3 class="title">{title}</h3>
               <span class="organisation">{organisation}</span>
@@ -60,10 +60,10 @@ import { experiences, education } from "../content/_experience";
                 {location} - {roleType}
               </span>
             </div>
-          </div>
+          )
         )
-      )
-    }
+      }
+    </div>
   </Section>
 </Root>
 
@@ -103,6 +103,10 @@ import { experiences, education } from "../content/_experience";
 
   .description {
     padding: var(--padding-double) var(--padding-half);
+  }
+
+  .education {
+    padding-bottom: var(--padding);
   }
 
   @include bp-small {
