@@ -29,13 +29,13 @@ const { menuBurgerId } = Astro.props;
       if (button.dataset.open === "true") {
         buttonElements.map((element) => {
           if (element) {
-            element.classList.add("menuBurgerOpen");
+            element.classList.add("menu-burger-open");
           }
         });
       } else {
         buttonElements.map((element) => {
           if (element) {
-            element.classList.remove("menuBurgerOpen");
+            element.classList.remove("menu-burger-open");
           }
         });
       }
@@ -104,7 +104,7 @@ const { menuBurgerId } = Astro.props;
     bottom: 10%;
   }
 
-  .menuBurgerOpen {
+  .menu-burger-open {
     &.first {
       top: 42.5%;
       width: 0%;

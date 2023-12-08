@@ -13,7 +13,7 @@ import MenuBurger from "./MenuBurger.astro";
           {text}
         </Button>
         {index < internalLinks.length - 1 ? (
-          <hr class:list={["menuSeparator", "internal"]} />
+          <hr class:list={["menu-separator", "internal"]} />
         ) : null}
       </>
     ))
@@ -25,7 +25,9 @@ import MenuBurger from "./MenuBurger.astro";
         <Button href={link} variant="text" external>
           {text}
         </Button>
-        {index < externalLinks.length - 1 ? <hr class="menuSeparator" /> : null}
+        {index < externalLinks.length - 1 ? (
+          <hr class="menu-separator" />
+        ) : null}
       </>
     ))
   }
@@ -88,16 +90,16 @@ import MenuBurger from "./MenuBurger.astro";
     transform: scaleY(1);
   }
 
-  .menuSeparator,
-  .primarySeparator {
+  .menu-separator,
+  .primary-separator {
     width: 100%;
   }
 
-  .menuSeparator {
+  .menu-separator {
     border-bottom-color: $text;
   }
 
-  .primarySeparator {
+  .primary-separator {
     border-bottom-color: $primary;
   }
 
@@ -110,7 +112,7 @@ import MenuBurger from "./MenuBurger.astro";
       display: none;
     }
 
-    .internalLink {
+    .internal-link {
       display: none;
     }
   }

@@ -38,10 +38,10 @@ const { className } = Astro.props;
 
 <header class:list={[className]}>
   <div class="root">
-    <div class="navBar">
-      <Button href="/" className="homeLink" variant="text">
+    <div class="nav-bar">
+      <Button href="/" className="home-link" variant="text">
         <img class="logo" src="/logo/white.svg" alt="Alex Tuppen logo" />
-        <span class="homeLinkText">Alex Tuppen</span>
+        <span class="home-link-text">Alex Tuppen</span>
       </Button>
       <div class="links">
         {
@@ -51,12 +51,12 @@ const { className } = Astro.props;
                 {text}
               </Button>
               {index < internalLinks.length - 1 ? (
-                <hr class:list={["toolbarSeperator", "internal"]} />
+                <hr class:list={["toolbar-seperator", "internal"]} />
               ) : null}
             </>
           ))
         }
-        <hr class:list={["primarySeperator", "external"]} />
+        <hr class:list={["primary-seperator", "external"]} />
         {
           externalLinks.map(({ link, text }, index) => (
             <>
@@ -69,12 +69,12 @@ const { className } = Astro.props;
                 {text}
               </Button>
               {index < externalLinks.length - 1 ? (
-                <hr class:list={["toolbarSeperator", "external"]} />
+                <hr class:list={["toolbar-seperator", "external"]} />
               ) : null}
             </>
           ))
         }
-        <div class="buttonWrapper">
+        <div class="button-wrapper">
           <Menu />
         </div>
       </div>
@@ -93,21 +93,21 @@ const { className } = Astro.props;
     justify-content: center;
   }
 
-  .navBar {
+  .nav-bar {
     width: 100%;
     max-width: var(--page-max-width);
     display: flex;
     justify-content: space-between;
   }
 
-  .homeLink {
+  .home-link {
     display: flex;
     align-items: center;
     cursor: pointer;
   }
 
-  .homeLink:hover,
-  .homeLink:active {
+  .home-link:hover,
+  .home-link:active {
     text-decoration: underline;
     text-decoration-color: $primary;
     text-decoration-style: double;
@@ -119,7 +119,7 @@ const { className } = Astro.props;
     width: calc(var(--logo-height) / 1.5);
   }
 
-  .homeLinkText {
+  .home-link-text {
     color: $text;
     font-family: "Montserrat", sans-serif;
     font-weight: 500;
@@ -139,20 +139,20 @@ const { className } = Astro.props;
     display: none;
   }
 
-  .toolbarSeperator,
-  .primarySeperator {
+  .toolbar-seperator,
+  .primary-seperator {
     height: 100%;
   }
 
-  .toolbarSeperator {
+  .toolbar-seperator {
     border-right-color: $text;
   }
 
-  .primarySeperator {
+  .primary-seperator {
     border-right-color: $primary;
   }
 
-  .buttonWrapper {
+  .button-wrapper {
     --burger-width: 2rem;
     position: relative;
     display: block;
@@ -174,7 +174,7 @@ const { className } = Astro.props;
       display: flex;
     }
 
-    .buttonWrapper {
+    .button-wrapper {
       display: none;
     }
   }
