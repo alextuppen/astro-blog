@@ -11,37 +11,96 @@ import {
 ---
 
 <Root title={"Alex Tuppen"} description={SITE_DESCRIPTION}>
-  <Section>
-    <img
-      width="160"
-      height="240"
-      src="/logo/white.svg"
-      alt="Alex Tuppen logo"
-      class="logo"
-    />
-    <div>
-      <h1>Alex</h1>
-      <h1>Tuppen</h1>
-    </div>
-    <h2>Full stack developer</h2>
-    <div>
-      <Button variant="large-icon" href={URL_LINKEDIN} external={true}>
-        <img
-          src="/icons/websites/linkedin.svg"
-          alt="LinkedIn logo"
-          class="logo"
-        />
-      </Button>
-      <Button variant="large-icon" href={URL_INSTAGRAM} external={true}>
-        <img
-          src="/icons/websites/instagram.svg"
-          alt="Instagram logo"
-          class="logo"
-        />
-      </Button>
-      <Button variant="large-icon" href={URL_GITHUB} external={true}>
-        <img src="/icons/websites/github.svg" alt="Github logo" class="logo" />
-      </Button>
+  <Section className="root">
+    <div class="wrapper">
+      <img
+        width="160"
+        height="240"
+        src="/logo/white.svg"
+        alt="Alex Tuppen logo"
+        class="at-logo"
+      />
+      <div class="name-wrapper">
+        <h1 class="name">Alex</h1>
+        <h1 class="name">Tuppen</h1>
+      </div>
+      <h2 class="tag-line">Full stack developer</h2>
+      <div class="buttons">
+        <Button variant="large-icon" href={URL_LINKEDIN} external={true}>
+          <img
+            width="48"
+            height="48"
+            src="/icons/websites/linkedin.svg"
+            alt="LinkedIn logo"
+          />
+        </Button>
+        <Button variant="large-icon" href={URL_INSTAGRAM} external={true}>
+          <img
+            width="48"
+            height="48"
+            src="/icons/websites/instagram.svg"
+            alt="Instagram logo"
+          />
+        </Button>
+        <Button variant="large-icon" href={URL_GITHUB} external={true}>
+          <img
+            width="48"
+            height="48"
+            src="/icons/websites/github.svg"
+            alt="Github logo"
+          />
+        </Button>
+      </div>
     </div>
   </Section>
 </Root>
+
+<style lang="scss">
+  @import "../styles/_globals.scss";
+
+  .root {
+    // 100 small view height - 2 x double padding (4) on section + rough height of header (3)
+    height: calc(100svh - (7 * var(--padding)));
+  }
+
+  .wrapper {
+    height: 100%;
+    display: grid;
+    grid-template-areas:
+      "at-logo"
+      "name-wrapper"
+      "tag-line"
+      "buttons";
+    justify-items: center;
+    grid-template-rows: 1fr min-content min-content 1fr;
+    gap: var(--padding-double);
+  }
+
+  .at-logo {
+    grid-area: at-logo;
+    align-self: end;
+  }
+
+  .name-wrapper {
+    grid-area: name-wrapper;
+  }
+
+  .name {
+    margin: auto;
+    font-size: 4rem;
+    line-height: 1;
+  }
+
+  .tag-line {
+    grid-area: tag-line;
+    font-size: 1.5rem;
+    font-weight: 500;
+    letter-spacing: 0.25rem;
+  }
+
+  .buttons {
+    grid-area: buttons;
+    display: flex;
+    gap: var(--padding-double);
+  }
+</style>
