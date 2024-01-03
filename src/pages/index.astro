@@ -59,7 +59,7 @@ import {
   @import "../styles/_globals.scss";
 
   .root {
-    // 100 small view height - 2 x double padding (4) on section + rough height of header (3)
+    // 100 small view height - (2 x double padding (4) on section + rough height of header (3))
     height: calc(100svh - (7 * var(--padding)));
   }
 
@@ -78,11 +78,13 @@ import {
 
   .at-logo {
     grid-area: at-logo;
-    align-self: end;
+    margin-top: var(--padding-double);
   }
 
   .name-wrapper {
     grid-area: name-wrapper;
+    display: flex;
+    flex-direction: column;
   }
 
   .name {
@@ -102,5 +104,20 @@ import {
     grid-area: buttons;
     display: flex;
     gap: var(--padding-double);
+  }
+
+  @include bp-small {
+    .wrapper {
+      grid-template-areas:
+        "at-logo name-wrapper"
+        "tag-line tag-line"
+        "buttons buttons";
+    }
+
+    .name {
+      margin: 0;
+      font-size: 6rem;
+      line-height: 1;
+    }
   }
 </style>
