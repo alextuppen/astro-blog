@@ -12,14 +12,8 @@ import {
 
 <Root title={"Alex Tuppen"} description={SITE_DESCRIPTION}>
   <Section className="root">
-    <div class="wrapper">
-      <img
-        width="160"
-        height="240"
-        src="/logo/white.svg"
-        alt="Alex Tuppen logo"
-        class="at-logo"
-      />
+    <div class="grid">
+      <img src="/logo/white.svg" alt="Alex Tuppen logo" class="at-logo" />
       <div class="name-wrapper">
         <h1 class="name">Alex</h1>
         <h1 class="name">Tuppen</h1>
@@ -63,8 +57,11 @@ import {
     height: calc(100svh - (7 * var(--padding)));
   }
 
-  .wrapper {
-    height: 100%;
+  .test {
+    display: flex;
+  }
+
+  .grid {
     display: grid;
     grid-template-areas:
       "at-logo"
@@ -72,13 +69,13 @@ import {
       "tag-line"
       "buttons";
     justify-items: center;
-    grid-template-rows: 1fr min-content min-content 1fr;
+    align-items: center;
     gap: var(--padding-double);
   }
 
   .at-logo {
     grid-area: at-logo;
-    margin-top: var(--padding-double);
+    width: 10rem;
   }
 
   .name-wrapper {
@@ -107,7 +104,7 @@ import {
   }
 
   @include bp-small {
-    .wrapper {
+    .grid {
       grid-template-areas:
         "at-logo name-wrapper"
         "tag-line tag-line"
@@ -117,7 +114,56 @@ import {
     .name {
       margin: 0;
       font-size: 6rem;
-      line-height: 1;
+    }
+
+    .tag-line {
+      font-size: 2.25rem;
+      letter-spacing: 0.5rem;
+    }
+  }
+
+  @include bp-medium {
+    .at-logo {
+      width: 12rem;
+    }
+
+    .name {
+      font-size: 7rem;
+    }
+
+    .tag-line {
+      font-size: 2.5rem;
+      letter-spacing: 0.75rem;
+    }
+  }
+
+  @include bp-large {
+    .at-logo {
+      width: 16rem;
+    }
+
+    .name {
+      font-size: 9rem;
+    }
+
+    .tag-line {
+      font-size: 3rem;
+      letter-spacing: 1rem;
+    }
+  }
+
+  @include bp-xl {
+    .at-logo {
+      width: 20rem;
+    }
+
+    .name {
+      font-size: 12rem;
+    }
+
+    .tag-line {
+      font-size: 3.75rem;
+      letter-spacing: 1.5rem;
     }
   }
 </style>
