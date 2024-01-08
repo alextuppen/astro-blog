@@ -1,0 +1,17 @@
+---
+import type { CollectionEntry } from "astro:content";
+import Root from "../layouts/Root.astro";
+import { Section } from "../components";
+// import { FormattedDate } from "../components/Display";
+
+type Props = CollectionEntry<"recipes">["data"];
+
+const { name, description } = Astro.props;
+---
+
+<Root title={name} description={description}>
+  <Section>
+    <h1>{name}</h1>
+    <p>{description}</p>
+  </Section>
+</Root>
