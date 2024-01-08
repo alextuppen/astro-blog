@@ -1,4 +1,4 @@
-import type { Technologies } from "../components/Display/Technologies/technologies.types";
+import type { Technologies } from "./components/Display/Technologies/technologies.types";
 
 interface Experience {
   title: string;
