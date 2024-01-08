@@ -1,0 +1,108 @@
+{
+  "@context": "https://schema.org/",
+  "@type": "Recipe",
+  "name": "Roasted chicken and vegetables with cheese sauce",
+  "image": ["/recipes/roasted-chicken-veg-cheese-sauce.jpg"],
+  "author": {
+    "@type": "Person",
+    "name": "Alex Tuppen"
+  },
+  "datePublished": "2022-07-25",
+  "description": "Affectionately known as 'slop' because of its appearance; this recipe is very easy to make (especially if you use pre-chopped butternut squash) and the sauce is far tastier than it has any right to be.",
+  "creativeWorkStatus": "draft",
+  "prepTime": "PT10M",
+  "cookTime": "PT40M",
+  "totalTime": "PT40M",
+  "keywords": "weeknight, chicken, butternut squash, broccoli, cheese",
+  "recipeYield": 2,
+  "recipeCategory": "Weeknight meal",
+  "recipeIngredient": [
+    "2tbsp vegetable oil",
+    "500g pre-chopped butternut squash",
+    "4 boneless skinned chicken thighs",
+    "200g tenderstem broccoli",
+    "250g cream cheese",
+    "1 medium white onion",
+    "3 cloves garlic",
+    "1 chicken stock pot",
+    "2tsp balsamic vinegar",
+    "freshly grated pepper",
+    "salt to season"
+  ],
+  "tool": [
+    {
+      "@type": "HowToTool",
+      "name": "Chefs knife"
+    },
+    {
+      "@type": "HowToTool",
+      "name": "Chopping board"
+    },
+    {
+      "@type": "HowToTool",
+      "name": "Large roasting tray"
+    },
+    {
+      "@type": "HowToTool",
+      "name": "Medium frying pan"
+    }
+  ],
+  "recipeInstructions": [
+    {
+      "@type": "HowToStep",
+      "name": "Pre-heat the oven to 220C"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Add butternut squash and chicken thighs to roasting tin",
+      "text": "Add the butternut squash pieces into the roasting tin, toss with salt, oil and pepper, place the chicken thighs on top and put the tin in the oven once it is up to temperature."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Set a timer for 10 minutes"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Chop broccoli, dice onion and mince garlic",
+      "itemListElement": [
+        {
+          "@type": "HowToDirection",
+          "text": "While you wait for the timer chop the brocolli into pieces roughly 2cm long, finely dice the onion and mince the garlic."
+        },
+        {
+          "@type": "HowToTip",
+          "text": "Chop these things in this order as this is the order they will be needed in later for cooking."
+        }
+      ]
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Add broccoli to roasting tin",
+      "text": "When the timer goes off add the brocolli to the roasting tin and stir to flip the butternut squash and coat the brocolli in the oil, salt and pepper."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Set a timer for 20 minutes"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Saute onion",
+      "text": "Add the vegetable oil to the frying pan and once hot saute the onion."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Saute garlic",
+      "text": "When the onion is a few minutes away from being cooked add the minced garlic."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "deglaze pan and finish sauce",
+      "text": "Once the garlic is cooked add 2 tablespoons of water to the pan to deglaze the fond, then add the cream cheese and stir until a runny sauce consistency is achieved. Then turn off the heat, add the chicken stock pot, 2 teaspoons of balsamic vinegar and salt and pepper to taste, stir to combine and set aside."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Plate and serve",
+      "text": "When the timer goes off take the roasting tin out of the oven, plate the butternut squash and broccoli, place the chicken thighs on top and spoon over the sauce, serve."
+    }
+  ]
+}
