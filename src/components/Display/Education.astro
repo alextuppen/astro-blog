@@ -1,0 +1,35 @@
+---
+import { getCollection } from "astro:content";
+import ExpEduDetails from "./ExpEduDetails.astro";
+
+const education = await getCollection("education");
+const sortedEducation = education.sort((a, b) =>
+  a.data.details.startDate < b.data.details.startDate ? 1 : -1
+);
+---
+
+{
+  sortedEducation.map(({ data: { details } }) => (
+    <div class="wrapper">
+      <ExpEduDetails details={details} month={false} />
+    </div>
+  ))
+}
+
+<style lang="scss">
+  @import "../../styles/globals.scss";
+
+  .wrapper {
+    @include elev-1();
+    width: 100%;
+    padding-bottom: var(--padding);
+    text-align: left;
+  }
+
+  @include bp-small {
+    .wrapper {
+      border-radius: var(--border-radius);
+      max-width: calc(var(--content-max-width) + var(--padding-double) * 2);
+    }
+  }
+</style>

@@ -1,37 +1,14 @@
-export type Technology =
-  | "apollo"
-  | "urql"
-  | "codegen"
-  | "dotNet"
-  | "gatsby"
-  | "nextjs"
-  | "react"
-  | "graphql"
-  | "node"
-  | "postgresql"
-  | "sccm"
-  | "cSharp"
-  | "css"
-  | "html"
-  | "javascript"
-  | "powerShell"
-  | "typescript"
-  | "aws"
-  | "azure"
-  | "heroku"
-  | "eslint"
-  | "git"
-  | "npm"
-  | "prettier"
-  | "yarn";
+import type { z } from "astro:content";
+import type {
+  technologySchema,
+  technologyAlternativeSchema,
+} from "../../../schemas";
+
+export type Technology = z.infer<typeof technologySchema>;
+
+export type TechnologyAlternative = z.infer<typeof technologyAlternativeSchema>;
 
 export type Technologies = (Technology | TechnologyAlternative)[];
-
-export interface TechnologyAlternative {
-  key: Technology;
-  title: string;
-  alt: string;
-}
 
 export type TechnologyDictionary = {
   [key in Technology]: {

@@ -1,0 +1,39 @@
+{
+  "details": {
+    "title": "Senior full stack engineer",
+    "organisation": "HeadBox",
+    "location": "London",
+    "startDate": "2022-06-01",
+    "endDate": "2023-02-01",
+    "roleType": "Permanent"
+  },
+  "technologies": [
+    "aws",
+    "node",
+    "postgresql",
+    "git",
+    "npm",
+    "yarn",
+    "eslint",
+    "prettier",
+    "graphql",
+    "apollo",
+    "urql",
+    "codegen",
+    "react",
+    "javascript",
+    "typescript",
+    "html",
+    "css"
+  ],
+  "description": [
+    "Provided technical leadership, line management and mentoring to my team developing a web application for ",
+    "internal and external customers to facilitate event management and venue sourcing. Lead the architecture, ",
+    "design and implementation of an 8 month long project to retire two existing products and replace them with ",
+    "a new product better suited to the current business needs. The project saw extensive changes and upgrades ",
+    "to over half of the entire HeadBox technical estate including the creation of 2 new back services and a new ",
+    "front end application. Introduced GraphQL schema stitching to replace the existing \"REST over GraphQL\" pattern ",
+    "of tightly coupled front and back ends. This represented a signifanct reduction in technical debt, a signifcant ",
+    "improvement in development speed and was done without any impact on product timelines."
+  ]
+}

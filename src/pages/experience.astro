@@ -1,127 +1,16 @@
 ---
 import { Root } from "../layouts";
-import { Section, Technologies } from "../components";
+import { Education, Experiences, Section } from "../components";
 import { SITE_DESCRIPTION } from "../consts";
-
-import { experiences, education } from "../_experience";
 ---
 
 <Root title="Experience" description={SITE_DESCRIPTION}>
   <Section>
     <h1>Experience</h1>
-    {
-      experiences.map(
-        ({
-          title,
-          organisation,
-          details: { location, startDate, endDate, roleType },
-          technologies,
-          description,
-        }) => (
-          <div class="wrapper">
-            <div class="title-wrapper">
-              <h3 class="title">{title}</h3>
-              <span class="organisation">{organisation}</span>
-              <span class="date">
-                {startDate} - {endDate}
-              </span>
-              <span class="location-role">
-                {location} - {roleType}
-              </span>
-            </div>
-            {description && description.length > 0 ? (
-              <p class="description">{description.join("")}</p>
-            ) : (
-              <p class="description">Description coming soon!</p>
-            )}
-            {technologies && <Technologies technologies={technologies} />}
-          </div>
-        )
-      )
-    }
+    <Experiences />
   </Section>
   <Section>
     <h2>Education</h2>
-    <div class="education wrapper">
-      {
-        education.map(
-          ({
-            title,
-            organisation,
-            details: { location, startDate, endDate, roleType },
-          }) => (
-            <div class="title-wrapper">
-              <h3 class="title">{title}</h3>
-              <span class="organisation">{organisation}</span>
-              <span class="date">
-                {startDate} - {endDate}
-              </span>
-              <span class="location-role">
-                {location} - {roleType}
-              </span>
-            </div>
-          )
-        )
-      }
-    </div>
+    <Education />
   </Section>
 </Root>
-
-<style lang="scss">
-  @import "../styles/_globals.scss";
-
-  .wrapper {
-    @include elev-1();
-    text-align: left;
-  }
-
-  .title-wrapper {
-    padding: var(--padding-double) var(--padding-half) var(--padding-half);
-    display: flex;
-    flex-direction: column;
-  }
-
-  .title {
-    padding-bottom: var(--padding-half);
-  }
-
-  .organisation {
-    padding: 0 0 var(--padding);
-  }
-
-  .organisation,
-  .location-role,
-  .date {
-    color: $text-medium-emphasis;
-  }
-
-  .location-role,
-  .date {
-    padding: unset;
-    font-size: var(--font-size-small);
-  }
-
-  .description {
-    padding: var(--padding-double) var(--padding-half);
-  }
-
-  .education {
-    padding-bottom: var(--padding);
-  }
-
-  @include bp-small {
-    .wrapper {
-      border-radius: var(--border-radius);
-      max-width: calc(var(--content-max-width) + var(--padding-double) * 2);
-    }
-
-    .title-wrapper {
-      padding: var(--padding-double) var(--padding-double) var(--padding);
-    }
-
-    .description {
-      padding: var(--padding) var(--padding-double) var(--padding-double);
-    }
-  }
-</style>
-../_experience

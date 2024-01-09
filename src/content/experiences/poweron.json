@@ -1,0 +1,32 @@
+{
+  "details": {
+    "title": "Developer",
+    "organisation": "PowerON Platforms",
+    "location": "London",
+    "startDate": "2016-09-01",
+    "endDate": "2018-08-01",
+    "roleType": "Permanent"
+  },
+  "technologies": [
+    "azure",
+    "sccm",
+    "dotNet",
+    {
+      "key": "dotNet",
+      "title": ".Net WPF",
+      "alt": ".Net WPF logo"
+    },
+    "powerShell",
+    "cSharp"
+  ],
+  "description": [
+    "Working in a small team has afforded a wide number of opportunities, challenges and responsibilities. ",
+    "The largest project has been researching, designing and creating a Windows Installer XML bundle containing ",
+    "a number of first and third party MSIs from scratch. This included knowledge of the Windows install ",
+    "process, WIX syntax to create the bundle and MSI XML markup, C# custom actions to configure the system ",
+    "and the Microsoft Monitoring Agent, building a custom bootstrapper including a controller communicating ",
+    "with the burn engine and a multi-page GUI using WPF and MVVM, and integrating with a third party WCF API. ",
+    "Other projects have included a number of PowerShell scripts running both locally and in Azure using Azure ",
+    "Automation and small desktop applications. "
+  ]
+}

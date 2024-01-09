@@ -1,0 +1,17 @@
+{
+  "details": {
+    "title": "Senior Technical analyst",
+    "organisation": "Rocksteady Studios Ltd",
+    "location": "London",
+    "startDate": "2013-05",
+    "endDate": "2015-08-01",
+    "roleType": "Permanent"
+  },
+  "description": [
+    "Responsible for managing and providing all first line and second line activities in a highly technically ",
+    "complex environment for a user base of between 130 and 170 (headcount increased as the project progressed). ",
+    "Responsibilities included all department PowerShell scripting, management of SCCM, deployment of SCSM, ",
+    "imaging for desktop deployments using WDS, providing assistance to infrastructure engineer with networking ",
+    "and server estate, hardware procurement and stock management."
+  ]
+}

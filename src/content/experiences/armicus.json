@@ -1,0 +1,36 @@
+{
+  "details": {
+    "title": "Founder",
+    "organisation": "Armicus",
+    "location": "London",
+    "startDate": "2018-08-01",
+    "endDate": "2020-03-01",
+    "roleType": "Permanent"
+  },
+  "technologies": [
+    "aws",
+    "heroku",
+    "node",
+    "postgresql",
+    "graphql",
+    "git",
+    "npm",
+    "apollo",
+    "react",
+    "javascript",
+    "html",
+    "css"
+  ],
+  "description": [
+    "Unpaid learning sabbatical, the goal was to learn how to architect and build a full-stack software as ",
+    "a service product. Written entirely in JavaScript and hosted on AWS and Heroku, the scope of this project ",
+    "has afforded a significant amount of personal growth and experience. Initially a blank slate, the project ",
+    "started with researching which technologies to use; React and NodeJS were chosen for the front and back ",
+    "ends respectively because they share the same language, with GraphQL used for the API, all are free open ",
+    "source software and each have extensive ecosystems surrounding them. Over time changes have included ",
+    "moving from MongoDB to PostgreSQL to prevent the need for relational logic in the code, replacing AWS ",
+    "AppSync (GraphQL API as a service) with Apollo Server to gain greater control over the business logic ",
+    "and moving the core logic from AWS Lambdas to Heroku to remove the long wait for first use. Built around ",
+    "an advanced template system that allows the user to customise the shape of their data."
+  ]
+}

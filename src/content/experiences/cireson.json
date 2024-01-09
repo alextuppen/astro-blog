@@ -1,0 +1,18 @@
+{
+  "details": {
+    "title": "Support Engineer",
+    "organisation": "Cireson",
+    "location": "London",
+    "startDate": "2015-08-01",
+    "endDate": "2016-09-01",
+    "roleType": "Permanent"
+  },
+  "description": [
+    "Providing highly technical support to a large customer base, each with unique and complex environments. ",
+    "Technologies most frequently utilised include Active Directory, IIS, PowerShell, SQL, SCSM and SCCM. ",
+    "While at Cireson I realised the potential for a dedicated application to make the primary product easier ",
+    "to use and assist customers in providing log files and other diagnostic information to the Support team. ",
+    "Following 6 months of teaching myself C# and WPF in my own time and 3000 lines of code this application ",
+    "was well received and the perfect springboard for my next adventure."
+  ]
+}

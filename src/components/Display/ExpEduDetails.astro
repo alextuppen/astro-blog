@@ -1,0 +1,88 @@
+---
+import type { z } from "astro:content";
+import type { expEduDetailsSchema } from "../../schemas/expEduDetailsSchema";
+import dayjs from "dayjs";
+
+const MONTH_FORMAT = "MMMM YYYY";
+const YEAR_FORMAT = "YYYY";
+
+interface Props {
+  details: z.infer<typeof expEduDetailsSchema>;
+  month: boolean;
+}
+
+const {
+  details: { title, organisation, startDate, endDate, location, roleType },
+  month,
+} = Astro.props;
+
+let formattedStartDate;
+let formattedEndDate;
+
+const parsedStateDate = dayjs(startDate);
+const parsedEndDate = dayjs(endDate);
+
+if (month) {
+  formattedStartDate = parsedStateDate.format(MONTH_FORMAT);
+  formattedEndDate = parsedEndDate.format(MONTH_FORMAT);
+} else {
+  formattedStartDate = parsedStateDate.format(YEAR_FORMAT);
+  formattedEndDate = parsedEndDate.format(YEAR_FORMAT);
+}
+
+if (endDate == null) {
+  formattedEndDate = "Present";
+}
+---
+
+<div class="title-wrapper">
+  <h3 class="title">{title}</h3>
+  <span class="organisation">{organisation}</span>
+  <span class="date">
+    {formattedStartDate} - {formattedEndDate}
+  </span>
+  <span class="location-role">
+    {location} - {roleType}
+  </span>
+</div>
+
+<style lang="scss">
+  @import "../../styles/globals.scss";
+
+  .title-wrapper {
+    padding: var(--padding-double) var(--padding-half) var(--padding-half);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .title {
+    padding-bottom: var(--padding-half);
+  }
+
+  .organisation {
+    padding: 0 0 var(--padding);
+  }
+
+  .organisation,
+  .location-role,
+  .date {
+    color: $text-medium-emphasis;
+  }
+
+  .location-role,
+  .date {
+    padding: unset;
+    font-size: var(--font-size-small);
+  }
+
+  @include bp-small {
+    .wrapper {
+      border-radius: var(--border-radius);
+      max-width: calc(var(--content-max-width) + var(--padding-double) * 2);
+    }
+
+    .title-wrapper {
+      padding: var(--padding-double) var(--padding-double) var(--padding);
+    }
+  }
+</style>
