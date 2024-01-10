@@ -1,6 +1,6 @@
 ---
 import type { z } from "astro:content";
-import type { expEduDetailsSchema } from "../../schemas/expEduDetailsSchema";
+import type { expEduDetailsSchema } from "../../../schemas/expEduDetailsSchema";
 import dayjs from "dayjs";
 
 const MONTH_FORMAT = "MMMM YYYY";
@@ -47,7 +47,7 @@ if (endDate == null) {
 </div>
 
 <style lang="scss">
-  @import "../../styles/globals.scss";
+  @import "../../../styles/globals.scss";
 
   .title-wrapper {
     padding: var(--padding-double) var(--padding-half) var(--padding-half);
