@@ -1,0 +1,130 @@
+---
+interface ListItem {
+  href: string;
+  title: string;
+  src: string | undefined;
+  alt: string | undefined;
+  description: string;
+}
+
+interface Props {
+  list: ListItem[];
+}
+
+const { list } = Astro.props;
+console.log(list);
+---
+
+<ol>
+  {
+    list.map(({ href, title, src, alt, description }) => (
+      <li>
+        <a href={href}>
+          <h2 class="title">{title}</h2>
+          {src != null && alt != null ? (
+            <img class="image" width={300} height={300} src={src} alt={alt} />
+          ) : (
+            <img
+              class="image placeholder"
+              width={260}
+              height={260}
+              src="/missing-image.svg"
+              alt="Placeholder image, no image yet"
+            />
+          )}
+          <span class="description">{description}</span>
+        </a>
+      </li>
+    ))
+  }
+</ol>
+
+<style lang="scss">
+  @import "../../styles/_globals.scss";
+
+  ol {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-double);
+    margin: unset;
+    padding: unset;
+  }
+
+  li {
+    @include elev-1();
+    padding: 0 var(--padding-half);
+  }
+
+  a {
+    padding: var(--padding-double) 0;
+    display: grid;
+    grid-template-areas:
+      "title"
+      "image"
+      "description";
+    justify-items: center;
+    text-align: center;
+    color: unset;
+    text-decoration: unset;
+  }
+
+  a:active > .title,
+  a:hover > .title {
+    text-decoration: underline;
+    text-decoration-color: $primary;
+  }
+
+  .title {
+    grid-area: title;
+    margin: unset;
+  }
+
+  .time {
+    color: $text-medium-emphasis;
+  }
+
+  .image {
+    grid-area: image;
+    border-radius: var(--border-radius);
+    margin: var(--padding-double) 0;
+  }
+
+  .placeholder {
+    margin: 20px !important;
+  }
+
+  .description {
+    grid-area: description;
+  }
+
+  @include bp-medium {
+    li {
+      @include elev-1();
+      padding: 0;
+      border-radius: var(--border-radius);
+    }
+
+    a {
+      padding: 0;
+      grid-template-areas:
+        "image title"
+        "image description";
+    }
+
+    .title {
+      padding: var(--padding-double);
+    }
+
+    .image {
+      border-top-right-radius: unset;
+      border-bottom-right-radius: unset;
+      margin: 0;
+      padding: unset;
+    }
+
+    .description {
+      padding: 0 var(--padding-double) var(--padding);
+    }
+  }
+</style>

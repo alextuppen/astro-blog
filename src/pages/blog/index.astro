@@ -2,40 +2,27 @@
 import { Root } from "../../layouts";
 import { SITE_DESCRIPTION } from "../../consts";
 import { getCollection } from "astro:content";
-import { FormattedDate, Section } from "../../components";
+import { BlogRecipeList, Section } from "../../components";
 
-const posts = (await getCollection("blog")).sort(
+const posts = await getCollection("blog");
+const sortedPosts = posts.sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+const transformedPosts = sortedPosts.map(
+  ({ slug, data: { heroImage, heroImageText, title, description } }) => ({
+    href: `/blog/${slug}`,
+    title,
+    src: heroImage,
+    alt: heroImageText,
+    description,
+  })
 );
 ---
 
 <Root title="Blog" description={SITE_DESCRIPTION}>
   <Section>
     <h1>Blog</h1>
-    <ol>
-      {
-        posts.map((post) => (
-          <li>
-            <a href={`/blog/${post.slug}/`}>
-              <div class="title-date">
-                <h2 class="title">{post.data.title}</h2>
-                <span>
-                  <FormattedDate date={post.data.pubDate} className="time" />
-                </span>
-              </div>
-              <img
-                class="image"
-                width={300}
-                height={300}
-                src={post.data.heroImage}
-                alt={post.data.heroImageText}
-              />
-              <span class="description">{post.data.description}</span>
-            </a>
-          </li>
-        ))
-      }
-    </ol>
+    <BlogRecipeList list={transformedPosts} />
   </Section>
 </Root>
 
@@ -45,90 +32,5 @@ const posts = (await getCollection("blog")).sort(
   section {
     max-width: var(--page-max-width);
     margin: auto;
-  }
-
-  ol {
-    list-style-type: none;
-    display: flex;
-    flex-direction: column;
-    gap: var(--padding-double);
-    margin: unset;
-    padding: unset;
-  }
-
-  li {
-    @include elev-1();
-    padding: 0 var(--padding-half);
-  }
-
-  a {
-    padding: var(--padding-double) 0;
-    display: grid;
-    grid-template-areas:
-      "title-date"
-      "image"
-      "description";
-    justify-items: center;
-    text-align: center;
-    color: unset;
-    text-decoration: unset;
-  }
-
-  a:active > div > .title,
-  a:hover > div > .title {
-    text-decoration: underline;
-    text-decoration-color: $primary;
-  }
-
-  .title-date {
-    grid-area: title-date;
-  }
-
-  .title {
-    margin: unset;
-  }
-
-  .time {
-    color: $text-medium-emphasis;
-  }
-
-  .image {
-    grid-area: image;
-    border-radius: var(--border-radius);
-    margin: var(--padding-double) 0;
-  }
-
-  .description {
-    grid-area: description;
-  }
-
-  @include bp-medium {
-    li {
-      @include elev-1();
-      padding: 0;
-      border-radius: var(--border-radius);
-    }
-
-    a {
-      padding: 0;
-      grid-template-areas:
-        "image title-date"
-        "image description";
-    }
-
-    .title-date {
-      padding: var(--padding-double);
-    }
-
-    .image {
-      border-top-right-radius: unset;
-      border-bottom-right-radius: unset;
-      margin: 0;
-      padding: unset;
-    }
-
-    .description {
-      padding: 0 var(--padding-double) var(--padding);
-    }
   }
 </style>

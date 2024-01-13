@@ -1,21 +1,32 @@
 ---
 import { Root } from "../../layouts";
-import { Section } from "../../components";
+import { BlogRecipeList, Section } from "../../components";
 
 import { SITE_DESCRIPTION } from "../../consts";
 import { getCollection } from "astro:content";
-import Fuse from "fuse.js";
+// import Fuse from "fuse.js";
 
 const recipes = await getCollection("recipes");
 const sortedRecipes = recipes.sort((a, b) =>
   a.data.datePublished < b.data.datePublished ? 1 : -1
 );
+const transformedRecipes = sortedRecipes.map(
+  ({ id, data: { name, description, image } }) => ({
+    href: `/recipes/${id}`,
+    title: name,
+    src: image ? image[0] : undefined,
+    alt: name,
+    description,
+  })
+);
 
-const fuse = new Fuse(sortedRecipes, {
-  keys: ["data.name", "data.description", "data.keywords"],
-});
+console.log(sortedRecipes);
 
-console.log(fuse.search("rice"));
+// const fuse = new Fuse(sortedRecipes, {
+//   keys: ["data.name", "data.description", "data.keywords"],
+// });
+
+// console.log(fuse.search("rice"));
 ---
 
 <Root title={"Alex Tuppen"} description={SITE_DESCRIPTION}>
@@ -25,7 +36,6 @@ console.log(fuse.search("rice"));
       This is just somewhere for me to remember the recipes I come up with.
       They're not complicated or fancy but they are fast and easy.
     </p>
-    <input />
-    {sortedRecipes.map(({ data: { name } }) => <p>{name}</p>)}
+    <BlogRecipeList list={transformedRecipes} />
   </Section>
 </Root>
