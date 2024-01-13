@@ -2,16 +2,85 @@
 import type { CollectionEntry } from "astro:content";
 import Root from "../layouts/Root.astro";
 import { Section } from "../components";
+import dayjs from "dayjs";
+import duration from "dayjs/plugin/duration";
+import relativeTime from "dayjs/plugin/relativeTime";
 // import { FormattedDate } from "../components/Display";
 
 type Props = CollectionEntry<"recipes">["data"];
 
-const { name, description } = Astro.props;
+const {
+  name,
+  image,
+  description,
+  creativeWorkStatus,
+  prepTime,
+  cookTime,
+  totalTime,
+  recipeYield,
+  recipeIngredient,
+  tool,
+  recipeInstructions,
+} = Astro.props;
+
+dayjs.extend(duration);
+dayjs.extend(relativeTime);
+
+const prepDuration = dayjs.duration(prepTime).humanize();
+const cookDuration = dayjs.duration(cookTime).humanize();
+const totalDuration = dayjs.duration(totalTime).humanize();
 ---
 
 <Root title={name} description={description}>
   <Section>
     <h1>{name}</h1>
+    <img width="400" src={image[0]} />
+    <p>{creativeWorkStatus}</p>
     <p>{description}</p>
+    <p>{`Serves: ${recipeYield}`}</p>
+    <p>{`Prep time: ${prepDuration}`}</p>
+    <p>{`Cook time: ${cookDuration}`}</p>
+    <p>{`Total time: ${totalDuration}`}</p>
+    <div>
+      <h2>Tools:</h2>
+      <ul>
+        {
+          tool.map(({ name }) => (
+            <li class="toolsIngredientsItem">
+              <img src="/logo/bulletPoints/white.svg" class="bullet-point" />
+              <span>{name}</span>
+            </li>
+          ))
+        }
+      </ul>
+      <h2>Ingredients:</h2>
+      <ul>
+        {
+          recipeIngredient.map((ingredient) => (
+            <li class="toolsIngredientsItem">
+              <img src="/logo/bulletPoints/white.svg" class="bullet-point" />
+              <span>{ingredient}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
   </Section>
 </Root>
+
+<style lang="scss">
+  @import "../styles/_globals.scss";
+
+  .toolsIngredientsItem {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: var(--padding);
+    color: $text;
+    text-align: left;
+  }
+
+  .bullet-point {
+    width: var(--font-size);
+  }
+</style>
