@@ -27,6 +27,7 @@ const { title, description, pubDate, updatedDate, heroImage, heroImageText } =
     </div>
     <div class="wrapper">
       <div class="titleWrapper">
+        <h1 class="title">{title}</h1>
         <div class="date">
           <FormattedDate date={pubDate} />
           {
@@ -37,7 +38,6 @@ const { title, description, pubDate, updatedDate, heroImage, heroImageText } =
             )
           }
         </div>
-        <h1 class="title">{title}</h1>
         <hr class="separator" />
       </div>
       <div class="content">
@@ -81,11 +81,11 @@ const { title, description, pubDate, updatedDate, heroImage, heroImageText } =
   }
 
   .title {
-    margin-bottom: var(--padding-double);
+    margin-bottom: var(--padding);
   }
 
   .date {
-    margin-bottom: var(--padding);
+    margin-bottom: var(--padding-double);
     color: $text-medium-emphasis;
   }
 
