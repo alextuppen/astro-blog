@@ -35,35 +35,87 @@ const totalDuration = dayjs.duration(totalTime).humanize();
   <Section>
     <h1>{name}</h1>
     <img width="400" src={image[0]} />
-    <p>{creativeWorkStatus}</p>
-    <p>{description}</p>
-    <p>{`Serves: ${recipeYield}`}</p>
-    <p>{`Prep time: ${prepDuration}`}</p>
-    <p>{`Cook time: ${cookDuration}`}</p>
-    <p>{`Total time: ${totalDuration}`}</p>
-    <div>
-      <h2>Tools:</h2>
-      <ul>
-        {
-          tool.map(({ name }) => (
-            <li class="toolsIngredientsItem">
-              <img src="/logo/bulletPoints/white.svg" class="bullet-point" />
-              <span>{name}</span>
-            </li>
-          ))
-        }
-      </ul>
-      <h2>Ingredients:</h2>
-      <ul>
-        {
-          recipeIngredient.map((ingredient) => (
-            <li class="toolsIngredientsItem">
-              <img src="/logo/bulletPoints/white.svg" class="bullet-point" />
-              <span>{ingredient}</span>
-            </li>
-          ))
-        }
-      </ul>
+    {
+      creativeWorkStatus && creativeWorkStatus === "draft" && (
+        <div class="draft">
+          <img
+            src="/icons/components/exclamation-circle.svg"
+            class="draft-icon"
+          />
+          <h3 class="draft-title">Draft recipe</h3>
+          <span class="draft-text">
+            This recipe is in draft state, it is unfinished and still being
+            refined.
+          </span>
+        </div>
+      )
+    }
+    <div class="grid">
+      <div class="description-card">
+        <p>{description}</p>
+        <p>{`Serves: ${recipeYield}`}</p>
+        <p>{`Prep time: ${prepDuration}`}</p>
+        <p>{`Cook time: ${cookDuration}`}</p>
+        <p>{`Total time: ${totalDuration}`}</p>
+      </div>
+      <div class="tools-ingredients-card">
+        <h2>Tools:</h2>
+        <ul>
+          {
+            tool.map(({ name }) => (
+              <li class="tools-ingredients-item">
+                <img src="/logo/bulletPoints/white.svg" class="bullet-point" />
+                <span>{name}</span>
+              </li>
+            ))
+          }
+        </ul>
+        <h2>Ingredients:</h2>
+        <ul>
+          {
+            recipeIngredient.map((ingredient) => (
+              <li class="tools-ingredients-item">
+                <img src="/logo/bulletPoints/white.svg" class="bullet-point" />
+                <span>{ingredient}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <div class="method-card">
+        <h2>Method</h2>
+        <ol>
+          {
+            recipeInstructions.map((instruction) => (
+              <li>
+                <h3>{instruction.name}</h3>
+                {"text" in instruction && <p>{instruction.text}</p>}
+                {"itemListElement" in instruction &&
+                  instruction.itemListElement.map((element) => {
+                    switch (element["@type"]) {
+                      case "HowToDirection":
+                        return <p>{element.text}</p>;
+                      case "HowToTip":
+                        return (
+                          <div>
+                            <div>
+                              <img src="/icons/components/light-bulb.svg" />
+                              <h4>Tip</h4>
+                            </div>
+                            <p>{element.text}</p>
+                          </div>
+                        );
+                      default:
+                        throw new Error(
+                          `itemListElement["@type"] switch has an illegal value: ${element["@type"]}`
+                        );
+                    }
+                  })}
+              </li>
+            ))
+          }
+        </ol>
+      </div>
     </div>
   </Section>
 </Root>
@@ -71,7 +123,64 @@ const totalDuration = dayjs.duration(totalTime).humanize();
 <style lang="scss">
   @import "../styles/_globals.scss";
 
-  .toolsIngredientsItem {
+  .grid {
+    width: 100%;
+    display: grid;
+    grid-template-areas: "description" "ingredients" "method";
+    gap: var(--padding-double);
+    align-items: start;
+  }
+
+  .description-card,
+  .tools-ingredients-card,
+  .method-card {
+    @include elev-1();
+  }
+
+  .description-card {
+    grid-area: description;
+  }
+
+  .tools-ingredients-card {
+    grid-area: ingredients;
+  }
+
+  .method-card {
+    grid-area: method;
+  }
+
+  .draft {
+    padding: var(--padding);
+    @include elev-3();
+    display: grid;
+    grid-template-areas:
+      "icon title"
+      "icon text";
+    row-gap: var(--padding-half);
+    column-gap: var(--padding);
+    border: var(--border-width) solid $secondary;
+    border-radius: var(--border-radius);
+  }
+
+  .draft-icon {
+    grid-area: icon;
+    width: calc(var(--font-size) * 3);
+    height: 100%;
+    color: $text;
+  }
+
+  .draft-title {
+    grid-area: title;
+    justify-self: start;
+  }
+
+  .draft-text {
+    grid-area: text;
+    justify-self: start;
+    text-align: start;
+  }
+
+  .tools-ingredients-item {
     display: flex;
     justify-content: flex-start;
     align-items: center;
