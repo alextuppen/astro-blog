@@ -59,50 +59,62 @@ const totalDuration = dayjs.duration(totalTime).humanize();
         <p>{`Total time: ${totalDuration}`}</p>
       </div>
       <div class="tools-ingredients-card">
-        <h2>Tools:</h2>
-        <ul>
-          {
-            tool.map(({ name }) => (
-              <li class="tools-ingredients-item">
-                <img src="/logo/bulletPoints/white.svg" class="bullet-point" />
-                <span>{name}</span>
-              </li>
-            ))
-          }
-        </ul>
-        <h2>Ingredients:</h2>
-        <ul>
-          {
-            recipeIngredient.map((ingredient) => (
-              <li class="tools-ingredients-item">
-                <img src="/logo/bulletPoints/white.svg" class="bullet-point" />
-                <span>{ingredient}</span>
-              </li>
-            ))
-          }
-        </ul>
+        <div class="tools-ingredients">
+          <h2>Tools:</h2>
+          <ul class="tools-ingredients-list">
+            {
+              tool.map(({ name }) => (
+                <li class="tools-ingredients-item">
+                  <img
+                    src="/logo/bulletPoints/white.svg"
+                    class="bullet-point"
+                  />
+                  <span>{name}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+        <div class="tools-ingredients">
+          <h2>Ingredients:</h2>
+          <ul class="tools-ingredients-list">
+            {
+              recipeIngredient.map((ingredient) => (
+                <li class="tools-ingredients-item">
+                  <img
+                    src="/logo/bulletPoints/white.svg"
+                    class="bullet-point"
+                  />
+                  <span>{ingredient}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
       </div>
       <div class="method-card">
         <h2>Method</h2>
-        <ol>
+        <ol class="methods">
           {
             recipeInstructions.map((instruction) => (
-              <li>
-                <h3>{instruction.name}</h3>
-                {"text" in instruction && <p>{instruction.text}</p>}
+              <li class="method">
+                <h4 class="method-title">{instruction.name}</h4>
+                {"text" in instruction && (
+                  <p class="method-text">{instruction.text}</p>
+                )}
                 {"itemListElement" in instruction &&
                   instruction.itemListElement.map((element) => {
                     switch (element["@type"]) {
                       case "HowToDirection":
-                        return <p>{element.text}</p>;
+                        return <p class="method-text">{element.text}</p>;
                       case "HowToTip":
                         return (
-                          <div>
-                            <div>
+                          <div class="method-tip">
+                            <div class="tip-title">
                               <img src="/icons/components/light-bulb.svg" />
-                              <h4>Tip</h4>
+                              <h5>Tip</h5>
                             </div>
-                            <p>{element.text}</p>
+                            <p class="method-text">{element.text}</p>
                           </div>
                         );
                       default:
@@ -132,9 +144,9 @@ const totalDuration = dayjs.duration(totalTime).humanize();
   }
 
   .description-card,
-  .tools-ingredients-card,
-  .method-card {
+  .tools-ingredients-card {
     @include elev-1();
+    padding: var(--padding-double) var(--padding);
   }
 
   .description-card {
@@ -147,6 +159,21 @@ const totalDuration = dayjs.duration(totalTime).humanize();
 
   .method-card {
     grid-area: method;
+  }
+
+  //   .imageWrapper {
+  //   position: relative;
+  //   width: 100%;
+  //   height: 20rem;
+  // }
+
+  // .imageWrapper > span > img {
+  //   border-radius: var(--border-radius-double);
+  // }
+
+  .description-items,
+  .tools-ingredients {
+    width: 75%;
   }
 
   .draft {
@@ -180,6 +207,23 @@ const totalDuration = dayjs.duration(totalTime).humanize();
     text-align: start;
   }
 
+  .description-items-list {
+    margin: unset;
+  }
+
+  .tools-ingredients-list {
+    margin-top: var(--padding);
+  }
+
+  .description-items-list,
+  .tools-ingredients-list {
+    padding-left: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--padding-half);
+  }
+
+  .description-item,
   .tools-ingredients-item {
     display: flex;
     justify-content: flex-start;
@@ -189,7 +233,142 @@ const totalDuration = dayjs.duration(totalTime).humanize();
     text-align: left;
   }
 
+  //   .description-item > svg {
+  //   font-size: var(--font-size);
+  // }
+
+  .description-item > span {
+    white-space: nowrap;
+  }
+
   .bullet-point {
     width: var(--font-size);
   }
+
+  .methods {
+    padding-left: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-triple);
+    counter-reset: method;
+    list-style-type: none;
+    color: $text;
+    text-align: left;
+  }
+
+  .method {
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding);
+    counter-increment: method;
+  }
+
+  .method-title {
+    display: flex;
+    gap: var(--padding-half);
+  }
+
+  .method-title::before {
+    content: counter(method) ".";
+  }
+
+  .method-tip {
+    display: flex;
+    padding: var(--padding-half);
+    @include elev-6();
+    flex-direction: column;
+    gap: var(--padding-half);
+    border: var(--border-width) solid $secondary;
+    border-radius: var(--border-radius);
+  }
+
+  .tip-title {
+    display: flex;
+    align-items: center;
+    gap: var(--padding-half);
+  }
+
+  @include bp-small {
+    // .imageWrapper {
+    //   height: 30rem;
+    // }
+
+    .description-card,
+    .tools-ingredients-card {
+      border-radius: var(--border-radius);
+    }
+
+    .description-items-list,
+    .tools-ingredients-list {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .description-items,
+    .tools-ingredients {
+      width: 90%;
+    }
+  }
+
+  @include bp-medium {
+    // .imageWrapper {
+    //   height: 40rem;
+    // }
+
+    .description-card,
+    .tools-ingredients-card {
+      padding: var(--padding-double);
+    }
+
+    .description {
+      width: 90%;
+    }
+
+    .description-items-list-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: var(--padding);
+    }
+
+    .description-items-list {
+      margin-top: unset;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: var(--padding);
+    }
+
+    .tools-ingredients-list {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .description-items,
+    .tools-ingredients {
+      width: 100%;
+    }
+
+    .description-item {
+      padding: 0 var(--padding);
+    }
+  }
+
+  @include bp-large {
+    // .imageWrapper {
+    //   height: 45rem;
+    // }
+
+    .grid {
+      grid-template-areas: "description description" "ingredients method";
+      grid-template-columns: 30% 1fr;
+    }
+
+    .tools-ingredients-list {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  // @include bp-xl {
+  //   .imageWrapper {
+  //     height: 50rem;
+  //   }
+  // }
 </style>
