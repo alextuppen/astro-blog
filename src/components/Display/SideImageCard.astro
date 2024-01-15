@@ -1,0 +1,97 @@
+---
+interface Props {
+  href: string | undefined;
+  title: string;
+  src: string | undefined;
+  alt: string | undefined;
+  description: string;
+}
+
+const { href, title, src, alt, description } = Astro.props;
+
+const Wrapper = href ? "a" : "div";
+---
+
+<Wrapper class="wrapper">
+  <h2 class="title">{title}</h2>
+  {
+    src != null && alt != null ? (
+      <img class="image" width={300} height={300} src={src} alt={alt} />
+    ) : (
+      <img
+        class="image placeholder"
+        width={260}
+        height={260}
+        src="/icons/components/missing-image.svg"
+        alt="Placeholder image, no image yet"
+      />
+    )
+  }
+  <span class="description">{description}</span>
+</Wrapper>
+
+<style lang="scss">
+  @import "../../styles/_globals.scss";
+
+  .wrapper {
+    padding: var(--padding-double) 0;
+    display: grid;
+    grid-template-areas:
+      "title"
+      "image"
+      "description";
+    justify-items: center;
+    text-align: center;
+    color: unset;
+    text-decoration: unset;
+  }
+
+  a:active > .title,
+  a:hover > .title {
+    text-decoration: underline;
+    text-decoration-color: $primary;
+  }
+
+  .title {
+    grid-area: title;
+    margin: unset;
+  }
+
+  .image {
+    grid-area: image;
+    border-radius: var(--border-radius);
+    margin: var(--padding-double) 0;
+  }
+
+  .placeholder {
+    margin: 20px !important;
+  }
+
+  .description {
+    grid-area: description;
+  }
+
+  @include bp-medium {
+    .wrapper {
+      padding: 0;
+      grid-template-areas:
+        "image title"
+        "image description";
+    }
+
+    .title {
+      padding: var(--padding-double);
+    }
+
+    .image {
+      border-top-right-radius: unset;
+      border-bottom-right-radius: unset;
+      margin: 0;
+      padding: unset;
+    }
+
+    .description {
+      padding: 0 var(--padding-double) var(--padding);
+    }
+  }
+</style>
