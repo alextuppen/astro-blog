@@ -5,7 +5,6 @@ import { Section } from "../components";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import relativeTime from "dayjs/plugin/relativeTime";
-// import { FormattedDate } from "../components/Display";
 
 type Props = CollectionEntry<"recipes">["data"];
 
@@ -53,10 +52,12 @@ const totalDuration = dayjs.duration(totalTime).humanize();
     <div class="grid">
       <div class="description-card">
         <p>{description}</p>
-        <p>{`Serves: ${recipeYield}`}</p>
-        <p>{`Prep time: ${prepDuration}`}</p>
-        <p>{`Cook time: ${cookDuration}`}</p>
-        <p>{`Total time: ${totalDuration}`}</p>
+        <div class="times">
+          <p>{`Prep time: ${prepDuration}`}</p>
+          <p>{`Cook time: ${cookDuration}`}</p>
+          <p>{`Total time: ${totalDuration}`}</p>
+        </div>
+        <p class="serves">{`Serves: ${recipeYield}`}</p>
       </div>
       <div class="tools-ingredients-card">
         <div class="tools-ingredients">
@@ -151,6 +152,15 @@ const totalDuration = dayjs.duration(totalTime).humanize();
 
   .description-card {
     grid-area: description;
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding);
+  }
+
+  .times {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   .tools-ingredients-card {
@@ -296,6 +306,12 @@ const totalDuration = dayjs.duration(totalTime).humanize();
     .description-card,
     .tools-ingredients-card {
       border-radius: var(--border-radius);
+    }
+
+    .times {
+      flex-direction: row;
+      flex-wrap: wrap;
+      column-gap: var(--padding);
     }
 
     .description-items-list,

@@ -1,5 +1,5 @@
-import FormattedDate from "./FormattedDate.astro";
 import BlogRecipeList from "./BlogRecipeList.astro";
+import FormattedDate from "./FormattedDate.astro";
 
 export { Education, ExpEduDetails, Experiences } from "./Experience";
-export { FormattedDate, BlogRecipeList };
+export { BlogRecipeList, FormattedDate };
