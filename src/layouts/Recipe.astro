@@ -1,7 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import Root from "../layouts/Root.astro";
-import { Section } from "../components";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -31,36 +30,47 @@ const totalDuration = dayjs.duration(totalTime).humanize();
 ---
 
 <Root title={name} description={description}>
-  <Section>
-    <h1>{name}</h1>
-    <img width="400" src={image[0]} />
+  <article>
+    <div class="hero-wrapper">
+      <img width="300" height="300" src={image[0]} class="hero-image" />
+      <h1>{name}</h1>
+    </div>
     {
-      creativeWorkStatus && creativeWorkStatus === "draft" && (
-        <div class="draft">
-          <img
-            src="/icons/components/exclamation-circle.svg"
-            class="draft-icon"
-          />
-          <h3 class="draft-title">Draft recipe</h3>
-          <span class="draft-text">
-            This recipe is in draft state, it is unfinished and still being
-            refined.
-          </span>
-        </div>
+      creativeWorkStatus === "draft" && (
+        <>
+          <hr class="separator" />
+          <div class="draft">
+            <img
+              src="/icons/components/exclamation-circle.svg"
+              class="draft-icon"
+            />
+            <h3 class="draft-title">Draft recipe</h3>
+            <span class="draft-text">
+              This recipe is in draft state; it is unfinished and still being
+              refined.
+            </span>
+          </div>
+        </>
       )
     }
-    <div class="grid">
-      <div class="description-card">
-        <p>{description}</p>
-        <div class="times">
-          <p>{`Prep time: ${prepDuration}`}</p>
-          <p>{`Cook time: ${cookDuration}`}</p>
-          <p>{`Total time: ${totalDuration}`}</p>
-        </div>
-        <p class="serves">{`Serves: ${recipeYield}`}</p>
+    <hr class="separator" />
+    <div class="description">
+      <p>{description}</p>
+      <div class="times-serves">
+        <span class="prep-desc">Preparation time:</span>
+        <span>{prepDuration}</span>
+        <span class="cook-desc">Cook time:</span>
+        <span>{cookDuration}</span>
+        <span class="total-desc">Total time:</span>
+        <span>{totalDuration}</span>
+        <span class="serves-desc">Serves:</span>
+        <span>{recipeYield}</span>
       </div>
-      <div class="tools-ingredients-card">
-        <div class="tools-ingredients">
+    </div>
+    <hr class="separator" />
+    <div class="tools-ingredients-method">
+      <div class="tools-ingredients">
+        <div class="tools">
           <h2>Tools:</h2>
           <ul class="tools-ingredients-list">
             {
@@ -76,7 +86,7 @@ const totalDuration = dayjs.duration(totalTime).humanize();
             }
           </ul>
         </div>
-        <div class="tools-ingredients">
+        <div class="ingredients">
           <h2>Ingredients:</h2>
           <ul class="tools-ingredients-list">
             {
@@ -93,7 +103,8 @@ const totalDuration = dayjs.duration(totalTime).humanize();
           </ul>
         </div>
       </div>
-      <div class="method-card">
+      <hr class="separator" />
+      <div class="method">
         <h2>Method</h2>
         <ol class="methods">
           {
@@ -130,73 +141,130 @@ const totalDuration = dayjs.duration(totalTime).humanize();
         </ol>
       </div>
     </div>
-  </Section>
+
+    <!-- <div class="grid">
+      <div class="tools-ingredients-card">
+        <div class="tools-ingredients">
+          <h2>Tools:</h2>
+          <ul class="tools-ingredients-list">
+            {
+              tool.map(({ name }) => (
+                <li class="tools-ingredients-item">
+                  <img
+                    src="/logo/bulletPoints/white.svg"
+                    class="bullet-point"
+                  />
+                  <span>{name}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+        <div class="tools-ingredients">
+          <h2>Ingredients:</h2>
+          <ul class="tools-ingredients-list">
+            {
+              recipeIngredient.map((ingredient) => (
+                <li class="tools-ingredients-item">
+                  <img
+                    src="/logo/bulletPoints/white.svg"
+                    class="bullet-point"
+                  />
+                  <span>{ingredient}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div> -->
+    <!-- <div class="method-card">
+        <h2>Method</h2>
+        <ol class="methods">
+          {
+            recipeInstructions.map((instruction) => (
+              <li class="method">
+                <h4 class="method-title">{instruction.name}</h4>
+                {"text" in instruction && (
+                  <p class="method-text">{instruction.text}</p>
+                )}
+                {"itemListElement" in instruction &&
+                  instruction.itemListElement.map((element) => {
+                    switch (element["@type"]) {
+                      case "HowToDirection":
+                        return <p class="method-text">{element.text}</p>;
+                      case "HowToTip":
+                        return (
+                          <div class="method-tip">
+                            <div class="tip-title">
+                              <img src="/icons/components/light-bulb.svg" />
+                              <h5>Tip</h5>
+                            </div>
+                            <p class="method-text">{element.text}</p>
+                          </div>
+                        );
+                      default:
+                        throw new Error(
+                          `itemListElement["@type"] switch has an illegal value: ${element["@type"]}`
+                        );
+                    }
+                  })}
+              </li>
+            ))
+          }
+        </ol>
+      </div> -->
+    <!-- </div> -->
+  </article>
 </Root>
 
 <style lang="scss">
   @import "../styles/_globals.scss";
 
-  .grid {
-    width: 100%;
-    display: grid;
-    grid-template-areas: "description" "ingredients" "method";
+  article {
+    max-width: var(--page-max-width);
+    margin: auto;
+    display: flex;
+    flex-direction: column;
     gap: var(--padding-double);
-    align-items: start;
   }
 
-  .description-card,
-  .tools-ingredients-card {
-    @include elev-1();
-    padding: var(--padding-double) var(--padding);
+  hr {
+    border-bottom-color: $text;
   }
 
-  .description-card {
-    grid-area: description;
+  .hero-wrapper {
     display: flex;
     flex-direction: column;
     gap: var(--padding);
+    padding-top: var(--padding-double);
   }
 
-  .times {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  .hero-image {
+    width: 80%;
+    height: 80%;
+    margin: auto;
+    border-radius: var(--border-radius-double);
   }
 
-  .tools-ingredients-card {
-    grid-area: ingredients;
+  h1 {
+    text-align: center;
   }
 
-  .method-card {
-    grid-area: method;
-  }
-
-  //   .imageWrapper {
-  //   position: relative;
-  //   width: 100%;
-  //   height: 20rem;
-  // }
-
-  // .imageWrapper > span > img {
-  //   border-radius: var(--border-radius-double);
-  // }
-
-  .description-items,
-  .tools-ingredients {
-    width: 75%;
+  .separator {
+    margin: 0 var(--padding-double);
   }
 
   .draft {
-    padding: var(--padding);
-    @include elev-3();
+    margin: auto;
+    padding: 0 var(--padding);
     display: grid;
     grid-template-areas:
+      "draft-top draft-top"
       "icon title"
-      "icon text";
+      "icon text"
+      "draft-bottom draft-bottom";
     row-gap: var(--padding-half);
     column-gap: var(--padding);
-    border: var(--border-width) solid $secondary;
-    border-radius: var(--border-radius);
   }
 
   .draft-icon {
@@ -215,6 +283,62 @@ const totalDuration = dayjs.duration(totalTime).humanize();
     grid-area: text;
     justify-self: start;
     text-align: start;
+  }
+
+  .description,
+  .tools-ingredients-method {
+    padding: 0 var(--padding);
+  }
+
+  .description {
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding);
+  }
+
+  .times-serves {
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+    column-gap: var(--padding);
+  }
+
+  .prep-desc,
+  .cook-desc,
+  .total-desc,
+  .serves-desc {
+    justify-self: end;
+  }
+
+  .tools-ingredients-method,
+  .tools-ingredients {
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-double);
+  }
+
+  .grid {
+    width: calc(100% - var(--padding-double));
+    margin: auto;
+    padding-top: var(--padding);
+    display: grid;
+    grid-template-areas: "ingredients" "method";
+    gap: var(--padding-double);
+    align-items: start;
+  }
+
+  .tools-ingredients-card {
+    grid-area: ingredients;
+  }
+
+  .method-card {
+    grid-area: method;
+  }
+
+  .description-items,
+  .tools-ingredients {
+    width: 75%;
   }
 
   .description-items-list {
@@ -242,10 +366,6 @@ const totalDuration = dayjs.duration(totalTime).humanize();
     color: $text;
     text-align: left;
   }
-
-  //   .description-item > svg {
-  //   font-size: var(--font-size);
-  // }
 
   .description-item > span {
     white-space: nowrap;
@@ -299,11 +419,7 @@ const totalDuration = dayjs.duration(totalTime).humanize();
   }
 
   @include bp-small {
-    // .imageWrapper {
-    //   height: 30rem;
-    // }
-
-    .description-card,
+    .description,
     .tools-ingredients-card {
       border-radius: var(--border-radius);
     }
@@ -326,11 +442,7 @@ const totalDuration = dayjs.duration(totalTime).humanize();
   }
 
   @include bp-medium {
-    // .imageWrapper {
-    //   height: 40rem;
-    // }
-
-    .description-card,
+    .description,
     .tools-ingredients-card {
       padding: var(--padding-double);
     }
@@ -368,10 +480,6 @@ const totalDuration = dayjs.duration(totalTime).humanize();
   }
 
   @include bp-large {
-    // .imageWrapper {
-    //   height: 45rem;
-    // }
-
     .grid {
       grid-template-areas: "description description" "ingredients method";
       grid-template-columns: 30% 1fr;
@@ -381,10 +489,4 @@ const totalDuration = dayjs.duration(totalTime).humanize();
       grid-template-columns: 1fr;
     }
   }
-
-  // @include bp-xl {
-  //   .imageWrapper {
-  //     height: 50rem;
-  //   }
-  // }
 </style>
