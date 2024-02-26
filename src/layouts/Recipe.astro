@@ -1,9 +1,13 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import Root from "../layouts/Root.astro";
-import dayjs from "dayjs";
-import duration from "dayjs/plugin/duration";
-import relativeTime from "dayjs/plugin/relativeTime";
+import {
+  Draft,
+  HorizontalSeperator,
+  Method,
+  TimesServes,
+  ToolsIngredients,
+} from "../components/Display";
 
 type Props = CollectionEntry<"recipes">["data"];
 
@@ -20,13 +24,6 @@ const {
   tool,
   recipeInstructions,
 } = Astro.props;
-
-dayjs.extend(duration);
-dayjs.extend(relativeTime);
-
-const prepDuration = dayjs.duration(prepTime).humanize();
-const cookDuration = dayjs.duration(cookTime).humanize();
-const totalDuration = dayjs.duration(totalTime).humanize();
 ---
 
 <Root title={name} description={description}>
@@ -35,185 +32,23 @@ const totalDuration = dayjs.duration(totalTime).humanize();
       <img width="300" height="300" src={image[0]} class="hero-image" />
       <h1>{name}</h1>
     </div>
-    {
-      creativeWorkStatus === "draft" && (
-        <>
-          <hr class="separator" />
-          <div class="draft">
-            <img
-              src="/icons/components/exclamation-circle.svg"
-              class="draft-icon"
-            />
-            <h3 class="draft-title">Draft recipe</h3>
-            <span class="draft-text">
-              This recipe is in draft state; it is unfinished and still being
-              refined.
-            </span>
-          </div>
-        </>
-      )
-    }
-    <hr class="separator" />
+    <Draft creativeWorkStatus={creativeWorkStatus} />
+    <HorizontalSeperator />
     <div class="description">
       <p>{description}</p>
-      <div class="times-serves">
-        <span class="prep-desc">Preparation time:</span>
-        <span>{prepDuration}</span>
-        <span class="cook-desc">Cook time:</span>
-        <span>{cookDuration}</span>
-        <span class="total-desc">Total time:</span>
-        <span>{totalDuration}</span>
-        <span class="serves-desc">Serves:</span>
-        <span>{recipeYield}</span>
-      </div>
+      <TimesServes
+        prepTime={prepTime}
+        cookTime={cookTime}
+        totalTime={totalTime}
+        recipeYield={recipeYield}
+      />
     </div>
-    <hr class="separator" />
+    <HorizontalSeperator />
     <div class="tools-ingredients-method">
-      <div class="tools-ingredients">
-        <div class="tools">
-          <h2>Tools:</h2>
-          <ul class="tools-ingredients-list">
-            {
-              tool.map(({ name }) => (
-                <li class="tools-ingredients-item">
-                  <img
-                    src="/logo/bulletPoints/white.svg"
-                    class="bullet-point"
-                  />
-                  <span>{name}</span>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-        <div class="ingredients">
-          <h2>Ingredients:</h2>
-          <ul class="tools-ingredients-list">
-            {
-              recipeIngredient.map((ingredient) => (
-                <li class="tools-ingredients-item">
-                  <img
-                    src="/logo/bulletPoints/white.svg"
-                    class="bullet-point"
-                  />
-                  <span>{ingredient}</span>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-      </div>
-      <hr class="separator" />
-      <div class="method">
-        <h2>Method</h2>
-        <ol class="methods">
-          {
-            recipeInstructions.map((instruction) => (
-              <li class="method">
-                <h4 class="method-title">{instruction.name}</h4>
-                {"text" in instruction && (
-                  <p class="method-text">{instruction.text}</p>
-                )}
-                {"itemListElement" in instruction &&
-                  instruction.itemListElement.map((element) => {
-                    switch (element["@type"]) {
-                      case "HowToDirection":
-                        return <p class="method-text">{element.text}</p>;
-                      case "HowToTip":
-                        return (
-                          <div class="method-tip">
-                            <div class="tip-title">
-                              <img src="/icons/components/light-bulb.svg" />
-                              <h5>Tip</h5>
-                            </div>
-                            <p class="method-text">{element.text}</p>
-                          </div>
-                        );
-                      default:
-                        throw new Error(
-                          `itemListElement["@type"] switch has an illegal value: ${element["@type"]}`
-                        );
-                    }
-                  })}
-              </li>
-            ))
-          }
-        </ol>
-      </div>
+      <ToolsIngredients tool={tool} recipeIngredient={recipeIngredient} />
+      <HorizontalSeperator />
+      <Method recipeInstructions={recipeInstructions} />
     </div>
-
-    <!-- <div class="grid">
-      <div class="tools-ingredients-card">
-        <div class="tools-ingredients">
-          <h2>Tools:</h2>
-          <ul class="tools-ingredients-list">
-            {
-              tool.map(({ name }) => (
-                <li class="tools-ingredients-item">
-                  <img
-                    src="/logo/bulletPoints/white.svg"
-                    class="bullet-point"
-                  />
-                  <span>{name}</span>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-        <div class="tools-ingredients">
-          <h2>Ingredients:</h2>
-          <ul class="tools-ingredients-list">
-            {
-              recipeIngredient.map((ingredient) => (
-                <li class="tools-ingredients-item">
-                  <img
-                    src="/logo/bulletPoints/white.svg"
-                    class="bullet-point"
-                  />
-                  <span>{ingredient}</span>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-      </div> -->
-    <!-- <div class="method-card">
-        <h2>Method</h2>
-        <ol class="methods">
-          {
-            recipeInstructions.map((instruction) => (
-              <li class="method">
-                <h4 class="method-title">{instruction.name}</h4>
-                {"text" in instruction && (
-                  <p class="method-text">{instruction.text}</p>
-                )}
-                {"itemListElement" in instruction &&
-                  instruction.itemListElement.map((element) => {
-                    switch (element["@type"]) {
-                      case "HowToDirection":
-                        return <p class="method-text">{element.text}</p>;
-                      case "HowToTip":
-                        return (
-                          <div class="method-tip">
-                            <div class="tip-title">
-                              <img src="/icons/components/light-bulb.svg" />
-                              <h5>Tip</h5>
-                            </div>
-                            <p class="method-text">{element.text}</p>
-                          </div>
-                        );
-                      default:
-                        throw new Error(
-                          `itemListElement["@type"] switch has an illegal value: ${element["@type"]}`
-                        );
-                    }
-                  })}
-              </li>
-            ))
-          }
-        </ol>
-      </div> -->
-    <!-- </div> -->
   </article>
 </Root>
 
@@ -226,10 +61,6 @@ const totalDuration = dayjs.duration(totalTime).humanize();
     display: flex;
     flex-direction: column;
     gap: var(--padding-double);
-  }
-
-  hr {
-    border-bottom-color: $text;
   }
 
   .hero-wrapper {
@@ -250,43 +81,7 @@ const totalDuration = dayjs.duration(totalTime).humanize();
     text-align: center;
   }
 
-  .separator {
-    margin: 0 var(--padding-double);
-  }
-
-  .draft {
-    margin: auto;
-    padding: 0 var(--padding);
-    display: grid;
-    grid-template-areas:
-      "draft-top draft-top"
-      "icon title"
-      "icon text"
-      "draft-bottom draft-bottom";
-    row-gap: var(--padding-half);
-    column-gap: var(--padding);
-  }
-
-  .draft-icon {
-    grid-area: icon;
-    width: calc(var(--font-size) * 3);
-    height: 100%;
-    color: $text;
-  }
-
-  .draft-title {
-    grid-area: title;
-    justify-self: start;
-  }
-
-  .draft-text {
-    grid-area: text;
-    justify-self: start;
-    text-align: start;
-  }
-
-  .description,
-  .tools-ingredients-method {
+  .description {
     padding: 0 var(--padding);
   }
 
@@ -296,197 +91,15 @@ const totalDuration = dayjs.duration(totalTime).humanize();
     gap: var(--padding);
   }
 
-  .times-serves {
-    margin: auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: start;
-    column-gap: var(--padding);
-  }
-
-  .prep-desc,
-  .cook-desc,
-  .total-desc,
-  .serves-desc {
-    justify-self: end;
-  }
-
-  .tools-ingredients-method,
-  .tools-ingredients {
+  .tools-ingredients-method {
     display: flex;
     flex-direction: column;
     gap: var(--padding-double);
-  }
-
-  .grid {
-    width: calc(100% - var(--padding-double));
-    margin: auto;
-    padding-top: var(--padding);
-    display: grid;
-    grid-template-areas: "ingredients" "method";
-    gap: var(--padding-double);
-    align-items: start;
-  }
-
-  .tools-ingredients-card {
-    grid-area: ingredients;
-  }
-
-  .method-card {
-    grid-area: method;
-  }
-
-  .description-items,
-  .tools-ingredients {
-    width: 75%;
-  }
-
-  .description-items-list {
-    margin: unset;
-  }
-
-  .tools-ingredients-list {
-    margin-top: var(--padding);
-  }
-
-  .description-items-list,
-  .tools-ingredients-list {
-    padding-left: 0;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--padding-half);
-  }
-
-  .description-item,
-  .tools-ingredients-item {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: var(--padding);
-    color: $text;
-    text-align: left;
-  }
-
-  .description-item > span {
-    white-space: nowrap;
-  }
-
-  .bullet-point {
-    width: var(--font-size);
-  }
-
-  .methods {
-    padding-left: 0;
-    display: flex;
-    flex-direction: column;
-    gap: var(--padding-triple);
-    counter-reset: method;
-    list-style-type: none;
-    color: $text;
-    text-align: left;
-  }
-
-  .method {
-    display: flex;
-    flex-direction: column;
-    gap: var(--padding);
-    counter-increment: method;
-  }
-
-  .method-title {
-    display: flex;
-    gap: var(--padding-half);
-  }
-
-  .method-title::before {
-    content: counter(method) ".";
-  }
-
-  .method-tip {
-    display: flex;
-    padding: var(--padding-half);
-    @include elev-6();
-    flex-direction: column;
-    gap: var(--padding-half);
-    border: var(--border-width) solid $secondary;
-    border-radius: var(--border-radius);
-  }
-
-  .tip-title {
-    display: flex;
-    align-items: center;
-    gap: var(--padding-half);
-  }
-
-  @include bp-small {
-    .description,
-    .tools-ingredients-card {
-      border-radius: var(--border-radius);
-    }
-
-    .times {
-      flex-direction: row;
-      flex-wrap: wrap;
-      column-gap: var(--padding);
-    }
-
-    .description-items-list,
-    .tools-ingredients-list {
-      grid-template-columns: 1fr 1fr;
-    }
-
-    .description-items,
-    .tools-ingredients {
-      width: 90%;
-    }
-  }
-
-  @include bp-medium {
-    .description,
-    .tools-ingredients-card {
-      padding: var(--padding-double);
-    }
-
-    .description {
-      width: 90%;
-    }
-
-    .description-items-list-wrapper {
-      display: flex;
-      flex-direction: column;
-      gap: var(--padding);
-    }
-
-    .description-items-list {
-      margin-top: unset;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: var(--padding);
-    }
-
-    .tools-ingredients-list {
-      grid-template-columns: 1fr 1fr 1fr;
-    }
-
-    .description-items,
-    .tools-ingredients {
-      width: 100%;
-    }
-
-    .description-item {
-      padding: 0 var(--padding);
-    }
   }
 
   @include bp-large {
-    .grid {
-      grid-template-areas: "description description" "ingredients method";
-      grid-template-columns: 30% 1fr;
-    }
-
-    .tools-ingredients-list {
-      grid-template-columns: 1fr;
+    .tools-ingredients-method {
+      flex-direction: row;
     }
   }
 </style>

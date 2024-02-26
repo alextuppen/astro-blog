@@ -1,0 +1,92 @@
+---
+import HorizontalSeperator from "../HorizontalSeperator.astro";
+
+interface Props {
+  tool: { "@type": "HowToTool"; name: string };
+  recipeIngredient: string[];
+}
+
+const { tool, recipeIngredient } = Astro.props;
+---
+
+<div class="root">
+  <div class="wrapper">
+    <h2>Tools:</h2>
+    <ul class="list">
+      {
+        tool.map(({ name }) => (
+          <li class="item">
+            <img src="/logo/bulletPoints/white.svg" class="bullet-point" />
+            <span>{name}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+  <HorizontalSeperator />
+  <div class="wrapper">
+    <h2>Ingredients:</h2>
+    <ul class="list">
+      {
+        recipeIngredient.map((ingredient) => (
+          <li class="item">
+            <img src="/logo/bulletPoints/white.svg" class="bullet-point" />
+            <span>{ingredient}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</div>
+
+<style lang="scss">
+  @import "../../../styles/_globals.scss";
+
+  .root {
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-double);
+  }
+
+  .wrapper {
+    padding: 0 var(--padding);
+  }
+
+  .list {
+    padding-left: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--padding-half);
+  }
+
+  .item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: var(--padding);
+    color: $text;
+    text-align: left;
+  }
+
+  .bullet-point {
+    width: var(--font-size);
+  }
+
+  @include bp-small {
+    .tools-ingredients-list {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @include bp-medium {
+    .tools-ingredients-list {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+
+  @include bp-large {
+    .tools-ingredients-list {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

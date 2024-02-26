@@ -1,0 +1,102 @@
+---
+import dayjs from "dayjs";
+import duration from "dayjs/plugin/duration";
+import relativeTime from "dayjs/plugin/relativeTime";
+
+interface Props {
+  prepTime: string;
+  cookTime: string;
+  totalTime: string;
+  recipeYield: number;
+}
+
+const { prepTime, cookTime, totalTime, recipeYield } = Astro.props;
+
+dayjs.extend(duration);
+dayjs.extend(relativeTime);
+
+const prepDuration = dayjs.duration(prepTime).humanize();
+const cookDuration = dayjs.duration(cookTime).humanize();
+const totalDuration = dayjs.duration(totalTime).humanize();
+---
+
+<div class="root">
+  <span class="prep-desc">Preparation:</span>
+  <span class="prep-time">{prepDuration}</span>
+  <span class="cook-desc">Cook:</span>
+  <span class="cook-time">{cookDuration}</span>
+  <span class="total-desc">Total:</span>
+  <span class="total-time">{totalDuration}</span>
+  <span class="serves-desc">Serves:</span>
+  <span class="serves-amount">{recipeYield}</span>
+</div>
+
+<style lang="scss">
+  @import "../../../styles/_globals.scss";
+
+  .root {
+    margin: auto;
+    display: grid;
+    align-items: start;
+    column-gap: var(--padding);
+    grid-template-areas:
+      "prep-desc prep-time"
+      "cook-desc cook-time"
+      "total-desc total-time"
+      "serves-desc serves-amount";
+  }
+
+  .prep-desc,
+  .cook-desc,
+  .total-desc,
+  .serves-desc {
+    justify-self: end;
+  }
+
+  .prep-desc {
+    grid-area: prep-desc;
+  }
+
+  .prep-time {
+    grid-area: prep-time;
+  }
+
+  .cook-desc {
+    grid-area: cook-desc;
+  }
+
+  .cook-time {
+    grid-area: cook-time;
+  }
+
+  .total-desc {
+    grid-area: total-desc;
+  }
+
+  .total-time {
+    grid-area: total-time;
+  }
+
+  .serves-desc {
+    grid-area: serves-desc;
+  }
+
+  .serves-amount {
+    grid-area: serves-amount;
+  }
+
+  @include bp-small {
+    .root {
+      row-gap: var(--padding-half);
+      grid-template-areas:
+        "prep-desc prep-time cook-desc cook-time total-desc total-time"
+        ". . serves-desc serves-amount . .";
+    }
+
+    .prep-desc,
+    .cook-desc,
+    .total-desc {
+      padding-left: var(--padding);
+    }
+  }
+</style>

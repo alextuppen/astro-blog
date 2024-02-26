@@ -1,0 +1,100 @@
+---
+interface Props {
+  recipeInstructions: {
+    name: string;
+    text?: string;
+    itemListElement?: {
+      "@type": "HowToDirection" | "HowToTip";
+      text: string;
+    }[];
+  }[];
+}
+
+const { recipeInstructions } = Astro.props;
+---
+
+<div class="root">
+  <h2>Method</h2>
+  <ol class="list">
+    {
+      recipeInstructions.map((instruction) => (
+        <li class="item">
+          <h4 class="title">{instruction.name}</h4>
+          {"text" in instruction && <p>{instruction.text}</p>}
+          {"itemListElement" in instruction &&
+            instruction.itemListElement.map((element) => {
+              switch (element["@type"]) {
+                case "HowToDirection":
+                  return <p>{element.text}</p>;
+                case "HowToTip":
+                  return (
+                    <div class="tip">
+                      <div class="tip-title">
+                        <img src="/icons/components/light-bulb.svg" />
+                        <h5>Tip</h5>
+                      </div>
+                      <p>{element.text}</p>
+                    </div>
+                  );
+                default:
+                  throw new Error(
+                    `itemListElement["@type"] switch has an illegal value: ${element["@type"]}`
+                  );
+              }
+            })}
+        </li>
+      ))
+    }
+  </ol>
+</div>
+
+<style lang="scss">
+  @import "../../../styles/_globals.scss";
+
+  .root {
+    padding: 0 var(--padding);
+  }
+
+  .list {
+    padding-left: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-triple);
+    counter-reset: method;
+    list-style-type: none;
+    color: $text;
+    text-align: left;
+  }
+
+  .item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding);
+    counter-increment: method;
+  }
+
+  .title {
+    display: flex;
+    gap: var(--padding-half);
+  }
+
+  .title::before {
+    content: counter(method) ".";
+  }
+
+  .tip {
+    display: flex;
+    padding: var(--padding-half);
+    @include elev-6();
+    flex-direction: column;
+    gap: var(--padding-half);
+    border: var(--border-width) solid $secondary;
+    border-radius: var(--border-radius);
+  }
+
+  .tip-title {
+    display: flex;
+    align-items: center;
+    gap: var(--padding-half);
+  }
+</style>

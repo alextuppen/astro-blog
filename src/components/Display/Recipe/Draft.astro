@@ -1,0 +1,63 @@
+---
+import HorizontalSeperator from "../HorizontalSeperator.astro";
+
+interface Props {
+  creativeWorkStatus: string;
+}
+
+const { creativeWorkStatus } = Astro.props;
+---
+
+{
+  creativeWorkStatus === "draft" && (
+    <>
+      <HorizontalSeperator />
+      <div class="draft">
+        <img
+          src="/icons/components/exclamation-circle.svg"
+          class="draft-icon"
+        />
+        <h3 class="draft-title">Draft recipe</h3>
+        <span class="draft-text">
+          This recipe is in draft state; it is unfinished and still being
+          refined.
+        </span>
+      </div>
+    </>
+  )
+}
+
+<style lang="scss">
+  @import "../../../styles/_globals.scss";
+
+  .draft {
+    margin: auto;
+    padding: 0 var(--padding);
+    display: grid;
+    grid-template-areas:
+      "draft-top draft-top"
+      "icon title"
+      "icon text"
+      "draft-bottom draft-bottom";
+    row-gap: var(--padding-half);
+    column-gap: var(--padding);
+  }
+
+  .draft-icon {
+    grid-area: icon;
+    width: calc(var(--font-size) * 3);
+    height: 100%;
+    color: $text;
+  }
+
+  .draft-title {
+    grid-area: title;
+    justify-self: start;
+  }
+
+  .draft-text {
+    grid-area: text;
+    justify-self: start;
+    text-align: start;
+  }
+</style>
