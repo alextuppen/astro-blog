@@ -2,26 +2,26 @@
 import { Button } from "../../Input";
 
 interface Props {
-  menuBurgerId: string;
+  id: string;
 }
 
-const { menuBurgerId } = Astro.props;
+const { id } = Astro.props;
 ---
 
-<Button id={menuBurgerId} className="root">
-  <div id="menuBurgerFirst" class="first"></div>
-  <div id="menuBurgerMiddle" class="middle"></div>
-  <div id="menuBurgerHidden" class="hidden"></div>
-  <div id="menuBurgerLast" class="last"></div>
+<Button id={id} className="root">
+  <div id="menu-burger-first" class="first"></div>
+  <div id="menu-burger-middle" class="middle"></div>
+  <div id="menu-burger-hidden" class="hidden"></div>
+  <div id="menu-burger-last" class="last"></div>
 </Button>
 
 <script>
-  const button = document.getElementById("menuBurger");
+  const button = document.getElementById("menu-burger");
   const buttonElements = [
-    document.getElementById("menuBurgerFirst"),
-    document.getElementById("menuBurgerMiddle"),
-    document.getElementById("menuBurgerHidden"),
-    document.getElementById("menuBurgerLast"),
+    document.getElementById("menu-burger-first"),
+    document.getElementById("menu-burger-middle"),
+    document.getElementById("menu-burger-hidden"),
+    document.getElementById("menu-burger-last"),
   ];
 
   if (button) {

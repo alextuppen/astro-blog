@@ -4,7 +4,7 @@ import { internalLinks, externalLinks } from "./Header.astro";
 import MenuBurger from "./MenuBurger.astro";
 ---
 
-<MenuBurger menuBurgerId={"menuBurger"} />
+<MenuBurger id={"menu-burger"} />
 <div id="menu" class="menu">
   {
     internalLinks.map(({ link, text }, index) => (
@@ -18,7 +18,7 @@ import MenuBurger from "./MenuBurger.astro";
       </>
     ))
   }
-  <hr class:list={["primarySeparator", "internal"]} />
+  <hr class:list={["primary-separator", "internal"]} />
   {
     externalLinks.map(({ link, text }, index) => (
       <>
@@ -35,7 +35,7 @@ import MenuBurger from "./MenuBurger.astro";
 
 <script>
   let open = false;
-  const button = document.getElementById("menuBurger");
+  const button = document.getElementById("menu-burger");
   const menu = document.getElementById("menu");
 
   if (button && menu) {
@@ -83,6 +83,7 @@ import MenuBurger from "./MenuBurger.astro";
     opacity: 0;
     transform-origin: top center;
     transform: scaleY(0);
+    // border-top: 1px solid $secondary;
   }
 
   .menu[data-open="true"] {
