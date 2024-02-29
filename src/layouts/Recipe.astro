@@ -29,7 +29,11 @@ const {
 <Root title={name} description={description}>
   <article>
     <div class="hero-wrapper">
-      <img width="300" height="300" src={image[0]} class="hero-image" />
+      {
+        image != null && image[0] != null && (
+          <img width="300" height="300" src={image[0]} class="hero-image" />
+        )
+      }
       <h1>{name}</h1>
     </div>
     <Draft creativeWorkStatus={creativeWorkStatus} />
@@ -44,13 +48,33 @@ const {
       />
     </div>
     <HorizontalSeperator />
-    <div class="tools-ingredients-method">
+    <div class="tools-ingredients-method" id="test2">
       <ToolsIngredients tool={tool} recipeIngredient={recipeIngredient} />
-      <HorizontalSeperator />
+      <HorizontalSeperator id="tools-ingredients-method-seperator" />
       <Method recipeInstructions={recipeInstructions} />
     </div>
   </article>
 </Root>
+
+<script>
+  import enquire from "enquire.js";
+  import { BP_QUERY_LARGE } from "../consts";
+
+  const seperator = document.getElementById(
+    "tools-ingredients-method-seperator"
+  );
+
+  enquire.register(BP_QUERY_LARGE, {
+    match: () => {
+      if (seperator == null) return;
+      seperator.style.display = "none";
+    },
+    unmatch: () => {
+      if (seperator == null) return;
+      seperator.style.display = "block";
+    },
+  });
+</script>
 
 <style lang="scss">
   @import "../styles/_globals.scss";

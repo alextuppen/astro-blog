@@ -85,6 +85,21 @@ const { tool, recipeIngredient } = Astro.props;
   }
 
   @include bp-large {
+    .root {
+      height: max-content;
+      position: relative;
+    }
+
+    .root:before {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: var(--padding);
+      height: calc(100% - var(--padding-double));
+      width: 0;
+      border-right: 1px solid $primary;
+    }
+
     .tools-ingredients-list {
       grid-template-columns: 1fr;
     }

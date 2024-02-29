@@ -1,10 +1,19 @@
-<hr />
+---
+interface Props {
+  id?: string;
+}
+
+const { id } = Astro.props;
+---
+
+<hr id={id ? id : undefined} />
 
 <style lang="scss">
   @import "../../styles/_globals.scss";
 
   hr {
-    border-bottom-color: $text;
+    border: unset;
+    border-bottom: 1px solid $primary;
     margin: 0 var(--padding-double);
   }
 </style>
