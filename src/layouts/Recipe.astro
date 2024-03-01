@@ -36,7 +36,6 @@ const {
       }
       <h1>{name}</h1>
     </div>
-    <HorizontalSeperator id="hero-description" />
     <div class="description-wrapper">
       <Draft creativeWorkStatus={creativeWorkStatus} />
       <p class="description">{description}</p>
@@ -47,7 +46,6 @@ const {
         recipeYield={recipeYield}
       />
     </div>
-    <HorizontalSeperator id="description-tools-ingredients" />
     <div class="tools-ingredients-method" id="test2">
       <ToolsIngredients tool={tool} recipeIngredient={recipeIngredient} />
       <HorizontalSeperator id="tools-ingredients-method-seperator" />
@@ -58,28 +56,7 @@ const {
 
 <script>
   import enquire from "enquire.js";
-  import { BP_QUERY_SMALL, BP_QUERY_LARGE } from "../consts";
-
-  const heroDescription = document.getElementById("hero-description");
-
-  const descriptionToolsIngredients = document.getElementById(
-    "description-tools-ingredients"
-  );
-
-  enquire.register(BP_QUERY_SMALL, {
-    match: () => {
-      if (heroDescription == null || descriptionToolsIngredients == null)
-        return;
-      heroDescription.style.display = "none";
-      descriptionToolsIngredients.style.display = "none";
-    },
-    unmatch: () => {
-      if (heroDescription == null || descriptionToolsIngredients == null)
-        return;
-      heroDescription.style.display = "block";
-      descriptionToolsIngredients.style.display = "block";
-    },
-  });
+  import { BP_QUERY_LARGE } from "../consts";
 
   const toolsIngredientsMethod = document.getElementById(
     "tools-ingredients-method-seperator"
@@ -128,10 +105,11 @@ const {
   }
 
   .description-wrapper {
-    padding: 0 var(--padding);
+    padding: var(--padding);
     display: flex;
     flex-direction: column;
     gap: var(--padding);
+    @include elev-1();
   }
 
   .description {
@@ -146,8 +124,6 @@ const {
 
   @include bp-small {
     .description-wrapper {
-      padding: var(--padding);
-      @include elev-3();
       border-radius: var(--border-radius);
     }
   }
