@@ -36,10 +36,10 @@ const {
       }
       <h1>{name}</h1>
     </div>
-    <Draft creativeWorkStatus={creativeWorkStatus} />
-    <HorizontalSeperator />
-    <div class="description">
-      <p>{description}</p>
+    <HorizontalSeperator id="hero-description" />
+    <div class="description-wrapper">
+      <Draft creativeWorkStatus={creativeWorkStatus} />
+      <p class="description">{description}</p>
       <TimesServes
         prepTime={prepTime}
         cookTime={cookTime}
@@ -47,7 +47,7 @@ const {
         recipeYield={recipeYield}
       />
     </div>
-    <HorizontalSeperator />
+    <HorizontalSeperator id="description-tools-ingredients" />
     <div class="tools-ingredients-method" id="test2">
       <ToolsIngredients tool={tool} recipeIngredient={recipeIngredient} />
       <HorizontalSeperator id="tools-ingredients-method-seperator" />
@@ -58,20 +58,41 @@ const {
 
 <script>
   import enquire from "enquire.js";
-  import { BP_QUERY_LARGE } from "../consts";
+  import { BP_QUERY_SMALL, BP_QUERY_LARGE } from "../consts";
 
-  const seperator = document.getElementById(
+  const heroDescription = document.getElementById("hero-description");
+
+  const descriptionToolsIngredients = document.getElementById(
+    "description-tools-ingredients"
+  );
+
+  enquire.register(BP_QUERY_SMALL, {
+    match: () => {
+      if (heroDescription == null || descriptionToolsIngredients == null)
+        return;
+      heroDescription.style.display = "none";
+      descriptionToolsIngredients.style.display = "none";
+    },
+    unmatch: () => {
+      if (heroDescription == null || descriptionToolsIngredients == null)
+        return;
+      heroDescription.style.display = "block";
+      descriptionToolsIngredients.style.display = "block";
+    },
+  });
+
+  const toolsIngredientsMethod = document.getElementById(
     "tools-ingredients-method-seperator"
   );
 
   enquire.register(BP_QUERY_LARGE, {
     match: () => {
-      if (seperator == null) return;
-      seperator.style.display = "none";
+      if (toolsIngredientsMethod == null) return;
+      toolsIngredientsMethod.style.display = "none";
     },
     unmatch: () => {
-      if (seperator == null) return;
-      seperator.style.display = "block";
+      if (toolsIngredientsMethod == null) return;
+      toolsIngredientsMethod.style.display = "block";
     },
   });
 </script>
@@ -106,20 +127,29 @@ const {
     margin: 0 var(--padding);
   }
 
-  .description {
+  .description-wrapper {
     padding: 0 var(--padding);
-  }
-
-  .description {
     display: flex;
     flex-direction: column;
     gap: var(--padding);
+  }
+
+  .description {
+    text-align: center;
   }
 
   .tools-ingredients-method {
     display: flex;
     flex-direction: column;
     gap: var(--padding-double);
+  }
+
+  @include bp-small {
+    .description-wrapper {
+      padding: var(--padding);
+      @include elev-3();
+      border-radius: var(--border-radius);
+    }
   }
 
   @include bp-large {

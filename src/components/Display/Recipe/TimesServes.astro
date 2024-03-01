@@ -2,6 +2,7 @@
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import relativeTime from "dayjs/plugin/relativeTime";
+import { Clock, CookingPot, Knife, KnifeFork } from "../../../svg";
 
 interface Props {
   prepTime: string;
@@ -21,13 +22,25 @@ const totalDuration = dayjs.duration(totalTime).humanize();
 ---
 
 <div class="root">
-  <span class="prep-desc">Preparation:</span>
+  <span class="prep-desc">
+    <Knife className="icon" />
+    <span>Preparation:</span>
+  </span>
   <span class="prep-time">{prepDuration}</span>
-  <span class="cook-desc">Cook:</span>
+  <span class="cook-desc">
+    <CookingPot className="icon" />
+    <span>Cook:</span>
+  </span>
   <span class="cook-time">{cookDuration}</span>
-  <span class="total-desc">Total:</span>
+  <span class="total-desc">
+    <Clock className="icon" />
+    <span>Total:</span>
+  </span>
   <span class="total-time">{totalDuration}</span>
-  <span class="serves-desc">Serves:</span>
+  <span class="serves-desc">
+    <KnifeFork className="icon" />
+    <span>Serves:</span>
+  </span>
   <span class="serves-amount">{recipeYield}</span>
 </div>
 
@@ -44,6 +57,7 @@ const totalDuration = dayjs.duration(totalTime).humanize();
       "cook-desc cook-time"
       "total-desc total-time"
       "serves-desc serves-amount";
+    align-items: center;
   }
 
   .prep-desc,
@@ -51,6 +65,14 @@ const totalDuration = dayjs.duration(totalTime).humanize();
   .total-desc,
   .serves-desc {
     justify-self: end;
+    display: flex;
+    align-items: center;
+    gap: var(--padding-half);
+  }
+
+  .icon {
+    font-size: var(--font-size);
+    color: $text;
   }
 
   .prep-desc {
@@ -85,9 +107,8 @@ const totalDuration = dayjs.duration(totalTime).humanize();
     grid-area: serves-amount;
   }
 
-  @include bp-small {
+  @include bp-medium {
     .root {
-      row-gap: var(--padding-half);
       grid-template-areas:
         "prep-desc prep-time cook-desc cook-time total-desc total-time"
         ". . serves-desc serves-amount . .";

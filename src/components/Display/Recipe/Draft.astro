@@ -1,5 +1,5 @@
 ---
-import HorizontalSeperator from "../HorizontalSeperator.astro";
+import { ExclamationCircle } from "../../../svg";
 
 interface Props {
   creativeWorkStatus: string;
@@ -10,27 +10,20 @@ const { creativeWorkStatus } = Astro.props;
 
 {
   creativeWorkStatus === "draft" && (
-    <>
-      <HorizontalSeperator />
-      <div class="draft">
-        <img
-          src="/icons/components/exclamation-circle.svg"
-          class="draft-icon"
-        />
-        <h3 class="draft-title">Draft recipe</h3>
-        <span class="draft-text">
-          This recipe is in draft state; it is unfinished and still being
-          refined.
-        </span>
-      </div>
-    </>
+    <div class="root">
+      <ExclamationCircle className="draft-icon" />
+      <h3 class="draft-title">Draft recipe</h3>
+      <span class="draft-text">
+        This recipe is in draft state; it is unfinished and still being refined.
+      </span>
+    </div>
   )
 }
 
 <style lang="scss">
   @import "../../../styles/_globals.scss";
 
-  .draft {
+  .root {
     margin: auto;
     padding: 0 var(--padding);
     display: grid;

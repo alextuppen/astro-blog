@@ -11,7 +11,7 @@ const { tool, recipeIngredient } = Astro.props;
 
 <div class="root">
   <div class="wrapper">
-    <h2>Tools:</h2>
+    <h2>Tools</h2>
     <ul class="list">
       {
         tool.map(({ name }) => (
@@ -23,9 +23,9 @@ const { tool, recipeIngredient } = Astro.props;
       }
     </ul>
   </div>
-  <HorizontalSeperator />
+  <HorizontalSeperator id="tools-ingredients" />
   <div class="wrapper">
-    <h2>Ingredients:</h2>
+    <h2>Ingredients</h2>
     <ul class="list">
       {
         recipeIngredient.map((ingredient) => (
@@ -39,24 +39,46 @@ const { tool, recipeIngredient } = Astro.props;
   </div>
 </div>
 
+<script>
+  import enquire from "enquire.js";
+  import { BP_QUERY_LARGE } from "../../../consts";
+
+  const toolsIngredients = document.getElementById("tools-ingredients");
+
+  enquire.register(BP_QUERY_LARGE, {
+    match: () => {
+      if (toolsIngredients == null) return;
+      toolsIngredients.style.display = "none";
+    },
+    unmatch: () => {
+      if (toolsIngredients == null) return;
+      toolsIngredients.style.display = "block";
+    },
+  });
+</script>
+
 <style lang="scss">
   @import "../../../styles/_globals.scss";
 
   .root {
     display: flex;
     flex-direction: column;
-    gap: var(--padding-double);
+    gap: var(--padding);
   }
 
   .wrapper {
     padding: 0 var(--padding);
   }
 
+  h2 {
+    text-align: center;
+    margin-bottom: var(--padding-double);
+  }
+
   .list {
     padding-left: 0;
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--padding-half);
   }
 
   .item {
@@ -73,13 +95,13 @@ const { tool, recipeIngredient } = Astro.props;
   }
 
   @include bp-small {
-    .tools-ingredients-list {
+    .list {
       grid-template-columns: 1fr 1fr;
     }
   }
 
   @include bp-medium {
-    .tools-ingredients-list {
+    .list {
       grid-template-columns: 1fr 1fr 1fr;
     }
   }
@@ -87,20 +109,12 @@ const { tool, recipeIngredient } = Astro.props;
   @include bp-large {
     .root {
       height: max-content;
-      position: relative;
+      padding: var(--padding);
+      @include elev-3();
+      border-radius: var(--border-radius);
     }
 
-    .root:before {
-      content: "";
-      position: absolute;
-      right: 0;
-      bottom: var(--padding);
-      height: calc(100% - var(--padding-double));
-      width: 0;
-      border-right: 1px solid $primary;
-    }
-
-    .tools-ingredients-list {
+    .list {
       grid-template-columns: 1fr;
     }
   }

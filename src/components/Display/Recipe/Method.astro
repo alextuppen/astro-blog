@@ -1,4 +1,6 @@
 ---
+import { LightBulb } from "../../../svg";
+
 interface Props {
   recipeInstructions: {
     name: string;
@@ -30,7 +32,7 @@ const { recipeInstructions } = Astro.props;
                   return (
                     <div class="tip">
                       <div class="tip-title">
-                        <img src="/icons/components/light-bulb.svg" />
+                        <LightBulb />
                         <h5>Tip</h5>
                       </div>
                       <p>{element.text}</p>
@@ -53,6 +55,11 @@ const { recipeInstructions } = Astro.props;
 
   .root {
     padding: 0 var(--padding);
+  }
+
+  h2 {
+    text-align: center;
+    margin-bottom: var(--padding-double);
   }
 
   .list {
@@ -85,7 +92,7 @@ const { recipeInstructions } = Astro.props;
   .tip {
     display: flex;
     padding: var(--padding);
-    @include elev-3();
+    @include elev-6();
     flex-direction: column;
     gap: var(--padding-half);
     border-radius: var(--border-radius);
