@@ -12,7 +12,6 @@ export async function getStaticPaths() {
 type Props = CollectionEntry<"recipes">;
 
 const post = Astro.props;
-console.log(post.data);
 ---
 
 <Recipe {...post.data} />
