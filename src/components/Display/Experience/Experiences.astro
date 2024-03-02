@@ -32,17 +32,17 @@ const sortedExperiences = experiences.sort((a, b) =>
   }
 
   .description {
-    padding: var(--padding-double) var(--padding-half);
+    padding: var(--paddingDouble) var(--paddingHalf);
   }
 
   @include bp-small {
     .wrapper {
-      border-radius: var(--border-radius);
-      max-width: calc(var(--content-max-width) + var(--padding-double) * 2);
+      border-radius: var(--borderRadius);
+      max-width: calc(var(--contentMaxWidth) + var(--paddingDouble) * 2);
     }
 
     .description {
-      padding: var(--padding) var(--padding-double) var(--padding-double);
+      padding: var(--padding) var(--paddingDouble) var(--paddingDouble);
     }
   }
 </style>

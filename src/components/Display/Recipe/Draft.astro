@@ -11,9 +11,9 @@ const { creativeWorkStatus } = Astro.props;
 {
   creativeWorkStatus === "draft" && (
     <div class="root">
-      <ExclamationCircle className="draft-icon" />
-      <h3 class="draft-title">Draft recipe</h3>
-      <span class="draft-text">
+      <ExclamationCircle className="draftIcon" />
+      <h3 class="draftTitle">Draft recipe</h3>
+      <span class="draftText">
         This recipe is in draft state; it is unfinished and still being refined.
       </span>
     </div>
@@ -21,7 +21,8 @@ const { creativeWorkStatus } = Astro.props;
 }
 
 <style lang="scss">
-  @import "../../../styles/_globals.scss";
+  @import 'src/styles/_globals.scss';
+  @import 'src/styles/typography.scss';
 
   .root {
     margin: auto;
@@ -32,23 +33,23 @@ const { creativeWorkStatus } = Astro.props;
       "icon title"
       "icon text"
       "draft-bottom draft-bottom";
-    row-gap: var(--padding-half);
+    row-gap: var(--paddingHalf);
     column-gap: var(--padding);
   }
 
-  .draft-icon {
+  .draftIcon {
     grid-area: icon;
-    width: calc(var(--font-size) * 3);
+    width: calc(var(--fontSize) * 3);
     height: 100%;
     color: $text;
   }
 
-  .draft-title {
+  .draftTitle {
     grid-area: title;
     justify-self: start;
   }
 
-  .draft-text {
+  .draftText {
     grid-area: text;
     justify-self: start;
     text-align: start;

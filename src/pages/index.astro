@@ -13,14 +13,14 @@ import {
 <Root title={"Alex Tuppen"} description={SITE_DESCRIPTION}>
   <Section className="root">
     <div class="grid">
-      <img src="/logo/white.svg" alt="Alex Tuppen logo" class="at-logo" />
-      <div class="name-wrapper">
+      <img src="/logo/white.svg" alt="Alex Tuppen logo" class="atLogo" />
+      <div class="nameWrapper">
         <h1 class="name">Alex</h1>
         <h1 class="name">Tuppen</h1>
       </div>
-      <h2 class="tag-line">Full stack developer</h2>
+      <h2 class="tagLine">Full stack developer</h2>
       <div class="buttons">
-        <Button variant="large-icon" href={URL_LINKEDIN} external={true}>
+        <Button variant="largeIcon" href={URL_LINKEDIN} external={true}>
           <img
             width="48"
             height="48"
@@ -28,7 +28,7 @@ import {
             alt="LinkedIn logo"
           />
         </Button>
-        <Button variant="large-icon" href={URL_INSTAGRAM} external={true}>
+        <Button variant="largeIcon" href={URL_INSTAGRAM} external={true}>
           <img
             width="48"
             height="48"
@@ -36,7 +36,7 @@ import {
             alt="Instagram logo"
           />
         </Button>
-        <Button variant="large-icon" href={URL_GITHUB} external={true}>
+        <Button variant="largeIcon" href={URL_GITHUB} external={true}>
           <img
             width="48"
             height="48"
@@ -50,7 +50,8 @@ import {
 </Root>
 
 <style lang="scss">
-  @import "../styles/_globals.scss";
+  @import 'src/styles/_globals.scss';
+  @import 'src/styles/typography.scss';
 
   .root {
     // 100 small view height - (2 x double padding (4) on section + rough height of header (3))
@@ -64,22 +65,22 @@ import {
   .grid {
     display: grid;
     grid-template-areas:
-      "at-logo"
-      "name-wrapper"
-      "tag-line"
+      "atLogo"
+      "nameWrapper"
+      "tagLine"
       "buttons";
     justify-items: center;
     align-items: center;
-    gap: var(--padding-double);
+    gap: var(--paddingDouble);
   }
 
-  .at-logo {
-    grid-area: at-logo;
+  .atLogo {
+    grid-area: atLogo;
     width: 10rem;
   }
 
-  .name-wrapper {
-    grid-area: name-wrapper;
+  .nameWrapper {
+    grid-area: nameWrapper;
     display: flex;
     flex-direction: column;
   }
@@ -90,8 +91,8 @@ import {
     line-height: 1;
   }
 
-  .tag-line {
-    grid-area: tag-line;
+  .tagLine {
+    grid-area: tagLine;
     font-size: 1.5rem;
     font-weight: 500;
     letter-spacing: 0.25rem;
@@ -100,14 +101,14 @@ import {
   .buttons {
     grid-area: buttons;
     display: flex;
-    gap: var(--padding-double);
+    gap: var(--paddingDouble);
   }
 
   @include bp-small {
     .grid {
       grid-template-areas:
-        "at-logo name-wrapper"
-        "tag-line tag-line"
+        "atLogo nameWrapper"
+        "tagLine tagLine"
         "buttons buttons";
     }
 
@@ -116,14 +117,14 @@ import {
       font-size: 6rem;
     }
 
-    .tag-line {
+    .tagLine {
       font-size: 2.25rem;
       letter-spacing: 0.5rem;
     }
   }
 
   @include bp-medium {
-    .at-logo {
+    .atLogo {
       width: 12rem;
     }
 
@@ -131,14 +132,14 @@ import {
       font-size: 7rem;
     }
 
-    .tag-line {
+    .tagLine {
       font-size: 2.5rem;
       letter-spacing: 0.75rem;
     }
   }
 
   @include bp-large {
-    .at-logo {
+    .atLogo {
       width: 16rem;
     }
 
@@ -146,14 +147,14 @@ import {
       font-size: 9rem;
     }
 
-    .tag-line {
+    .tagLine {
       font-size: 3rem;
       letter-spacing: 1rem;
     }
   }
 
   @include bp-xl {
-    .at-logo {
+    .atLogo {
       width: 20rem;
     }
 
@@ -161,7 +162,7 @@ import {
       font-size: 12rem;
     }
 
-    .tag-line {
+    .tagLine {
       font-size: 3.75rem;
       letter-spacing: 1.5rem;
     }

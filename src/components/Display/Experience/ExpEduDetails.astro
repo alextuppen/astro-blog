@@ -35,13 +35,13 @@ if (endDate == null) {
 }
 ---
 
-<div class="title-wrapper">
+<div class="root">
   <h3 class="title">{title}</h3>
   <span class="organisation">{organisation}</span>
   <span class="date">
     {formattedStartDate} - {formattedEndDate}
   </span>
-  <span class="location-role">
+  <span class="locationRole">
     {location} - {roleType}
   </span>
 </div>
@@ -49,14 +49,14 @@ if (endDate == null) {
 <style lang="scss">
   @import "../../../styles/globals.scss";
 
-  .title-wrapper {
-    padding: var(--padding-double) var(--padding-half) var(--padding-half);
+  .root {
+    padding: var(--paddingDouble) var(--paddingHalf) var(--paddingHalf);
     display: flex;
     flex-direction: column;
   }
 
   .title {
-    padding-bottom: var(--padding-half);
+    padding-bottom: var(--paddingHalf);
   }
 
   .organisation {
@@ -64,25 +64,25 @@ if (endDate == null) {
   }
 
   .organisation,
-  .location-role,
+  .locationRole,
   .date {
-    color: $text-medium-emphasis;
+    color: $textMediumEmphasis;
   }
 
-  .location-role,
+  .locationRole,
   .date {
     padding: unset;
-    font-size: var(--font-size-small);
+    font-size: var(--fontSizeSmall);
   }
 
   @include bp-small {
     .wrapper {
-      border-radius: var(--border-radius);
-      max-width: calc(var(--content-max-width) + var(--padding-double) * 2);
+      border-radius: var(--borderRadius);
+      max-width: calc(var(--contentMaxWidth) + var(--paddingDouble) * 2);
     }
 
-    .title-wrapper {
-      padding: var(--padding-double) var(--padding-double) var(--padding);
+    .root {
+      padding: var(--paddingDouble) var(--paddingDouble) var(--padding);
     }
   }
 </style>

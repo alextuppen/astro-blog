@@ -3,7 +3,7 @@ interface Props {
   className?: string;
 }
 
-const { className } = Astro.props;
+const { className, ...rest } = Astro.props;
 ---
 
 <svg
@@ -15,6 +15,7 @@ const { className } = Astro.props;
   height="1em"
   width="1em"
   class={className ? className : undefined}
+  {...rest}
 >
   <path
     fill-rule="evenodd"

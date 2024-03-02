@@ -1,9 +1,10 @@
 ---
+import type { CollectionEntry } from "astro:content";
 import HorizontalSeperator from "../HorizontalSeperator.astro";
 
 interface Props {
-  tool: { "@type": "HowToTool"; name: string };
-  recipeIngredient: string[];
+  tool: CollectionEntry<"recipes">['data']['tool']
+  recipeIngredient: CollectionEntry<"recipes">['data']['recipeIngredient']
 }
 
 const { tool, recipeIngredient } = Astro.props;
@@ -16,7 +17,7 @@ const { tool, recipeIngredient } = Astro.props;
       {
         tool.map(({ name }) => (
           <li class="item">
-            <img src="/logo/bulletPoints/white.svg" class="bullet-point" />
+            <img src="/logo/bulletPoints/white.svg" class="bulletPoint" />
             <span>{name}</span>
           </li>
         ))
@@ -30,7 +31,7 @@ const { tool, recipeIngredient } = Astro.props;
       {
         recipeIngredient.map((ingredient) => (
           <li class="item">
-            <img src="/logo/bulletPoints/white.svg" class="bullet-point" />
+            <img src="/logo/bulletPoints/white.svg" class="bulletPoint" />
             <span>{ingredient}</span>
           </li>
         ))
@@ -58,7 +59,8 @@ const { tool, recipeIngredient } = Astro.props;
 </script>
 
 <style lang="scss">
-  @import "../../../styles/_globals.scss";
+  @import 'src/styles/_globals.scss';
+  @import 'src/styles/typography.scss';
 
   .root {
     display: flex;
@@ -72,7 +74,7 @@ const { tool, recipeIngredient } = Astro.props;
 
   h2 {
     text-align: center;
-    margin-bottom: var(--padding-double);
+    margin-bottom: var(--paddingDouble);
   }
 
   .list {
@@ -90,8 +92,8 @@ const { tool, recipeIngredient } = Astro.props;
     text-align: left;
   }
 
-  .bullet-point {
-    width: var(--font-size);
+  .bulletPoint {
+    width: var(--fontSize);
   }
 
   @include bp-small {
@@ -111,7 +113,7 @@ const { tool, recipeIngredient } = Astro.props;
       height: max-content;
       padding: var(--padding);
       @include elev-1();
-      border-radius: var(--border-radius);
+      border-radius: var(--borderRadius);
     }
 
     .list {

@@ -1,4 +1,4 @@
-@import "./globals.scss";
+@import "src/styles/globals";
 
 * {
   font-family: "Jost", sans-serif;
@@ -40,7 +40,7 @@ h4 {
 }
 
 h5 {
-  margin: var(--padding-quarter);
+  margin: var(--paddingQuarter);
   font-size: 1.4rem;
 }
 
@@ -51,16 +51,16 @@ th,
 td,
 li,
 time {
-  padding: var(--padding-quarter) 0;
-  font-size: var(--font-size);
+  padding: var(--paddingQuarter) 0;
+  font-size: var(--fontSize);
 }
 
 a:link {
-  color: $primary-light;
+  color: $primaryLight;
 }
 
 a:visited {
-  color: $primary-dark;
+  color: $primaryDark;
 }
 
 @include bp-small {

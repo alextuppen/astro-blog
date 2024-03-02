@@ -39,37 +39,38 @@ const lookedUpTechs = lookUpTechnologies(technologies);
 </ul>
 
 <style lang="scss">
-  @import "../../../../styles/_globals.scss";
+  @import 'src/styles/_globals.scss';
+  @import 'src/styles/typography.scss';
 
   ul {
     @include elev-4();
     border-top-color: $primary;
-    border-top-width: var(--border-width);
+    border-top-width: var(--borderWidth);
     border-top-style: solid;
     list-style: none;
     display: flex;
     flex-wrap: wrap;
     gap: var(--padding);
-    padding: var(--padding) var(--padding-half);
+    padding: var(--padding) var(--paddingHalf);
     margin: unset;
   }
 
   li {
     display: flex;
-    gap: var(--padding-half);
+    gap: var(--paddingHalf);
     align-items: center;
   }
 
   span {
     padding: unset;
-    font-size: var(--font-size-small);
+    font-size: var(--fontSizeSmall);
   }
 
   @include bp-small {
     ul {
-      padding: var(--padding) var(--padding-double);
-      border-bottom-left-radius: var(--border-radius);
-      border-bottom-right-radius: var(--border-radius);
+      padding: var(--padding) var(--paddingDouble);
+      border-bottom-left-radius: var(--borderRadius);
+      border-bottom-right-radius: var(--borderRadius);
     }
   }
 </style>

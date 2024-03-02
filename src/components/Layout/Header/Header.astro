@@ -38,10 +38,10 @@ const { className } = Astro.props;
 
 <header class:list={[className]}>
   <div class="root">
-    <div class="nav-bar">
-      <Button href="/" className="home-link" variant="text">
+    <div class="navBar">
+      <Button href="/" className="homeLink" variant="text">
         <img class="logo" src="/logo/white.svg" alt="Alex Tuppen logo" />
-        <span class="home-link-text">Alex Tuppen</span>
+        <span class="homeLinkText">Alex Tuppen</span>
       </Button>
       <div class="links">
         {
@@ -51,12 +51,12 @@ const { className } = Astro.props;
                 {text}
               </Button>
               {index < internalLinks.length - 1 ? (
-                <hr class:list={["toolbar-seperator", "internal"]} />
+                <hr class:list={["toolbarSeperator", "internal"]} />
               ) : null}
             </>
           ))
         }
-        <hr class:list={["primary-seperator", "external"]} />
+        <hr class:list={["primarySeperator", "external"]} />
         {
           externalLinks.map(({ link, text }, index) => (
             <>
@@ -69,12 +69,12 @@ const { className } = Astro.props;
                 {text}
               </Button>
               {index < externalLinks.length - 1 ? (
-                <hr class:list={["toolbar-seperator", "external"]} />
+                <hr class:list={["toolbarSeperator", "external"]} />
               ) : null}
             </>
           ))
         }
-        <div class="button-wrapper">
+        <div class="buttonWrapper">
           <Menu />
         </div>
       </div>
@@ -83,31 +83,32 @@ const { className } = Astro.props;
 </header>
 
 <style lang="scss">
-  @import "../../../styles/_globals.scss";
+  @import 'src/styles/_globals.scss';
+  @import 'src/styles/typography.scss';
 
   .root {
     @include elev-6();
     display: flex;
-    padding: var(--padding-half);
+    padding: var(--paddingHalf);
     position: sticky;
     justify-content: center;
   }
 
-  .nav-bar {
+  .navBar {
     width: 100%;
-    max-width: var(--page-max-width);
+    max-width: var(--pageMaxWidth);
     display: flex;
     justify-content: space-between;
   }
 
-  .home-link {
+  .homeLink {
     display: flex;
     align-items: center;
     cursor: pointer;
   }
 
-  .home-link:hover,
-  .home-link:active {
+  .homeLink:hover,
+  .homeLink:active {
     text-decoration: underline;
     text-decoration-color: $primary;
     text-decoration-style: double;
@@ -119,7 +120,7 @@ const { className } = Astro.props;
     width: calc(var(--logo-height) / 1.5);
   }
 
-  .home-link-text {
+  .homeLinkText {
     color: $text;
     font-family: "Montserrat", sans-serif;
     font-weight: 500;
@@ -131,7 +132,7 @@ const { className } = Astro.props;
   .links {
     display: flex;
     align-items: center;
-    gap: var(--padding-half);
+    gap: var(--paddingHalf);
   }
 
   .internal,
@@ -139,20 +140,20 @@ const { className } = Astro.props;
     display: none;
   }
 
-  .toolbar-seperator,
-  .primary-seperator {
+  .toolbarSeperator,
+  .primarySeperator {
     height: 100%;
   }
 
-  .toolbar-seperator {
+  .toolbarSeperator {
     border-right-color: $text;
   }
 
-  .primary-seperator {
+  .primarySeperator {
     border-right-color: $primary;
   }
 
-  .button-wrapper {
+  .buttonWrapper {
     --burger-width: 2rem;
     position: relative;
     display: block;
@@ -174,7 +175,7 @@ const { className } = Astro.props;
       display: flex;
     }
 
-    .button-wrapper {
+    .buttonWrapper {
       display: none;
     }
   }

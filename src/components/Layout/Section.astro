@@ -1,20 +1,20 @@
 ---
-const { className } = Astro.props;
+const { className, ...rest } = Astro.props;
 ---
 
-<section class:list={["section", className]}>
+<section class:list={["section", className]} {...rest}>
   <slot />
 </section>
 
 <style lang="scss">
   .section {
-    max-width: var(--page-max-width);
+    max-width: var(--pageMaxWidth);
     display: flex;
     flex-direction: column;
-    gap: var(--padding-double);
+    gap: var(--paddingDouble);
     justify-content: center;
     align-items: center;
     text-align: center;
-    margin: var(--padding-double) auto;
+    margin: var(--paddingDouble) auto;
   }
 </style>

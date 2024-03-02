@@ -2,20 +2,18 @@
 interface Props {
   id?: string;
   className?: string;
-  variant?: "primary" | "secondary" | "icon" | "large-icon" | "text";
+  variant?: "primary" | "secondary" | "icon" | "largeIcon" | "text";
   handleClick?: (this: HTMLElement, ev: MouseEvent) => any;
   href?: string;
   external?: boolean;
 }
 
-const { id, className, variant, href, external = false } = Astro.props;
+const { id, className, variant, href, external = false, ...rest } = Astro.props;
 
 const classList = [
   "button",
   variant,
-  {
-    [className]: className ? className : null,
-  },
+  className
 ];
 ---
 
@@ -27,18 +25,20 @@ const classList = [
       href={href}
       target={external ? "_blank" : "_self"}
       rel={external ? "noreferrer noopener" : null}
+      {...rest}
     >
       <slot />
     </a>
   ) : (
-    <button id={id} class:list={classList}>
+    <button id={id} class:list={classList} {...rest}>
       <slot />
     </button>
   )
 }
 
 <style lang="scss">
-  @import "../../styles/_globals.scss";
+  @import 'src/styles/_globals.scss';
+  @import 'src/styles/typography.scss';
 
   .button {
     display: block;
@@ -66,7 +66,7 @@ const classList = [
     height: 2.5rem;
   }
 
-  .large-icon {
+  .largeIcon {
     width: 3rem;
     height: 3rem;
   }
@@ -80,44 +80,44 @@ const classList = [
     font-size: 1.25rem;
     font-weight: 600;
     display: inline-flex;
-    gap: var(--padding-half);
+    gap: var(--paddingHalf);
     justify-content: center;
     align-items: center;
-    box-shadow: 0px 8px 15px $base-colour;
-    border-radius: var(--border-radius);
+    box-shadow: 0px 8px 15px $baseColour;
+    border-radius: var(--borderRadius);
   }
 
   .primary {
-    padding: calc(var(--padding-half) + var(--border-width))
-      calc(var(--padding) + var(--border-width));
+    padding: calc(var(--paddingHalf) + var(--borderWidth))
+      calc(var(--padding) + var(--borderWidth));
     background-color: $primary;
     transition: background-color 0.25s ease-in-out;
-    color: $base-colour;
+    color: $baseColour;
   }
 
   .primary:hover {
-    background-color: $primary-dark;
+    background-color: $primaryDark;
   }
 
   .primary:active {
-    background-color: $primary-light;
+    background-color: $primaryLight;
   }
 
   .secondary {
-    padding: var(--padding-half) var(--padding);
-    background-color: $base-colour;
-    border: var(--border-width) solid $primary;
+    padding: var(--paddingHalf) var(--padding);
+    background-color: $baseColour;
+    border: var(--borderWidth) solid $primary;
     transition: border 0.25s;
   }
 
   .secondary:hover {
     background-color: rgba($color: $primary, $alpha: 0.1);
-    border-color: $primary-dark;
+    border-color: $primaryDark;
   }
 
   .secondary:active {
     background-color: rgba($color: $primary, $alpha: 0.2);
-    border-color: $primary-light;
+    border-color: $primaryLight;
   }
 
   @include bp-small {
@@ -126,7 +126,7 @@ const classList = [
       height: 2.75rem;
     }
 
-    .large-icon {
+    .largeIcon {
       width: 3.5rem;
       height: 3.5rem;
     }
@@ -138,7 +138,7 @@ const classList = [
       height: 3rem;
     }
 
-    .large-icon {
+    .largeIcon {
       width: 4rem;
       height: 4rem;
     }
@@ -150,7 +150,7 @@ const classList = [
       height: 3.4rem;
     }
 
-    .large-icon {
+    .largeIcon {
       width: 5rem;
       height: 5rem;
     }
@@ -162,7 +162,7 @@ const classList = [
       height: 3.75rem;
     }
 
-    .large-icon {
+    .largeIcon {
       width: 6rem;
       height: 6rem;
     }

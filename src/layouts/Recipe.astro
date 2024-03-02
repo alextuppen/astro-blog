@@ -28,15 +28,15 @@ const {
 
 <Root title={name} description={description}>
   <article>
-    <div class="hero-wrapper">
+    <div class="heroWrapper">
       {
         image != null && image[0] != null && (
-          <img width="300" height="300" src={image[0]} class="hero-image" />
+          <img width="300" height="300" src={image[0]} class="heroImage" />
         )
       }
       <h1>{name}</h1>
     </div>
-    <div class="description-wrapper">
+    <div class="descriptionWrapper">
       <Draft creativeWorkStatus={creativeWorkStatus} />
       <p class="description">{description}</p>
       <TimesServes
@@ -46,9 +46,9 @@ const {
         recipeYield={recipeYield}
       />
     </div>
-    <div class="tools-ingredients-method" id="test2">
+    <div class="toolsIngredientsMethod" id="test2">
       <ToolsIngredients tool={tool} recipeIngredient={recipeIngredient} />
-      <HorizontalSeperator id="tools-ingredients-method-seperator" />
+      <HorizontalSeperator id="toolsIngredientsMethodSeperator" />
       <Method recipeInstructions={recipeInstructions} />
     </div>
   </article>
@@ -59,7 +59,7 @@ const {
   import { BP_QUERY_LARGE } from "../consts";
 
   const toolsIngredientsMethod = document.getElementById(
-    "tools-ingredients-method-seperator"
+    "toolsIngredientsMethodSeperator"
   );
 
   enquire.register(BP_QUERY_LARGE, {
@@ -75,28 +75,29 @@ const {
 </script>
 
 <style lang="scss">
-  @import "../styles/_globals.scss";
+@import 'src/styles/_globals.scss';
+@import 'src/styles/typography.scss';
 
   article {
-    max-width: var(--page-max-width);
+    max-width: var(--pageMaxWidth);
     margin: auto;
     display: flex;
     flex-direction: column;
-    gap: var(--padding-double);
+    gap: var(--paddingDouble);
   }
 
-  .hero-wrapper {
+  .heroWrapper {
     display: flex;
     flex-direction: column;
     gap: var(--padding);
-    padding-top: var(--padding-double);
+    padding-top: var(--paddingDouble);
   }
 
-  .hero-image {
+  .heroImage {
     width: 80%;
     height: 80%;
     margin: auto;
-    border-radius: var(--border-radius-double);
+    border-radius: var(--borderRadiusDouble);
   }
 
   h1 {
@@ -104,7 +105,7 @@ const {
     margin: 0 var(--padding);
   }
 
-  .description-wrapper {
+  .descriptionWrapper {
     padding: var(--padding);
     display: flex;
     flex-direction: column;
@@ -116,20 +117,20 @@ const {
     text-align: center;
   }
 
-  .tools-ingredients-method {
+  .toolsIngredientsMethod {
     display: flex;
     flex-direction: column;
-    gap: var(--padding-double);
+    gap: var(--paddingDouble);
   }
 
   @include bp-small {
-    .description-wrapper {
-      border-radius: var(--border-radius);
+    .descriptionWrapper {
+      border-radius: var(--borderRadius);
     }
   }
 
   @include bp-large {
-    .tools-ingredients-method {
+    .toolsIngredientsMethod {
       flex-direction: row;
     }
   }

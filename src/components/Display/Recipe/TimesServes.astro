@@ -22,30 +22,31 @@ const totalDuration = dayjs.duration(totalTime).humanize();
 ---
 
 <div class="root">
-  <span class="prep-desc">
+  <span class="prepDesc">
     <Knife className="icon" />
     <span>Preparation:</span>
   </span>
-  <span class="prep-time">{prepDuration}</span>
-  <span class="cook-desc">
+  <span class="prepTime">{prepDuration}</span>
+  <span class="cookDesc">
     <CookingPot className="icon" />
     <span>Cook:</span>
   </span>
-  <span class="cook-time">{cookDuration}</span>
-  <span class="total-desc">
+  <span class="cookTime">{cookDuration}</span>
+  <span class="totalDesc">
     <Clock className="icon" />
     <span>Total:</span>
   </span>
-  <span class="total-time">{totalDuration}</span>
-  <span class="serves-desc">
+  <span class="totalTime">{totalDuration}</span>
+  <span class="servesDesc">
     <KnifeFork className="icon" />
     <span>Serves:</span>
   </span>
-  <span class="serves-amount">{recipeYield}</span>
+  <span class="servesAmount">{recipeYield}</span>
 </div>
 
 <style lang="scss">
-  @import "../../../styles/_globals.scss";
+  @import 'src/styles/_globals.scss';
+  @import 'src/styles/typography.scss';
 
   .root {
     margin: auto;
@@ -53,70 +54,70 @@ const totalDuration = dayjs.duration(totalTime).humanize();
     align-items: start;
     column-gap: var(--padding);
     grid-template-areas:
-      "prep-desc prep-time"
-      "cook-desc cook-time"
-      "total-desc total-time"
-      "serves-desc serves-amount";
+      "prepDesc prepTime"
+      "cookDesc cookTime"
+      "totalDesc totalTime"
+      "servesDesc servesAmount";
     align-items: center;
   }
 
-  .prep-desc,
-  .cook-desc,
-  .total-desc,
-  .serves-desc {
+  .prepDesc,
+  .cookDesc,
+  .totalDesc,
+  .servesDesc {
     justify-self: end;
     display: flex;
     align-items: center;
-    gap: var(--padding-half);
+    gap: var(--paddingHalf);
   }
 
   .icon {
-    font-size: var(--font-size);
+    font-size: var(--fontSize);
     color: $text;
   }
 
-  .prep-desc {
-    grid-area: prep-desc;
+  .prepDesc {
+    grid-area: prepDesc;
   }
 
-  .prep-time {
-    grid-area: prep-time;
+  .prepTime {
+    grid-area: prepTime;
   }
 
-  .cook-desc {
-    grid-area: cook-desc;
+  .cookDesc {
+    grid-area: cookDesc;
   }
 
-  .cook-time {
-    grid-area: cook-time;
+  .cookTime {
+    grid-area: cookTime;
   }
 
-  .total-desc {
-    grid-area: total-desc;
+  .totalDesc {
+    grid-area: totalDesc;
   }
 
-  .total-time {
-    grid-area: total-time;
+  .totalTime {
+    grid-area: totalTime;
   }
 
-  .serves-desc {
-    grid-area: serves-desc;
+  .servesDesc {
+    grid-area: servesDesc;
   }
 
-  .serves-amount {
-    grid-area: serves-amount;
+  .servesAmount {
+    grid-area: servesAmount;
   }
 
   @include bp-medium {
     .root {
       grid-template-areas:
-        "prep-desc prep-time cook-desc cook-time total-desc total-time"
-        ". . serves-desc serves-amount . .";
+        "prepDesc prepTime cookDesc cookTime totalDesc totalTime"
+        ". . servesDesc servesAmount . .";
     }
 
-    .prep-desc,
-    .cook-desc,
-    .total-desc {
+    .prepDesc,
+    .cookDesc,
+    .totalDesc {
       padding-left: var(--padding);
     }
   }

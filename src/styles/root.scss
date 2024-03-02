@@ -1,5 +1,5 @@
-@import "./_globals.scss";
-@import "./typography.scss";
+@import "src/styles/globals";
+@import "src/styles/typography";
 
 * {
   box-sizing: border-box;
@@ -7,48 +7,48 @@
 
 html {
   height: 100%;
-  --border-width: 0.1rem;
-  --border-radius: 0.5rem;
-  --border-radius-double: calc(var(--border-radius) * 2);
-  --page-max-width: 100%;
-  --content-max-width: 100%;
-  --padding-quarter: calc(var(--padding) / 4);
-  --padding-half: calc(var(--padding) / 2);
+  --borderWidth: 0.1rem;
+  --borderRadius: 0.5rem;
+  --borderRadiusDouble: calc(var(--borderRadius) * 2);
+  --pageMaxWidth: 100%;
+  --contentMaxWidth: 100%;
+  --paddingQuarter: calc(var(--padding) / 4);
+  --paddingHalf: calc(var(--padding) / 2);
   --padding: 1rem;
-  --padding-double: calc(var(--padding) * 2);
-  --padding-triple: calc(var(--padding) * 3);
-  --font-size: 1.2rem;
-  --font-size-small: 1rem;
+  --paddingDouble: calc(var(--padding) * 2);
+  --paddingTriple: calc(var(--padding) * 3);
+  --fontSize: 1.2rem;
+  --fontSizeSmall: 1rem;
 }
 
 body {
-  background-color: $base-colour;
+  background-color: $baseColour;
 }
 
 main {
-  gap: var(--padding-double);
+  gap: var(--paddingDouble);
 }
 
 @include bp-small {
   html {
-    --border-width: 0.125rem;
-    --border-radius: 0.75rem;
-    --page-max-width: 95%;
-    --content-max-width: 45rem;
+    --borderWidth: 0.125rem;
+    --borderRadius: 0.75rem;
+    --pageMaxWidth: 95%;
+    --contentMaxWidth: 45rem;
     --padding: 1.125rem;
   }
 }
 
 @include bp-medium {
   html {
-    --border-width: 0.15rem;
-    --border-radius: 1rem;
+    --borderWidth: 0.15rem;
+    --borderRadius: 1rem;
     --padding: 1.25rem;
   }
 }
 
 @include bp-large {
   html {
-    --page-max-width: 70rem;
+    --pageMaxWidth: 70rem;
   }
 }

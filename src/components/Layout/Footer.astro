@@ -1,4 +1,5 @@
 ---
+// import '../../styles/_globals.scss'
 const today = new Date();
 
 const { className } = Astro.props;
@@ -13,16 +14,17 @@ const { className } = Astro.props;
 </footer>
 
 <style>
-  @import "../../styles/_globals.scss";
+  @import 'src/styles/_globals.scss';
+  @import 'src/styles/typography.scss';
 
   .root {
     width: 100%;
     bottom: 0;
-    padding: var(--padding-double);
+    padding: var(--paddingDouble);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--padding-double);
+    gap: var(--paddingDouble);
   }
 
   .logo {
@@ -35,7 +37,7 @@ const { className } = Astro.props;
   .text {
     display: flex;
     flex-direction: column;
-    gap: var(--padding-half);
+    gap: var(--paddingHalf);
     text-align: center;
   }
 

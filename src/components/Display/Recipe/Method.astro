@@ -1,15 +1,9 @@
 ---
 import { LightBulb } from "../../../svg";
+import type { CollectionEntry } from "astro:content";
 
 interface Props {
-  recipeInstructions: {
-    name: string;
-    text?: string;
-    itemListElement?: {
-      "@type": "HowToDirection" | "HowToTip";
-      text: string;
-    }[];
-  }[];
+  recipeInstructions: CollectionEntry<"recipes">['data']['recipeInstructions'];
 }
 
 const { recipeInstructions } = Astro.props;
@@ -22,8 +16,8 @@ const { recipeInstructions } = Astro.props;
       recipeInstructions.map((instruction) => (
         <li class="item">
           <h4 class="title">{instruction.name}</h4>
-          {"text" in instruction && <p>{instruction.text}</p>}
-          {"itemListElement" in instruction &&
+          {instruction.text != null && <p>{instruction.text}</p>}
+          {instruction.itemListElement != null &&
             instruction.itemListElement.map((element) => {
               switch (element["@type"]) {
                 case "HowToDirection":
@@ -31,7 +25,7 @@ const { recipeInstructions } = Astro.props;
                 case "HowToTip":
                   return (
                     <div class="tip">
-                      <div class="tip-title">
+                      <div class="tipTitle">
                         <LightBulb />
                         <h5>Tip</h5>
                       </div>
@@ -51,7 +45,8 @@ const { recipeInstructions } = Astro.props;
 </div>
 
 <style lang="scss">
-  @import "../../../styles/_globals.scss";
+  @import 'src/styles/_globals.scss';
+  @import 'src/styles/typography.scss';
 
   .root {
     padding: 0 var(--padding);
@@ -59,14 +54,14 @@ const { recipeInstructions } = Astro.props;
 
   h2 {
     text-align: center;
-    margin-bottom: var(--padding-double);
+    margin-bottom: var(--paddingDouble);
   }
 
   .list {
     padding-left: 0;
     display: flex;
     flex-direction: column;
-    gap: var(--padding-triple);
+    gap: var(--paddingTriple);
     counter-reset: method;
     list-style-type: none;
     color: $text;
@@ -82,7 +77,7 @@ const { recipeInstructions } = Astro.props;
 
   .title {
     display: flex;
-    gap: var(--padding-half);
+    gap: var(--paddingHalf);
   }
 
   .title::before {
@@ -94,13 +89,13 @@ const { recipeInstructions } = Astro.props;
     padding: var(--padding);
     @include elev-3();
     flex-direction: column;
-    gap: var(--padding-half);
-    border-radius: var(--border-radius);
+    gap: var(--paddingHalf);
+    border-radius: var(--borderRadius);
   }
 
-  .tip-title {
+  .tipTitle {
     display: flex;
     align-items: center;
-    gap: var(--padding-half);
+    gap: var(--paddingHalf);
   }
 </style>

@@ -9,19 +9,19 @@ const { id } = Astro.props;
 ---
 
 <Button id={id} className="root">
-  <div id="menu-burger-first" class="first"></div>
-  <div id="menu-burger-middle" class="middle"></div>
-  <div id="menu-burger-hidden" class="hidden"></div>
-  <div id="menu-burger-last" class="last"></div>
+  <div id="menuBurgerFirst" class="first"></div>
+  <div id="menuBurgerMiddle" class="middle"></div>
+  <div id="menuBurgerHidden" class="hidden"></div>
+  <div id="menuBurgerLast" class="last"></div>
 </Button>
 
 <script>
-  const button = document.getElementById("menu-burger");
+  const button = document.getElementById("menuBurger");
   const buttonElements = [
-    document.getElementById("menu-burger-first"),
-    document.getElementById("menu-burger-middle"),
-    document.getElementById("menu-burger-hidden"),
-    document.getElementById("menu-burger-last"),
+    document.getElementById("menuBurgerFirst"),
+    document.getElementById("menuBurgerMiddle"),
+    document.getElementById("menuBurgerHidden"),
+    document.getElementById("menuBurgerLast"),
   ];
 
   if (button) {
@@ -29,13 +29,13 @@ const { id } = Astro.props;
       if (button.dataset.open === "true") {
         buttonElements.map((element) => {
           if (element) {
-            element.classList.add("menu-burger-open");
+            element.classList.add("menuBurgerOpen");
           }
         });
       } else {
         buttonElements.map((element) => {
           if (element) {
-            element.classList.remove("menu-burger-open");
+            element.classList.remove("menuBurgerOpen");
           }
         });
       }
@@ -44,7 +44,8 @@ const { id } = Astro.props;
 </script>
 
 <style lang="scss">
-  @import "../../../styles/_globals.scss";
+  @import 'src/styles/_globals.scss';
+  @import 'src/styles/typography.scss';
 
   .root {
     width: var(--burger-width);
@@ -68,7 +69,7 @@ const { id } = Astro.props;
     position: absolute;
     height: 15%;
     width: 100%;
-    border-radius: var(--border-radius);
+    border-radius: var(--borderRadius);
     opacity: 1;
     left: 0;
     -webkit-transform: rotate(0deg);
@@ -104,7 +105,7 @@ const { id } = Astro.props;
     bottom: 10%;
   }
 
-  .menu-burger-open {
+  .menuBurgerOpen {
     &.first {
       top: 42.5%;
       width: 0%;

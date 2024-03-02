@@ -9,11 +9,12 @@ const { id } = Astro.props;
 <hr id={id ? id : undefined} />
 
 <style lang="scss">
-  @import "../../styles/_globals.scss";
+  @import 'src/styles/_globals.scss';
+  @import 'src/styles/typography.scss';
 
   hr {
     border: unset;
     border-bottom: 1px solid $primary;
-    margin: 0 var(--padding-double);
+    margin: 0 var(--paddingDouble);
   }
 </style>
