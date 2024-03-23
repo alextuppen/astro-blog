@@ -1,0 +1,8 @@
+---
+import type { Props } from './BlogRecipeList.types'
+import { BlogRecipeListSolid } from './BlogRecipeListSolid'
+
+const { list, keywords } = Astro.props;
+---
+
+<BlogRecipeListSolid list={list} keywords={keywords} client:load/>./BlogRecipeListSolid

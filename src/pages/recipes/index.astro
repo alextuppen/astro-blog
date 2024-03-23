@@ -4,29 +4,39 @@ import { BlogRecipeList, Section } from "../../components";
 
 import { SITE_DESCRIPTION } from "../../consts";
 import { getCollection } from "astro:content";
-// import Fuse from "fuse.js";
 
 const recipes = await getCollection("recipes");
 const sortedRecipes = recipes.sort((a, b) =>
   a.data.datePublished < b.data.datePublished ? 1 : -1
 );
 const transformedRecipes = sortedRecipes.map(
-  ({ id, data: { name, description, image } }) => ({
-    href: `/recipes/${id}`,
-    title: name,
-    src: image ? image[0] : undefined,
-    alt: name,
-    description,
-  })
+  ({ id, data: { name, description, image, keywords } }) => {
+    const splitKeywords = keywords.split(', ')
+
+    return {
+      href: `/recipes/${id}`,
+      title: name,
+      src: image ? image[0] : undefined,
+      alt: name,
+      description,
+      keywords: splitKeywords
+    }
+  }
 );
 
-// console.log(sortedRecipes);
+  const keywordsWithCount = transformedRecipes.reduce<{ [key: string]: number }>(
+    (accumulator, { keywords }) => {
+      keywords.forEach((keyword) => {
+        accumulator[keyword] = (accumulator[keyword] || 0) + 1;
+      });
+      return accumulator;
+    },
+    {}
+  );
 
-// const fuse = new Fuse(sortedRecipes, {
-//   keys: ["data.name", "data.description", "data.keywords"],
-// });
-
-// console.log(fuse.search("rice"));
+  const keywordsSortedByCount = Object.keys(keywordsWithCount).sort(
+    (a, b) => keywordsWithCount[b] - keywordsWithCount[a]
+  );
 ---
 
 <Root title={"Alex Tuppen"} description={SITE_DESCRIPTION}>
@@ -36,6 +46,6 @@ const transformedRecipes = sortedRecipes.map(
       This is just somewhere for me to remember the recipes I come up with.
       They're not complicated or fancy but they are fast and easy.
     </p>
-    <BlogRecipeList list={transformedRecipes} />
+    <BlogRecipeList list={transformedRecipes} keywords={keywordsSortedByCount}/>
   </Section>
 </Root>

@@ -1,9 +1,17 @@
 export {
-  BlogRecipeList,
+  Button,
   Education,
   ExpEduDetails,
   Experiences,
+  Draft,
+  Method,
+  TimesServes,
+  ToolsIngredients,
   FormattedDate,
-} from "./Display";
-export { Button } from "./Input";
-export { BaseHead, Footer, Header, Section } from "./Layout";
+  HorizontalSeperator,
+  BaseHead,
+  Footer,
+  Header,
+  Section,
+} from "./Astro";
+export { BlogRecipeList } from "./Solid";

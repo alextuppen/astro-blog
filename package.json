@@ -12,12 +12,13 @@
   "dependencies": {
     "@astrojs/mdx": "^0.19.7",
     "@astrojs/sitemap": "^2.0.1",
+    "@astrojs/solid-js": "^4.0.1",
     "astro": "^4.4.8",
     "dayjs": "^1.11.10",
     "enquire.js": "^2.1.6",
-    "fuse.js": "^7.0.0",
     "normalize.css": "^8.0.1",
-    "sass": "^1.71.1"
+    "sass": "^1.71.1",
+    "solid-js": "^1.8.15"
   },
   "devDependencies": {
     "@types/enquire.js": "^2.1.5"

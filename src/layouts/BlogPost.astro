@@ -1,7 +1,7 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import Root from "../layouts/Root.astro";
-import { FormattedDate } from "../components/Display";
+import { FormattedDate } from "../components";
 
 type Props = CollectionEntry<"blog">["data"];
 
@@ -145,3 +145,4 @@ const { title, description, pubDate, updatedDate, heroImage, heroImageText } =
     background-color: $elevation6 !important;
   }
 </style>
+../components/Astro
