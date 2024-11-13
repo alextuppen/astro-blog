@@ -3,7 +3,6 @@
 
 .button {
   display: block;
-  color: $text !important;
   background: none;
   border: none;
   text-decoration: none;
@@ -13,6 +12,11 @@
 
 .button:active {
   transform: translateY(0.2rem);
+}
+
+.textButton,
+.secondary {
+  color: $text !important;
 }
 
 .textButton:hover,
@@ -36,10 +40,9 @@
 .secondary {
   white-space: nowrap;
   text-decoration: none;
-  text-transform: uppercase;
+  text-transform: capitalize;
   letter-spacing: 0.1rem;
   font-size: 1.25rem;
-  font-weight: 600;
   display: inline-flex;
   gap: var(--paddingHalf);
   justify-content: center;
@@ -51,6 +54,7 @@
 .primary {
   padding: calc(var(--paddingHalf) + var(--borderWidth))
     calc(var(--padding) + var(--borderWidth));
+  color: $baseColour !important;
   background-color: $primary;
   transition: background-color 0.25s ease-in-out;
   color: $baseColour;
@@ -67,7 +71,8 @@
 .secondary {
   padding: var(--paddingHalf) var(--padding);
   background-color: $baseColour;
-  border: var(--borderWidth) solid $primary;
+  border: var(--borderWidthHalf) solid;
+  border-color: $primary;
   transition: border 0.25s;
 }
 

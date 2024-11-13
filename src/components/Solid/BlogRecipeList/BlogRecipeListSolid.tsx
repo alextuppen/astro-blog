@@ -1,74 +1,61 @@
-import { createSignal } from "solid-js";
+import { createSignal, type JSX } from "solid-js";
+import Fuse from "fuse.js";
 import styles from "./BlogRecipeList.module.scss";
 import type { ListItem, Props } from "./BlogRecipeList.types";
 
 export function BlogRecipeListSolid({ list, keywords }: Props) {
-  const resetKeywords = keywords != null ? keywords : [];
+  const fuse = new Fuse(list, {
+    keys: ["title", "keywords"],
+    includeScore: true,
+    includeMatches: true,
+    threshold: 0.3,
+  });
 
   const [visibleRecipes, setVisibleRecipes] = createSignal<ListItem[]>(list);
-  const [selectedKeywords, setSelectedKeywords] = createSignal<string[]>([]);
-  const [visibleKeywords, setVisibleKeywords] =
-    createSignal<string[]>(resetKeywords);
 
-  const updateVisibleRecipesAndKeywords = (newSelectedKeywords: string[]) => {
-    const newVisisbleRecipes: ListItem[] = [];
-    const newVisibleKeywords = new Set<string>();
+  const searchChange: JSX.EventHandler<HTMLInputElement, InputEvent> = ({
+    currentTarget: { value },
+  }) => {
+    if (value === "") {
+      setVisibleRecipes(list);
+      return;
+    }
 
-    list.forEach((item) => {
-      const { keywords } = item;
+    const searchResult = fuse.search(value);
 
-      if (
-        keywords != null &&
-        newSelectedKeywords.every((kws) => keywords.includes(kws))
-      ) {
-        newVisisbleRecipes.push(item);
-        keywords.forEach((keyword) => {
-          newVisibleKeywords.add(keyword);
-        });
+    const sortedResult = searchResult.sort((a, b) => {
+      if (a.score == null && b.score == null) {
+        return 0;
+      }
+
+      if (a.score == null) {
+        return 1;
+      }
+
+      if (b.score == null) {
+        return -1;
+      }
+
+      if (a.score < b.score) {
+        return -1;
+      } else if (a.score > b.score) {
+        return 1;
+      } else {
+        return 0;
       }
     });
 
-    setVisibleRecipes(newVisisbleRecipes);
-    setVisibleKeywords([...newVisibleKeywords]);
-  };
+    const finalList = sortedResult.map((result) => result.item);
 
-  const handleKeywordClick = (keyword: string) => {
-    if (selectedKeywords().includes(keyword)) {
-      const newSelectedKeywords = selectedKeywords().filter(
-        (arrayWord) => arrayWord !== keyword
-      );
-
-      updateVisibleRecipesAndKeywords(newSelectedKeywords);
-
-      setSelectedKeywords(newSelectedKeywords);
-    } else {
-      const newSelectedKeywords = selectedKeywords().concat(keyword);
-
-      updateVisibleRecipesAndKeywords(newSelectedKeywords);
-
-      setSelectedKeywords(newSelectedKeywords);
-    }
-  };
-
-  const handleResetClick = () => {
-    setVisibleRecipes(list);
-    setSelectedKeywords([]);
-    setVisibleKeywords(resetKeywords);
+    setVisibleRecipes(finalList);
   };
 
   return (
     <>
       {keywords != null && (
         <div>
-          <h3>Keyword filter</h3>
-          <div>
-            {visibleKeywords().map((keyword) => (
-              <button onclick={() => handleKeywordClick(keyword)}>
-                {keyword}
-              </button>
-            ))}
-          </div>
-          <button onclick={handleResetClick}>Reset</button>
+          <label>Search</label>
+          <input type="text" onInput={searchChange} />
         </div>
       )}
       <ol class={styles.list}>

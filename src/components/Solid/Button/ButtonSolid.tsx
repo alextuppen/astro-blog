@@ -1,4 +1,5 @@
-import { ButtonSize, ButtonVariants, ButtonProps } from "./Button.types";
+import { ButtonSize, ButtonVariants } from "./Button.types";
+import type { Props } from "./Button.types";
 import styles from "./Button.module.scss";
 
 export const Button = ({
@@ -11,7 +12,7 @@ export const Button = ({
   className,
   children,
   ...props
-}) => {
+}: Props) => {
   let classes = `${styles.button}`;
 
   if (icon) {
@@ -47,32 +48,27 @@ export const Button = ({
     classes = `${classes} ${className}`;
   }
 
-  if (href) {
-    if (external) {
-      return (
-        <a
-          className={classes}
-          href={href}
-          target="_blank"
-          rel="noreferrer"
-          {...props}
-        >
-          {icon || children}
-        </a>
-      );
-    }
+  if (href != null) {
     return (
-      <Link href={href} {...props}>
-        {/* href passed to anchor tag automatically by Link */}
-        {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-        <a className={classes}>{icon || children}</a>
-      </Link>
+      <a
+        class={classes}
+        href={href}
+        target="_blank"
+        rel="noreferrer"
+        {...props}
+      >
+        {icon || children}
+      </a>
     );
   }
 
-  return (
-    <RButton className={classes} onClick={onClick} {...props}>
-      {icon || children}
-    </RButton>
-  );
+  if (onClick != null) {
+    return (
+      <button class={classes} onclick={onClick}>
+        {icon || children}
+      </button>
+    );
+  }
+
+  throw new Error("href or onClick must be supplied");
 };

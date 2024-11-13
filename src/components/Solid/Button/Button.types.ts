@@ -1,5 +1,4 @@
-import { MouseEventHandler, ReactNode } from "react";
-import { ComponentCommon } from "@types";
+import type { JSX } from "solid-js";
 
 export enum ButtonSize {
   Default,
@@ -13,11 +12,13 @@ export enum ButtonVariants {
   Unstyled,
 }
 
-export interface ButtonProps extends ComponentCommon {
+export interface Props {
   size?: ButtonSize;
   variant?: ButtonVariants;
-  onClick?: (this: HTMLElement, ev: MouseEvent) => any;
+  onClick?: JSX.EventHandlerUnion<HTMLButtonElement, MouseEvent>;
   href?: string;
   external?: boolean;
-  icon?: ReactNode;
+  icon?: Element;
+  className?: string;
+  children: Element | string;
 }
