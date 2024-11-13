@@ -1,12 +1,13 @@
 ---
 interface Props {
   id?: string;
+  variant?: 'primary' | 'text'
 }
 
-const { id } = Astro.props;
+const { id, variant } = Astro.props;
 ---
 
-<hr id={id ? id : undefined} />
+<hr id={id ? id : undefined} class={variant ? variant : 'primary'} />
 
 <style lang="scss">
   @import 'src/styles/_globals.scss';
@@ -14,7 +15,15 @@ const { id } = Astro.props;
 
   hr {
     border: unset;
-    border-bottom: 1px solid $primary;
+    border-bottom: 1px solid;
     margin: 0 var(--paddingDouble);
+  }
+
+  .primary {
+    border-bottom-color: $primary;
+  }
+
+  .text {
+    border-bottom-color: $text;
   }
 </style>

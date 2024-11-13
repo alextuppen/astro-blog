@@ -1,10 +1,40 @@
 @import "src/styles/_globals.scss";
 @import "src/styles/typography.scss";
 
-.input {
+input {
   height: 2rem;
   width: 80%;
-  border: var(--borderWidthHalf) solid;
+  box-sizing: border-box;
+  padding-top: var(--padding);
+  padding-bottom: var(--padding);
+  padding-right: var(--padding);
+  border: var(--borderWidthDouble) solid;
+  border-color: $text;
+  border-radius: var(--borderRadius);
+  outline: none;
+  background-color: $text;
+  transition: border 150ms ease-out;
+}
+
+input:focus {
   border-color: $primary;
-  border-radius: var(--borderRadiusHalf);
+}
+
+input:hover {
+  background-color: $primaryLight;
+}
+
+input::placeholder {
+  color: $textMediumEmphasis;
+  opacity: 1;
+}
+
+.inputNoIcon {
+  padding-left: var(--padding);
+}
+
+.inputIcon {
+  padding-left: var(--paddingDouble);
+  background-position: var(--paddingQuarter);
+  background-repeat: no-repeat;
 }

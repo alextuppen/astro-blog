@@ -55,8 +55,13 @@ export function BlogRecipeList({ list, keywords }: Props) {
     <>
       {keywords != null && (
         <div class={styles.search}>
-          <h3>Search</h3>
-          <Input name="search-input" type="text" onInput={searchChange} />
+          <Input
+            name="search-input"
+            type="text"
+            placeholder="Search..."
+            onInput={searchChange}
+            icon="icons/ui/search.svg"
+          />
         </div>
       )}
       <ol class={styles.list}>

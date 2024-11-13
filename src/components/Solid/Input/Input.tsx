@@ -5,6 +5,14 @@ import styles from "./Input.module.scss";
 export const Input = (props: InputProps) => {
   const [, inputProps] = splitProps(props, ["value", "label", "error"]);
 
+  let classes = String();
+
+  if (props.icon == null) {
+    classes = `${classes} ${styles.inputNoIcon}`;
+  } else {
+    classes = `${classes} ${styles.inputIcon}`;
+  }
+
   return (
     <div>
       {props.label && (
@@ -14,7 +22,8 @@ export const Input = (props: InputProps) => {
       )}
       <input
         {...inputProps}
-        class={styles.input}
+        class={classes}
+        style={props.icon ? `background-image: url(${props.icon});` : ""}
         id={props.name}
         value={props.value || ""}
         aria-invalid={!!props.error}

@@ -5,6 +5,7 @@ export interface InputProps {
   type: "text" | "email" | "tel" | "password" | "url" | "date";
   label?: string;
   placeholder?: string;
+  icon?: string;
   value?: string | undefined;
   error?: string;
   required?: boolean;
