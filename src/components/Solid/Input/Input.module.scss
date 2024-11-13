@@ -1,0 +1,10 @@
+@import "src/styles/_globals.scss";
+@import "src/styles/typography.scss";
+
+.input {
+  height: 2rem;
+  width: 80%;
+  border: var(--borderWidthHalf) solid;
+  border-color: $primary;
+  border-radius: var(--borderRadiusHalf);
+}

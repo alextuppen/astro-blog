@@ -1,3 +1,3 @@
-import BlogRecipeList from "./BlogRecipeList.astro";
+import BlogRecipeList from "./BlogRecipeListAstro.astro";
 
 export { BlogRecipeList };

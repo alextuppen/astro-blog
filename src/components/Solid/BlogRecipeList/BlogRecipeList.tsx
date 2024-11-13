@@ -2,8 +2,9 @@ import { createSignal, type JSX } from "solid-js";
 import Fuse from "fuse.js";
 import styles from "./BlogRecipeList.module.scss";
 import type { ListItem, Props } from "./BlogRecipeList.types";
+import { Input } from "../Input";
 
-export function BlogRecipeListSolid({ list, keywords }: Props) {
+export function BlogRecipeList({ list, keywords }: Props) {
   const fuse = new Fuse(list, {
     keys: ["title", "keywords"],
     includeScore: true,
@@ -53,9 +54,9 @@ export function BlogRecipeListSolid({ list, keywords }: Props) {
   return (
     <>
       {keywords != null && (
-        <div>
-          <label>Search</label>
-          <input type="text" onInput={searchChange} />
+        <div class={styles.search}>
+          <h3>Search</h3>
+          <Input name="search-input" type="text" onInput={searchChange} />
         </div>
       )}
       <ol class={styles.list}>
