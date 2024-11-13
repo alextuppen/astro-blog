@@ -1,35 +1,50 @@
-import { splitProps } from "solid-js";
+import { Button, ButtonSize } from "../Button";
+import { Cross } from "../../../svg/Solid";
 import type { InputProps } from "./Input.types";
 import styles from "./Input.module.scss";
 
-export const Input = (props: InputProps) => {
-  const [, inputProps] = splitProps(props, ["value", "label", "error"]);
+export const Input = ({
+  icon,
+  id,
+  value,
+  onClear: propsOnClear,
+  error,
+  ...rest
+}: InputProps) => {
+  const onClear = () => {
+    const self = document.getElementById(id);
+
+    if (self != null && self instanceof HTMLInputElement) {
+      self.value = "";
+    }
+
+    if (propsOnClear != null) {
+      propsOnClear();
+    }
+  };
 
   let classes = String();
 
-  if (props.icon == null) {
+  if (icon == null) {
     classes = `${classes} ${styles.inputNoIcon}`;
   } else {
     classes = `${classes} ${styles.inputIcon}`;
   }
 
   return (
-    <div>
-      {props.label && (
-        <label for={props.name}>
-          {props.label} {props.required && <span>*</span>}
-        </label>
-      )}
+    <div class={styles.wrapper}>
       <input
-        {...inputProps}
+        {...rest}
         class={classes}
-        style={props.icon ? `background-image: url(${props.icon});` : ""}
-        id={props.name}
-        value={props.value || ""}
-        aria-invalid={!!props.error}
-        aria-errormessage={`${props.name}-error`}
+        style={icon ? `background-image: url(${icon});` : ""}
+        id={id}
+        value={value || ""}
+        aria-invalid={!!error}
+        aria-errormessage={`${id}-error`}
       />
-      {props.error && <div id={`${props.name}-error`}>{props.error}</div>}
+      {propsOnClear == null ? null : (
+        <Button size={ButtonSize.Default} Icon={<Cross />} onClick={onClear} />
+      )}
     </div>
   );
 };

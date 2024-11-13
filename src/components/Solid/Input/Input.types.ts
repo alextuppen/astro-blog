@@ -1,7 +1,7 @@
 import { type JSX } from "solid-js";
 
 export interface InputProps {
-  name: string;
+  id: string;
   type: "text" | "email" | "tel" | "password" | "url" | "date";
   label?: string;
   placeholder?: string;
@@ -9,6 +9,7 @@ export interface InputProps {
   value?: string | undefined;
   error?: string;
   required?: boolean;
+  onClear?: () => {};
   ref?: (element: HTMLInputElement) => void;
   onInput?: JSX.EventHandler<HTMLInputElement, InputEvent>;
   onChange?: JSX.EventHandler<HTMLInputElement, Event>;

@@ -18,7 +18,7 @@ export interface Props {
   onClick?: JSX.EventHandlerUnion<HTMLButtonElement, MouseEvent>;
   href?: string;
   external?: boolean;
-  icon?: Element;
+  Icon?: JSX.Element;
   className?: string;
-  children: Element | string;
+  children?: JSX.Element | string;
 }

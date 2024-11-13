@@ -7,7 +7,7 @@ export const Button = ({
   variant = ButtonVariants.Unstyled,
   onClick,
   href,
-  icon,
+  Icon,
   external,
   className,
   children,
@@ -15,16 +15,13 @@ export const Button = ({
 }: Props) => {
   let classes = `${styles.button}`;
 
-  if (icon) {
+  if (Icon) {
     switch (size) {
-      case ButtonSize.Default:
-        classes = `${classes} ${styles.icon}`;
-        break;
       case ButtonSize.Large:
         classes = `${classes} ${styles.largeIcon}`;
         break;
       default:
-        throw new Error(`ButtonSize enum has illegal value ${size}`);
+        classes = `${classes} ${styles.icon}`;
     }
   }
 
@@ -57,7 +54,7 @@ export const Button = ({
         rel="noreferrer"
         {...props}
       >
-        {icon || children}
+        {/* {icon || children} */}
       </a>
     );
   }
@@ -65,7 +62,8 @@ export const Button = ({
   if (onClick != null) {
     return (
       <button class={classes} onclick={onClick}>
-        {icon || children}
+        {Icon || children}
+        {/* {<Icon />} */}
       </button>
     );
   }

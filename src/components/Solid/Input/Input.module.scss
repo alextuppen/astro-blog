@@ -1,27 +1,30 @@
 @import "src/styles/_globals.scss";
 @import "src/styles/typography.scss";
 
-input {
+.wrapper {
   height: 2rem;
   width: 80%;
-  box-sizing: border-box;
-  padding-top: var(--padding);
-  padding-bottom: var(--padding);
-  padding-right: var(--padding);
+  display: flex;
+  // box-sizing: border-box;
+  // padding-top: var(--padding);
+  // padding-bottom: var(--padding);
+  // padding-right: var(--padding);
   border: var(--borderWidthDouble) solid;
   border-color: $text;
   border-radius: var(--borderRadius);
-  outline: none;
   background-color: $text;
   transition: border 150ms ease-out;
 }
 
-input:focus {
-  border-color: $primary;
+input {
+  height: 100%;
+  width: 100%;
+  border: unset;
+  outline: none;
 }
 
-input:hover {
-  background-color: $primaryLight;
+.wrapper:has(input:focus) {
+  border-color: $primary;
 }
 
 input::placeholder {
