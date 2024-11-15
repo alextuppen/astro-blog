@@ -1,11 +1,11 @@
-import { type JSX } from "solid-js";
+import { type JSX, type ValidComponent } from "solid-js";
 
 export interface InputProps {
   id: string;
   type: "text" | "email" | "tel" | "password" | "url" | "date";
   label?: string;
   placeholder?: string;
-  icon?: string;
+  icon?: ValidComponent;
   value?: string | undefined;
   error?: string;
   required?: boolean;

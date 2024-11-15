@@ -19,6 +19,6 @@ export interface Props {
   href?: string;
   external?: boolean;
   Icon?: JSX.Element;
-  className?: string;
+  className?: string | undefined;
   children?: JSX.Element | string;
 }

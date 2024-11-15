@@ -4,6 +4,7 @@ import styles from "./BlogRecipeList.module.scss";
 import type { ListItem, Props } from "./BlogRecipeList.types";
 import { Input } from "../Input";
 import { NoResultsFound } from "./NoResultsFound";
+import { Search } from "../../../svg/Solid";
 
 export function BlogRecipeList({ list, keywords }: Props) {
   const fuse = new Fuse(list, {
@@ -61,7 +62,7 @@ export function BlogRecipeList({ list, keywords }: Props) {
             type="text"
             placeholder="Search..."
             onInput={onSearchChange}
-            icon="icons/ui/search.svg"
+            icon={Search}
             onClear={() => setVisibleRecipes(list)}
           />
         </div>

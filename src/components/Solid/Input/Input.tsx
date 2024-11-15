@@ -1,21 +1,47 @@
-import { Button, ButtonSize } from "../Button";
+import { Button } from "../Button";
 import { Cross } from "../../../svg/Solid";
 import type { InputProps } from "./Input.types";
 import styles from "./Input.module.scss";
+import { Dynamic } from "solid-js/web";
+import { createSignal, type JSX } from "solid-js";
 
 export const Input = ({
   icon,
   id,
   value,
-  onClear: propsOnClear,
   error,
+  onClear: propsOnClear,
+  onInput: propsOnInput,
   ...rest
 }: InputProps) => {
-  const onClear = () => {
-    const self = document.getElementById(id);
+  const [selfHasValue, setSelfHasValue] = createSignal<boolean>(false);
 
-    if (self != null && self instanceof HTMLInputElement) {
+  const getSelf = () => document.getElementById(id);
+  const selfIsValid = (s: HTMLElement | null): s is HTMLInputElement =>
+    s != null && s instanceof HTMLInputElement;
+
+  const onInput: JSX.EventHandler<HTMLInputElement, InputEvent> = (e) => {
+    const self = getSelf();
+
+    if (selfIsValid(self)) {
+      if (self.value !== "") {
+        setSelfHasValue(true);
+      } else {
+        setSelfHasValue(false);
+      }
+    }
+
+    if (propsOnInput != null) {
+      propsOnInput(e);
+    }
+  };
+
+  const onClear = () => {
+    const self = getSelf();
+
+    if (selfIsValid(self)) {
       self.value = "";
+      setSelfHasValue(false);
     }
 
     if (propsOnClear != null) {
@@ -23,28 +49,22 @@ export const Input = ({
     }
   };
 
-  let classes = String();
-
-  if (icon == null) {
-    classes = `${classes} ${styles.inputNoIcon}`;
-  } else {
-    classes = `${classes} ${styles.inputIcon}`;
-  }
-
   return (
     <div class={styles.wrapper}>
+      {icon ? <Dynamic component={icon} className={styles.icon} /> : null}
       <input
         {...rest}
-        class={classes}
-        style={icon ? `background-image: url(${icon});` : ""}
         id={id}
         value={value || ""}
         aria-invalid={!!error}
         aria-errormessage={`${id}-error`}
+        oninput={onInput}
       />
-      {propsOnClear == null ? null : (
-        <Button size={ButtonSize.Default} Icon={<Cross />} onClick={onClear} />
-      )}
+      {propsOnClear != null && selfHasValue() === true ? (
+        <Button onClick={onClear} className={styles.button}>
+          <Cross className={styles.icon} />
+        </Button>
+      ) : null}
     </div>
   );
 };

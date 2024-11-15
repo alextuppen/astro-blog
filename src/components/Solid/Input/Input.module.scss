@@ -4,22 +4,25 @@
 .wrapper {
   height: 2rem;
   width: 80%;
+  margin: auto;
+  padding-left: var(--paddingHalf);
+  padding-right: var(--paddingHalf);
   display: flex;
-  // box-sizing: border-box;
-  // padding-top: var(--padding);
-  // padding-bottom: var(--padding);
-  // padding-right: var(--padding);
+  flex-direction: row;
+  gap: var(--paddingHalf);
   border: var(--borderWidthDouble) solid;
   border-color: $text;
   border-radius: var(--borderRadius);
   background-color: $text;
   transition: border 150ms ease-out;
+  align-items: center;
 }
 
 input {
   height: 100%;
   width: 100%;
   border: unset;
+  padding: unset;
   outline: none;
 }
 
@@ -32,12 +35,12 @@ input::placeholder {
   opacity: 1;
 }
 
-.inputNoIcon {
-  padding-left: var(--padding);
+.icon {
+  width: 2rem;
+  height: 100%;
 }
 
-.inputIcon {
-  padding-left: var(--paddingDouble);
-  background-position: var(--paddingQuarter);
-  background-repeat: no-repeat;
+.button {
+  padding: unset;
+  display: flex;
 }
