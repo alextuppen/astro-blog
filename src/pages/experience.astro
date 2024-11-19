@@ -6,30 +6,22 @@ import { getCollection } from "astro:content";
 
 const experiences = await getCollection("experiences");
 const sortedExperiences = experiences.sort((a, b) =>
-  a.data.details.startDate < b.data.details.startDate ? 1 : -1
+  a.data.details.startDate < b.data.details.startDate ? 1 : -1,
 );
 
 const education = await getCollection("education");
 const sortedEducation = education.sort((a, b) =>
-  a.data.details.startDate < b.data.details.startDate ? 1 : -1
+  a.data.details.startDate < b.data.details.startDate ? 1 : -1,
 );
 ---
 
 <Root title="Experience" description={SITE_DESCRIPTION}>
   <Section>
     <h1>Experience</h1>
-    {
-      sortedExperiences.map(({ data }) => (
-        <Job data={data} />
-      ))
-    }
+    {sortedExperiences.map(({ data }) => <Job data={data} />)}
   </Section>
   <Section>
     <h2>Education</h2>
-    {
-      sortedEducation.map(({ data }) => (
-        <Education data={ data } />
-      ))
-    }
+    {sortedEducation.map(({ data }) => <Education data={data} />)}
   </Section>
 </Root>

@@ -4,19 +4,23 @@ import ExpEduDetails from "./ExpEduDetails.astro";
 import { Technologies } from "./Technologies";
 
 interface Props {
-  data: CollectionEntry<"experiences">['data']
+  data: CollectionEntry<"experiences">["data"];
 }
 
-const { data: { description, details, technologies }} = Astro.props;
+const {
+  data: { description, details, technologies },
+} = Astro.props;
 ---
 
 <div class="wrapper">
   <ExpEduDetails details={details} month={true} />
-  {description && description.length > 0 ? (
-    <p class="description">{description.join("")}</p>
-  ) : (
-    <p class="description">Description coming soon!</p>
-  )}
+  {
+    description && description.length > 0 ? (
+      <p class="description">{description.join("")}</p>
+    ) : (
+      <p class="description">Description coming soon!</p>
+    )
+  }
   {technologies && <Technologies technologies={technologies} />}
 </div>
 

@@ -63,8 +63,8 @@ import MenuBurger from "./MenuBurger.astro";
 </script>
 
 <style lang="scss">
-  @import 'src/styles/_globals.scss';
-  @import 'src/styles/typography.scss';
+  @import "src/styles/_globals.scss";
+  @import "src/styles/typography.scss";
 
   .menu {
     position: absolute;
@@ -78,7 +78,9 @@ import MenuBurger from "./MenuBurger.astro";
     align-items: center;
     gap: var(--paddingHalf);
     border-bottom-left-radius: var(--borderRadius);
-    transition: opacity 250ms ease-in-out, transform 250ms ease-in-out;
+    transition:
+      opacity 250ms ease-in-out,
+      transform 250ms ease-in-out;
     opacity: 0;
     transform-origin: top center;
     transform: scaleY(0);

@@ -7,11 +7,11 @@ import { getCollection } from "astro:content";
 
 const recipes = await getCollection("recipes");
 const sortedRecipes = recipes.sort((a, b) =>
-  a.data.datePublished < b.data.datePublished ? 1 : -1
+  a.data.datePublished < b.data.datePublished ? 1 : -1,
 );
 const transformedRecipes = sortedRecipes.map(
   ({ id, data: { name, description, image, keywords } }) => {
-    const splitKeywords = keywords.split(', ')
+    const splitKeywords = keywords.split(", ");
 
     return {
       href: `/recipes/${id}`,
@@ -19,9 +19,9 @@ const transformedRecipes = sortedRecipes.map(
       src: image ? image[0] : undefined,
       alt: name,
       description,
-      keywords: splitKeywords
-    }
-  }
+      keywords: splitKeywords,
+    };
+  },
 );
 ---
 
@@ -29,18 +29,18 @@ const transformedRecipes = sortedRecipes.map(
   <Section>
     <h1>Recipes</h1>
     <p>
-      I enjoy the challenge of creating recipes that are as easy to cook as possible. 
-      They are not complicated or fancy but they do use ingredients in standard UK supermarket 
-      sizes and generate as little washing up as possible. Please let me know what you think 
-      if you cook one of them!
+      I enjoy the challenge of creating recipes that are as easy to cook as
+      possible. They are not complicated or fancy but they do use ingredients in
+      standard UK supermarket sizes and generate as little washing up as
+      possible. Please let me know what you think if you cook one of them!
     </p>
-    <BlogRecipeList list={transformedRecipes}/>
+    <BlogRecipeList list={transformedRecipes} />
   </Section>
 </Root>
 
 <style lang="scss">
-  @import 'src/styles/_globals.scss';
-  @import 'src/styles/typography.scss';
+  @import "src/styles/_globals.scss";
+  @import "src/styles/typography.scss";
 
   p {
     padding-left: var(--paddingHalf);

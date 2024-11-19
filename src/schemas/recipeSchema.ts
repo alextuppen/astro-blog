@@ -23,7 +23,7 @@ export const recipeSchema = z.object({
   recipeCategory: z.literal("Weeknight meal"),
   recipeIngredient: z.string().array(),
   tool: z.array(
-    z.object({ "@type": z.literal("HowToTool"), name: z.string() })
+    z.object({ "@type": z.literal("HowToTool"), name: z.string() }),
   ),
   recipeInstructions: z.array(
     z.object({
@@ -38,9 +38,9 @@ export const recipeSchema = z.object({
               z.literal("HowToTip"),
             ]),
             text: z.string(),
-          })
+          }),
         )
         .optional(),
-    })
+    }),
   ),
 });

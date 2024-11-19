@@ -10,11 +10,7 @@ interface Props {
 
 const { id, className, variant, href, external = false, ...rest } = Astro.props;
 
-const classList = [
-  "button",
-  variant,
-  className
-];
+const classList = ["button", variant, className];
 ---
 
 {
@@ -37,8 +33,8 @@ const classList = [
 }
 
 <style lang="scss">
-  @import 'src/styles/_globals.scss';
-  @import 'src/styles/typography.scss';
+  @import "src/styles/_globals.scss";
+  @import "src/styles/typography.scss";
 
   .button {
     display: block;

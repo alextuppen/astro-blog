@@ -1,17 +1,17 @@
 ---
 interface Props {
   id?: string;
-  variant?: 'primary' | 'text'
+  variant?: "primary" | "text";
 }
 
 const { id, variant } = Astro.props;
 ---
 
-<hr id={id ? id : undefined} class={variant ? variant : 'primary'} />
+<hr id={id ? id : undefined} class={variant ? variant : "primary"} />
 
 <style lang="scss">
-  @import 'src/styles/_globals.scss';
-  @import 'src/styles/typography.scss';
+  @import "src/styles/_globals.scss";
+  @import "src/styles/typography.scss";
 
   hr {
     border: unset;

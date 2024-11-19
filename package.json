@@ -22,6 +22,8 @@
     "solid-js": "^1.8.15"
   },
   "devDependencies": {
-    "@types/enquire.js": "^2.1.5"
+    "@types/enquire.js": "^2.1.5",
+    "prettier": "^3.3.3",
+    "prettier-plugin-astro": "^0.14.1"
   }
 }

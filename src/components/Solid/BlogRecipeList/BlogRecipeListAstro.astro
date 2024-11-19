@@ -1,8 +1,8 @@
 ---
-import type { Props } from './BlogRecipeList.types'
-import { BlogRecipeList } from './BlogRecipeList'
+import type { Props } from "./BlogRecipeList.types";
+import { BlogRecipeList } from "./BlogRecipeList";
 
-const { list, keywords } = Astro.props;
+const { list } = Astro.props;
 ---
 
-<BlogRecipeList list={list} keywords={keywords} client:load/>
+<BlogRecipeList list={list} client:load />

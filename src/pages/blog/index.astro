@@ -6,7 +6,7 @@ import { BlogRecipeList, Section } from "../../components";
 
 const posts = await getCollection("blog");
 const sortedPosts = posts.sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 const transformedPosts = sortedPosts.map(
   ({ slug, data: { heroImage, heroImageText, title, description } }) => ({
@@ -15,7 +15,7 @@ const transformedPosts = sortedPosts.map(
     src: heroImage,
     alt: heroImageText,
     description,
-  })
+  }),
 );
 ---
 
@@ -27,8 +27,8 @@ const transformedPosts = sortedPosts.map(
 </Root>
 
 <style lang="scss">
-  @import 'src/styles/_globals.scss';
-  @import 'src/styles/typography.scss';
+  @import "src/styles/_globals.scss";
+  @import "src/styles/typography.scss";
 
   section {
     max-width: var(--pageMaxWidth);

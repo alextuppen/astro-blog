@@ -3,10 +3,12 @@ import ExpEduDetails from "./ExpEduDetails.astro";
 import type { CollectionEntry } from "astro:content";
 
 interface Props {
-  data: CollectionEntry<"education">['data']
-} 
+  data: CollectionEntry<"education">["data"];
+}
 
-const { data: { details }} = Astro.props;
+const {
+  data: { details },
+} = Astro.props;
 ---
 
 <div class="wrapper">

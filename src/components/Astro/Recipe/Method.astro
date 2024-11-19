@@ -3,7 +3,7 @@ import { LightBulb } from "../../../svg";
 import type { CollectionEntry } from "astro:content";
 
 interface Props {
-  recipeInstructions: CollectionEntry<"recipes">['data']['recipeInstructions'];
+  recipeInstructions: CollectionEntry<"recipes">["data"]["recipeInstructions"];
 }
 
 const { recipeInstructions } = Astro.props;
@@ -34,7 +34,7 @@ const { recipeInstructions } = Astro.props;
                   );
                 default:
                   throw new Error(
-                    `itemListElement["@type"] switch has an illegal value: ${element["@type"]}`
+                    `itemListElement["@type"] switch has an illegal value: ${element["@type"]}`,
                   );
               }
             })}
@@ -45,8 +45,8 @@ const { recipeInstructions } = Astro.props;
 </div>
 
 <style lang="scss">
-  @import 'src/styles/_globals.scss';
-  @import 'src/styles/typography.scss';
+  @import "src/styles/_globals.scss";
+  @import "src/styles/typography.scss";
 
   .root {
     padding: 0 var(--padding);

@@ -3,8 +3,8 @@ import type { CollectionEntry } from "astro:content";
 import HorizontalSeperator from "../HorizontalSeperator.astro";
 
 interface Props {
-  tool: CollectionEntry<"recipes">['data']['tool']
-  recipeIngredient: CollectionEntry<"recipes">['data']['recipeIngredient']
+  tool: CollectionEntry<"recipes">["data"]["tool"];
+  recipeIngredient: CollectionEntry<"recipes">["data"]["recipeIngredient"];
 }
 
 const { tool, recipeIngredient } = Astro.props;
@@ -24,7 +24,7 @@ const { tool, recipeIngredient } = Astro.props;
       }
     </ul>
   </div>
-  <HorizontalSeperator id="tools-ingredients" variant="text"/>
+  <HorizontalSeperator id="tools-ingredients" variant="text" />
   <div class="wrapper">
     <h2>Ingredients</h2>
     <ul class="list">
@@ -59,8 +59,8 @@ const { tool, recipeIngredient } = Astro.props;
 </script>
 
 <style lang="scss">
-  @import 'src/styles/_globals.scss';
-  @import 'src/styles/typography.scss';
+  @import "src/styles/_globals.scss";
+  @import "src/styles/typography.scss";
 
   .root {
     display: flex;
