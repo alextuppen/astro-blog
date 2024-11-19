@@ -130,7 +130,7 @@ const latestExperience = experiences[latestExperienceIndex]?.data;
             if you cook one of them!
           </p>
           <ul class="list">
-            <BlogRecipeItem item={transformedRecipe} />
+            <BlogRecipeItem item={transformedRecipe} client:load />
           </ul>
         </>
       ) : null
@@ -149,7 +149,7 @@ const latestExperience = experiences[latestExperienceIndex]?.data;
             If you have any feedback on any of the posts I'd love to hear it.
           </p>
           <ul class="list">
-            <BlogRecipeItem item={transformedBlogPost} />
+            <BlogRecipeItem item={transformedBlogPost} client:load />
           </ul>
         </>
       ) : null
