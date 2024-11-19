@@ -11,10 +11,12 @@ import {
 import { getCollection } from "astro:content";
 
 const recipes = await getCollection("recipes");
-const recipe = recipes.find((recipe) => recipe.data.name === "Pea and chorizo orzo")
-let transformedRecipe
+const recipe = recipes.find(
+  (recipe) => recipe.data.name === "Pea and chorizo orzo",
+);
+let transformedRecipe;
 if (recipe == null) {
-  transformedRecipe = undefined
+  transformedRecipe = undefined;
 } else {
   transformedRecipe = {
     href: `/recipes/${recipe.id}`,
@@ -22,46 +24,56 @@ if (recipe == null) {
     src: recipe.data.image ? recipe.data.image[0] : undefined,
     alt: recipe.data.name,
     description: recipe.data.description,
-  }
+  };
 }
 
 const blogPosts = await getCollection("blog");
-const latestBlogPostIndex = blogPosts.reduce((accumulator, currentPost, currentPostIndex) => {
-  const accumulatorPubDate = blogPosts[accumulator]?.data.pubDate;
-  const currentPubDate = currentPost.data.pubDate;
+const latestBlogPostIndex = blogPosts.reduce(
+  (accumulator, currentPost, currentPostIndex) => {
+    const accumulatorPubDate = blogPosts[accumulator]?.data.pubDate;
+    const currentPubDate = currentPost.data.pubDate;
 
-  if (accumulatorPubDate == null || accumulatorPubDate < currentPubDate) {
-    return currentPostIndex;
-  }
+    if (accumulatorPubDate == null || accumulatorPubDate < currentPubDate) {
+      return currentPostIndex;
+    }
 
-  return accumulator;
-}, 0)
+    return accumulator;
+  },
+  0,
+);
 const blogPost = blogPosts[latestBlogPostIndex];
-let transformedBlogPost
+let transformedBlogPost;
 if (blogPost == null) {
-  transformedBlogPost = undefined
+  transformedBlogPost = undefined;
 } else {
   transformedBlogPost = {
-      href: `/blog/${blogPost.slug}`,
-      title: blogPost.data.title,
-      src: blogPost.data.heroImage,
-      alt: blogPost.data.heroImageText,
-      description: blogPost.data.description,
-  }
+    href: `/blog/${blogPost.slug}`,
+    title: blogPost.data.title,
+    src: blogPost.data.heroImage,
+    alt: blogPost.data.heroImageText,
+    description: blogPost.data.description,
+  };
 }
 
 const experiences = await getCollection("experiences");
-const latestExperienceIndex = experiences.reduce((accumulator, currectExp, currectExpIndex) => {
-  const accumulatorStartDate = experiences[accumulator]?.data.details.startDate;
-  const currentStartDate = currectExp.data.details.startDate;
+const latestExperienceIndex = experiences.reduce(
+  (accumulator, currectExp, currectExpIndex) => {
+    const accumulatorStartDate =
+      experiences[accumulator]?.data.details.startDate;
+    const currentStartDate = currectExp.data.details.startDate;
 
-  if (accumulatorStartDate == null || accumulatorStartDate < currentStartDate) {
-    return currectExpIndex
-  }
+    if (
+      accumulatorStartDate == null ||
+      accumulatorStartDate < currentStartDate
+    ) {
+      return currectExpIndex;
+    }
 
-  return accumulator
-}, 0)
-const latestExperience = experiences[latestExperienceIndex]?.data
+    return accumulator;
+  },
+  0,
+);
+const latestExperience = experiences[latestExperienceIndex]?.data;
 ---
 
 <Root title={"Alex Tuppen"} description={SITE_DESCRIPTION}>
@@ -102,54 +114,71 @@ const latestExperience = experiences[latestExperienceIndex]?.data
     </div>
   </Section>
   <Section>
-    {transformedRecipe != null ? (
-      <Button variant={'text'} href="/recipes">
-        <h2>Recipes</h2>
-      </Button>
-      <p>
-        I enjoy the challenge of creating recipes that are as easy to cook as possible. 
-        They are not complicated or fancy but they do use ingredients in standard UK supermarket 
-        package sizes and generate as little washing up as possible. You can see all of my recipes 
-        on the <a href="/recipes">recipes page</a> or click the card below to go straight to my
-        favourite recipe. Please let me know what you think if you cook one of them!
-      </p>
-      <ul class="list">
-        <BlogRecipeItem item={transformedRecipe} />
-      </ul>
-    ) : null}
-    {transformedBlogPost != null ? (
-      <Button variant={'text'} href="/blog">
-        <h2>Blog</h2>
-      </Button>
-      <p>
-        I am also trying to improve my technical writing and document the most interesting 
-        technical projects I have worked on. You can read my latest blog post by clicking 
-        on the card below or see all posts by going to the <a href="/blog">blog page.</a> 
-        If you have any feedback on any of the posts I'd love to hear it.
-      </p>
-      <ul class="list">
-        <BlogRecipeItem item={transformedBlogPost} />
-      </ul>
-    ) : null}
-    {latestExperience != null ? (
-      <Button variant="text" href="/experience">
-        <h2>Experience</h2>
-      </Button>
-      <p>
-        I started my career in IT but rapidly discovered that scripting was far more interesting 
-        than turning computers off and on again. PowerShell scripting soon led to C# and .Net 
-        desktop applications, but the world of custom MSIs and WPF felt constrained so I taught
-        myself JavaScript and React and I haven't looked back. My latest/current role is displayed 
-        below, to see my past roles please <a href="/experience">click here.</a>
-      </p>
-      <Job data={latestExperience} />
-    ) : null}
+    {
+      transformedRecipe != null ? (
+        <>
+          <Button variant={"text"} href="/recipes">
+            <h2>Recipes</h2>
+          </Button>
+          <p>
+            I enjoy the challenge of creating recipes that are as easy to cook
+            as possible. They are not complicated or fancy but they do use
+            ingredients in standard UK supermarket package sizes and generate as
+            little washing up as possible. You can see all of my recipes on the{" "}
+            <a href="/recipes">recipes page</a> or click the card below to go
+            straight to my favourite recipe. Please let me know what you think
+            if you cook one of them!
+          </p>
+          <ul class="list">
+            <BlogRecipeItem item={transformedRecipe} />
+          </ul>
+        </>
+      ) : null
+    }
+    {
+      transformedBlogPost != null ? (
+        <>
+          <Button variant={"text"} href="/blog">
+            <h2>Blog</h2>
+          </Button>
+          <p>
+            I am also trying to improve my technical writing and document the
+            most interesting technical projects I have worked on. You can read
+            my latest blog post by clicking on the card below or see all posts
+            by going to the <a href="/blog">blog page.</a>
+            If you have any feedback on any of the posts I'd love to hear it.
+          </p>
+          <ul class="list">
+            <BlogRecipeItem item={transformedBlogPost} />
+          </ul>
+        </>
+      ) : null
+    }
+    {
+      latestExperience != null ? (
+        <>
+          <Button variant="text" href="/experience">
+            <h2>Experience</h2>
+          </Button>
+          <p>
+            I started my career in IT but rapidly discovered that scripting was
+            far more interesting than turning computers off and on again.
+            PowerShell scripting soon led to C# and .Net desktop applications,
+            but the world of custom MSIs and WPF felt constrained so I taught
+            myself JavaScript and React and I haven't looked back. My
+            latest/current role is displayed below, to see my past roles please{" "}
+            <a href="/experience">click here.</a>
+          </p>
+          <Job data={latestExperience} />
+        </>
+      ) : null
+    }
   </Section>
 </Root>
 
 <style lang="scss">
-  @import 'src/styles/_globals.scss';
-  @import 'src/styles/typography.scss';
+  @import "src/styles/_globals.scss";
+  @import "src/styles/typography.scss";
 
   .hero {
     // 100 small view height - (2 x double padding (4) on section + rough height of header (3))
@@ -227,6 +256,11 @@ const latestExperience = experiences[latestExperienceIndex]?.data
 
     .tagLine {
       font-size: 2.25rem;
+    }
+
+    p {
+      padding-left: var(--padding);
+      padding-right: var(--padding);
     }
   }
 
