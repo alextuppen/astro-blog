@@ -24,22 +24,22 @@ const transformedRecipes = sortedRecipes.map(
   }
 );
 
-  const keywordsWithCount = transformedRecipes.reduce<{ [key: string]: number }>(
-    (accumulator, { keywords }) => {
-      keywords.forEach((keyword) => {
-        accumulator[keyword] = (accumulator[keyword] || 0) + 1;
-      });
-      return accumulator;
-    },
-    {}
-  );
+const keywordsWithCount = transformedRecipes.reduce<{ [key: string]: number }>(
+  (accumulator, { keywords }) => {
+    keywords.forEach((keyword) => {
+      accumulator[keyword] = (accumulator[keyword] || 0) + 1;
+    });
+    return accumulator;
+  },
+  {}
+);
 
-  const keywordsSortedByCount = Object.keys(keywordsWithCount).sort(
-    (a, b) => keywordsWithCount[b] - keywordsWithCount[a]
-  );
+const keywordsSortedByCount = Object.keys(keywordsWithCount).sort(
+  (a, b) => keywordsWithCount[b] - keywordsWithCount[a]
+);
 ---
 
-<Root title={"Alex Tuppen"} description={SITE_DESCRIPTION}>
+<Root title={"Alex Tuppen | Recipes"} description={SITE_DESCRIPTION}>
   <Section>
     <h1>Recipes</h1>
     <p>

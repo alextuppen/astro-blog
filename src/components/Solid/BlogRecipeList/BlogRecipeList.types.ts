@@ -4,10 +4,10 @@ export interface ListItem {
   src: string | undefined;
   alt: string | undefined;
   description: string;
-  keywords: string[] | undefined;
+  keywords?: string[] | undefined;
 }
 
 export interface Props {
   list: ListItem[];
-  keywords: string[] | undefined;
+  keywords?: string[] | undefined;
 }
