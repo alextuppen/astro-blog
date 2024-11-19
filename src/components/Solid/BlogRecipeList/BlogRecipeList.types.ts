@@ -9,5 +9,4 @@ export interface ListItem {
 
 export interface Props {
   list: ListItem[];
-  keywords?: string[] | undefined;
 }

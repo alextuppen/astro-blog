@@ -1,8 +1,7 @@
 export {
   Button,
   Education,
-  ExpEduDetails,
-  Experiences,
+  Job,
   Draft,
   Method,
   TimesServes,
@@ -14,4 +13,4 @@ export {
   Header,
   Section,
 } from "./Astro";
-export { BlogRecipeList } from "./Solid";
+export { BlogRecipeList, BlogRecipeItem } from "./Solid";

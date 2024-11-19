@@ -1,7 +1,7 @@
 export { blogSchema } from "./blogSchema";
 export { educationSchema } from "./educationSchema";
 export {
-  experienceSchema,
+  jobSchema,
   technologySchema,
   technologyAlternativeSchema,
 } from "./experienceSchema";

@@ -1,1 +1,1 @@
-export { BlogRecipeList } from "./BlogRecipeList";
+export { BlogRecipeList, BlogRecipeItem } from "./BlogRecipeList";

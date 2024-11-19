@@ -1,20 +1,17 @@
 ---
-import { getCollection } from "astro:content";
 import ExpEduDetails from "./ExpEduDetails.astro";
+import type { CollectionEntry } from "astro:content";
 
-const education = await getCollection("education");
-const sortedEducation = education.sort((a, b) =>
-  a.data.details.startDate < b.data.details.startDate ? 1 : -1
-);
+interface Props {
+  data: CollectionEntry<"education">['data']
+} 
+
+const { data: { details }} = Astro.props;
 ---
 
-{
-  sortedEducation.map(({ data: { details } }) => (
-    <div class="wrapper">
-      <ExpEduDetails details={details} month={false} />
-    </div>
-  ))
-}
+<div class="wrapper">
+  <ExpEduDetails details={details} month={false} />
+</div>
 
 <style lang="scss">
   @import "../../../styles/globals.scss";

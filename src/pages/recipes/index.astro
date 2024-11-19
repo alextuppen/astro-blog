@@ -23,29 +23,27 @@ const transformedRecipes = sortedRecipes.map(
     }
   }
 );
-
-const keywordsWithCount = transformedRecipes.reduce<{ [key: string]: number }>(
-  (accumulator, { keywords }) => {
-    keywords.forEach((keyword) => {
-      accumulator[keyword] = (accumulator[keyword] || 0) + 1;
-    });
-    return accumulator;
-  },
-  {}
-);
-
-const keywordsSortedByCount = Object.keys(keywordsWithCount).sort(
-  (a, b) => keywordsWithCount[b] - keywordsWithCount[a]
-);
 ---
 
 <Root title={"Alex Tuppen | Recipes"} description={SITE_DESCRIPTION}>
   <Section>
     <h1>Recipes</h1>
     <p>
-      This is just somewhere for me to remember the recipes I come up with.
-      They're not complicated or fancy but they are fast and easy.
+      I enjoy the challenge of creating recipes that are as easy to cook as possible. 
+      They are not complicated or fancy but they do use ingredients in standard UK supermarket 
+      sizes and generate as little washing up as possible. Please let me know what you think 
+      if you cook one of them!
     </p>
-    <BlogRecipeList list={transformedRecipes} keywords={keywordsSortedByCount}/>
+    <BlogRecipeList list={transformedRecipes}/>
   </Section>
 </Root>
+
+<style lang="scss">
+  @import 'src/styles/_globals.scss';
+  @import 'src/styles/typography.scss';
+
+  p {
+    padding-left: var(--paddingHalf);
+    padding-right: var(--paddingHalf);
+  }
+</style>

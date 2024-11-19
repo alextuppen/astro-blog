@@ -7,13 +7,15 @@ import { NoResultsFound } from "./NoResultsFound";
 import { Search } from "../../../svg/Solid";
 import { BlogRecipeItem } from "./BlogRecipeItem";
 
-export function BlogRecipeList({ list, keywords }: Props) {
+export function BlogRecipeList({ list }: Props) {
   const fuse = new Fuse(list, {
     keys: ["title", "keywords"],
     includeScore: true,
     includeMatches: true,
     threshold: 0.3,
   });
+
+  const searchEnabled = list.some((listItem) => listItem.keywords != null);
 
   const [visibleListItems, setVisibleListItems] =
     createSignal<ListItem[]>(list);
@@ -57,7 +59,7 @@ export function BlogRecipeList({ list, keywords }: Props) {
 
   return (
     <>
-      {keywords != null && (
+      {searchEnabled != null && (
         <div class={styles.search}>
           <Input
             id="blog-recipe-list-search-input"

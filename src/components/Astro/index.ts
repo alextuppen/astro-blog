@@ -5,7 +5,7 @@ import Button from "./Button.astro";
 import Footer from "./Footer.astro";
 import Section from "./Section.astro";
 
-export { Education, ExpEduDetails, Experiences } from "./Experience";
+export { Education, Job } from "./Experience";
 export { Draft, Method, TimesServes, ToolsIngredients } from "./Recipe";
 export { Header } from "./Header";
 export {

@@ -35,7 +35,7 @@ export const technologyAlternativeSchema = z.object({
   alt: z.string(),
 });
 
-export const experienceSchema = educationSchema.extend({
+export const jobSchema = educationSchema.extend({
   technologies: z
     .array(z.union([technologySchema, technologyAlternativeSchema]))
     .optional(),

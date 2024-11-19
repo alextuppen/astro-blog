@@ -1,5 +1,4 @@
 import Education from "./Education.astro";
-import ExpEduDetails from "./ExpEduDetails.astro";
-import Experiences from "./Experiences.astro";
+import Job from "./Job.astro";
 
-export { Education, ExpEduDetails, Experiences };
+export { Education, Job };

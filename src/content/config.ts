@@ -2,7 +2,7 @@ import { defineCollection } from "astro:content";
 import {
   blogSchema,
   educationSchema,
-  experienceSchema,
+  jobSchema,
   recipeSchema,
 } from "../schemas";
 
@@ -18,7 +18,7 @@ const education = defineCollection({
 
 const experiences = defineCollection({
   type: "data",
-  schema: experienceSchema,
+  schema: jobSchema,
 });
 
 const recipes = defineCollection({
