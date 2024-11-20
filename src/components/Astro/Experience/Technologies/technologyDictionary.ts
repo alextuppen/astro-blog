@@ -6,11 +6,6 @@ export const technologyDictionary: TechnologyDictionary = {
     title: "Apollo GraphQL",
     alt: "Apollo GraphQL logo",
   },
-  urql: {
-    src: "/icons/frameworks/urql.svg",
-    title: "URQL",
-    alt: "URQL logo",
-  },
   codegen: {
     src: "/icons/frameworks/codegen.svg",
     title: "GraphQL code generator",
@@ -20,6 +15,11 @@ export const technologyDictionary: TechnologyDictionary = {
     src: "/icons/frameworks/dot-net.svg",
     title: ".Net",
     alt: ".Net logo",
+  },
+  fastify: {
+    src: "/icons/frameworks/fastify.svg",
+    title: "Fastify",
+    alt: "Fastify logo",
   },
   gatsby: {
     src: "/icons/frameworks/gatsby.svg",
@@ -35,6 +35,11 @@ export const technologyDictionary: TechnologyDictionary = {
     src: "/icons/frameworks/react.svg",
     title: "React",
     alt: "React logo",
+  },
+  urql: {
+    src: "/icons/frameworks/urql.svg",
+    title: "URQL",
+    alt: "URQL logo",
   },
   graphql: {
     src: "/icons/infrastructure/graphql.svg",
@@ -55,6 +60,11 @@ export const technologyDictionary: TechnologyDictionary = {
     src: "/icons/infrastructure/sccm.svg",
     title: "SCCM",
     alt: "SCCM logo",
+  },
+  bicep: {
+    src: "/icons/languages/bicep.svg",
+    title: "Bicep",
+    alt: "Bicep logo",
   },
   cSharp: {
     src: "/icons/languages/csharp.svg",
@@ -86,6 +96,11 @@ export const technologyDictionary: TechnologyDictionary = {
     title: "TypeScript",
     alt: "TypeScript logo",
   },
+  yaml: {
+    src: "/icons/languages/yaml.svg",
+    title: "YAML",
+    alt: "YAML logo",
+  },
   aws: {
     src: "/icons/platforms/aws.svg",
     title: "AWS",
@@ -95,6 +110,11 @@ export const technologyDictionary: TechnologyDictionary = {
     src: "/icons/platforms/azure.svg",
     title: "Azure",
     alt: "Azure logo",
+  },
+  azureDevops: {
+    src: "/icons/platforms/azure-devops.svg",
+    title: "Azure DevOps",
+    alt: "Azure DevOps logo",
   },
   heroku: {
     src: "/icons/platforms/heroku.svg",
