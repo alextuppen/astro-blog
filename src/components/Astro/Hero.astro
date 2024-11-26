@@ -1,0 +1,155 @@
+---
+import Button from "./Button.astro";
+import Section from "./Section.astro";
+
+import { URL_LINKEDIN, URL_INSTAGRAM, URL_GITHUB } from "../../consts";
+---
+
+<Section className="hero">
+  <div class="grid">
+    <img src="/logo/white.svg" alt="Alex Tuppen logo" class="atLogo" />
+    <div class="nameWrapper">
+      <h1 class="name">Alex</h1>
+      <h1 class="name">Tuppen</h1>
+    </div>
+    <h2 class="tagLine">Full stack developer</h2>
+    <div class="buttons">
+      <Button variant="largeIcon" href={URL_LINKEDIN} external={true}>
+        <img
+          width="48"
+          height="48"
+          src="/icons/websites/linkedin.svg"
+          alt="LinkedIn logo"
+        />
+      </Button>
+      <Button variant="largeIcon" href={URL_INSTAGRAM} external={true}>
+        <img
+          width="48"
+          height="48"
+          src="/icons/websites/instagram.svg"
+          alt="Instagram logo"
+        />
+      </Button>
+      <Button variant="largeIcon" href={URL_GITHUB} external={true}>
+        <img
+          width="48"
+          height="48"
+          src="/icons/websites/github.svg"
+          alt="Github logo"
+        />
+      </Button>
+    </div>
+  </div>
+</Section>
+
+<style lang="scss">
+  @import "src/styles/_globals.scss";
+  @import "src/styles/typography.scss";
+
+  .hero {
+    // 100 small view height - (2 x double padding (4) on section + rough height of header (3))
+    height: calc(100svh - (7 * var(--padding)));
+  }
+
+  .grid {
+    display: grid;
+    grid-template-areas:
+      "atLogo"
+      "nameWrapper"
+      "tagLine"
+      "buttons";
+    justify-items: center;
+    align-items: center;
+    gap: var(--paddingDouble);
+  }
+
+  .atLogo {
+    grid-area: atLogo;
+    width: 10rem;
+  }
+
+  .nameWrapper {
+    grid-area: nameWrapper;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .name {
+    margin: auto;
+    font-size: 4rem;
+    line-height: 1;
+  }
+
+  .tagLine {
+    grid-area: tagLine;
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+
+  .buttons {
+    grid-area: buttons;
+    display: flex;
+    gap: var(--paddingDouble);
+  }
+
+  @include bp-small {
+    .grid {
+      grid-template-areas:
+        "atLogo nameWrapper"
+        "tagLine tagLine"
+        "buttons buttons";
+    }
+
+    .name {
+      margin: 0;
+      font-size: 6rem;
+      text-align: left;
+    }
+
+    .tagLine {
+      font-size: 2.25rem;
+    }
+  }
+
+  @include bp-medium {
+    .atLogo {
+      width: 12rem;
+    }
+
+    .name {
+      font-size: 7rem;
+    }
+
+    .tagLine {
+      font-size: 2.5rem;
+    }
+  }
+
+  @include bp-large {
+    .atLogo {
+      width: 16rem;
+    }
+
+    .name {
+      font-size: 9rem;
+    }
+
+    .tagLine {
+      font-size: 3rem;
+    }
+  }
+
+  @include bp-xl {
+    .atLogo {
+      width: 20rem;
+    }
+
+    .name {
+      font-size: 12rem;
+    }
+
+    .tagLine {
+      font-size: 3.75rem;
+    }
+  }
+</style>
