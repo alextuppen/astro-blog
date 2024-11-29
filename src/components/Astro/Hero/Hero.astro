@@ -1,11 +1,13 @@
 ---
-import Button from "./Button.astro";
-import Section from "./Section.astro";
+import Button from "../Button.astro";
+import HeroBackground from "./HeroBackground.astro";
+import Section from "../Section.astro";
 
-import { URL_LINKEDIN, URL_INSTAGRAM, URL_GITHUB } from "../../consts";
+import { URL_LINKEDIN, URL_INSTAGRAM, URL_GITHUB } from "../../../consts";
 ---
 
 <Section className="hero">
+  <HeroBackground />
   <div class="grid">
     <img src="/logo/white.svg" alt="Alex Tuppen logo" class="atLogo" />
     <div class="nameWrapper">
@@ -47,6 +49,7 @@ import { URL_LINKEDIN, URL_INSTAGRAM, URL_GITHUB } from "../../consts";
   @import "src/styles/typography.scss";
 
   .hero {
+    position: relative;
     // 100 small view height - (2 x double padding (4) on section + rough height of header (3))
     height: calc(100svh - (7 * var(--padding)));
   }

@@ -1,0 +1,121 @@
+<canvas id="hero-background-canvas"></canvas>
+
+<script>
+  import type { Column } from "./HeroBackground.types";
+
+  const rootStyle = getComputedStyle(document.body);
+  const paddingValue = rootStyle.getPropertyValue("--padding");
+  const parsedPadding = parseFloat(paddingValue.replace("rem", ""));
+  const fontSize = parseFloat(rootStyle.fontSize);
+  const headerHeight = parsedPadding * fontSize * 3;
+  const canvasWidth = document.body.clientWidth - parsedPadding * fontSize;
+  const canvasHeight = document.body.clientHeight - headerHeight;
+
+  const canvas = document.getElementById("hero-background-canvas");
+  if (canvas == null || !(canvas instanceof HTMLCanvasElement)) {
+    throw new Error("Canvas not found");
+  }
+
+  canvas.width = canvasWidth;
+  canvas.height = canvasHeight;
+
+  const context = canvas.getContext("2d");
+
+  function generateRandomNumber(min: number, max: number) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  let columns: Column[] = [];
+  function generateColumn() {
+    const columnLength = generateRandomNumber(40, 60);
+    const columnChars = [];
+
+    for (let i = 1; i < columnLength; i++) {
+      // Generate between 97 and 122 (ASCII for lowercase letters)
+      const randAscii = generateRandomNumber(97, 122);
+      columnChars.push(String.fromCharCode(randAscii));
+    }
+
+    columns.push({
+      chars: columnChars,
+      currentChar: 0,
+      xCoord: 64,
+      yCoord: 100,
+      prevRender: 0,
+    });
+  }
+
+  function renderColumn(
+    ctx: CanvasRenderingContext2D,
+    { chars, currentChar, xCoord, yCoord }: Omit<Column, "prevRender">,
+  ) {
+    ctx.font = `${fontSize}px "Jost", sans-serif`;
+    ctx.shadowBlur = 10;
+
+    const alpha = 0.7 / currentChar;
+    for (let i = 0; i < chars.length; i++) {
+      const char = chars[i];
+      if (char == null) {
+        throw new Error(`Character at index ${i} in char is not defined`);
+      }
+
+      if (i === 0) {
+        const primaryColour = "#f9ab01";
+        ctx.shadowColor = primaryColour;
+        ctx.fillStyle = primaryColour;
+      } else {
+        const secondaryColour = `rgba(255, 255, 255, ${alpha * (currentChar - i)})`;
+        ctx.shadowColor = secondaryColour;
+        ctx.fillStyle = secondaryColour;
+      }
+
+      ctx.fillText(char, xCoord, yCoord - fontSize * i);
+    }
+  }
+
+  function animate() {
+    if (canvas == null || !(canvas instanceof HTMLCanvasElement)) {
+      throw new Error("Canvas not found");
+    }
+    if (context == null || !(context instanceof CanvasRenderingContext2D)) {
+      throw new Error("Context not found");
+    }
+
+    window.requestAnimationFrame(animate);
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    const now = window.performance.now();
+    const newLetters: Column[] = [];
+
+    for (const column of columns) {
+      const { chars, currentChar, xCoord, yCoord, prevRender } = column;
+
+      if (now - prevRender < 250) {
+        renderColumn(context, { chars, currentChar, xCoord, yCoord });
+        newLetters.push(column);
+      } else {
+        renderColumn(context, { chars, currentChar, xCoord, yCoord });
+
+        if (yCoord - fontSize * chars.length < canvasHeight) {
+          newLetters.push({
+            chars,
+            currentChar: currentChar + 1,
+            xCoord,
+            yCoord: yCoord + fontSize,
+            prevRender: window.performance.now(),
+          });
+        }
+      }
+    }
+
+    columns = newLetters;
+  }
+
+  generateColumn();
+  animate();
+</script>
+
+<style lang="scss">
+  canvas {
+    position: absolute;
+  }
+</style>
