@@ -27,7 +27,7 @@
 
   let columns: Column[] = [];
   function generateColumn() {
-    const columnLength = generateRandomNumber(40, 60);
+    const columnLength = generateRandomNumber(30, 50);
     const columnChars = [];
 
     for (let i = 1; i < columnLength; i++) {
@@ -49,9 +49,6 @@
     ctx: CanvasRenderingContext2D,
     { chars, currentChar, xCoord, yCoord }: Omit<Column, "prevRender">,
   ) {
-    ctx.font = `${fontSize}px "Jost", sans-serif`;
-    ctx.shadowBlur = 10;
-
     const alpha = 0.7 / currentChar;
     for (let i = 0; i < chars.length; i++) {
       const char = chars[i];
@@ -81,8 +78,10 @@
       throw new Error("Context not found");
     }
 
-    window.requestAnimationFrame(animate);
     context.clearRect(0, 0, canvas.width, canvas.height);
+    context.font = `${fontSize}px "Jost", sans-serif`;
+    context.shadowBlur = 10;
+    context.textAlign = "center";
     const now = window.performance.now();
     const newLetters: Column[] = [];
 
@@ -108,6 +107,7 @@
     }
 
     columns = newLetters;
+    window.requestAnimationFrame(animate);
   }
 
   generateColumn();
