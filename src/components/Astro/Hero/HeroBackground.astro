@@ -6,9 +6,9 @@
   const rootStyle = getComputedStyle(document.body);
   const paddingValue = rootStyle.getPropertyValue("--padding");
   const parsedPadding = parseFloat(paddingValue.replace("rem", ""));
-  const fontSize = parseFloat(rootStyle.fontSize);
-  const headerHeight = parsedPadding * fontSize * 3;
-  const canvasWidth = document.body.clientWidth - parsedPadding * fontSize;
+  const rootFontSize = parseFloat(rootStyle.fontSize);
+  const headerHeight = parsedPadding * rootFontSize * 3;
+  const canvasWidth = document.body.clientWidth - parsedPadding * rootFontSize;
   const canvasHeight = document.body.clientHeight - headerHeight;
 
   const canvas = document.getElementById("hero-background-canvas");
@@ -19,54 +19,94 @@
   canvas.width = canvasWidth;
   canvas.height = canvasHeight;
 
-  const context = canvas.getContext("2d");
+  const context = canvas.getContext("2d", { alpha: false });
 
   function generateRandomNumber(min: number, max: number) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
   let columns: Column[] = [];
+  const totalPossibleColumns = Math.floor((canvasWidth / rootFontSize) * 2);
+
   function generateColumn() {
-    const columnLength = generateRandomNumber(30, 50);
+    const columnLength = generateRandomNumber(20, 50);
     const columnChars = [];
 
-    for (let i = 1; i < columnLength; i++) {
+    const alphaIncrement = 0.5 / columnLength;
+    const gradient = [];
+
+    for (let i = 1; i <= columnLength; i++) {
       // Generate between 97 and 122 (ASCII for lowercase letters)
       const randAscii = generateRandomNumber(97, 122);
       columnChars.push(String.fromCharCode(randAscii));
+
+      gradient.push(alphaIncrement * i);
     }
+
+    const fontSize = generateRandomNumber(
+      0.75 * rootFontSize,
+      1.25 * rootFontSize,
+    );
+    const xCoord = generateRandomNumber(0, canvasWidth);
+    const yCoord = generateRandomNumber(0, canvasHeight / 0.5);
 
     columns.push({
       chars: columnChars,
       currentChar: 0,
-      xCoord: 64,
-      yCoord: 100,
+      charsRemaining: columnLength,
+      gradient,
+      fontSize,
+      xCoord,
+      yCoord,
       prevRender: 0,
     });
   }
 
-  function renderColumn(
-    ctx: CanvasRenderingContext2D,
-    { chars, currentChar, xCoord, yCoord }: Omit<Column, "prevRender">,
-  ) {
-    const alpha = 0.7 / currentChar;
-    for (let i = 0; i < chars.length; i++) {
+  function renderColumn(ctx: CanvasRenderingContext2D, column: Column) {
+    const {
+      chars,
+      currentChar,
+      charsRemaining,
+      gradient,
+      fontSize,
+      xCoord,
+      yCoord,
+    } = column;
+
+    const length = chars.length;
+    const fadeInGradient = gradient.slice(-currentChar);
+    const fadeOutGradient = Array(length - charsRemaining)
+      .fill(0)
+      .concat(gradient);
+
+    for (let i = 0; i !== currentChar; i++) {
+      if (charsRemaining !== length && charsRemaining + i < length) {
+        continue;
+      }
+
       const char = chars[i];
       if (char == null) {
         throw new Error(`Character at index ${i} in char is not defined`);
       }
 
-      if (i === 0) {
-        const primaryColour = "#f9ab01";
-        ctx.shadowColor = primaryColour;
-        ctx.fillStyle = primaryColour;
+      let colour: string;
+      if (i === currentChar - 1 && charsRemaining === length) {
+        colour = "#f9ab01";
       } else {
-        const secondaryColour = `rgba(255, 255, 255, ${alpha * (currentChar - i)})`;
-        ctx.shadowColor = secondaryColour;
-        ctx.fillStyle = secondaryColour;
+        if (charsRemaining === length) {
+          colour = `rgba(255, 255, 255, ${fadeInGradient[i]})`;
+          // colour = `rgba(255, 255, 255, 0.7)`;
+        } else {
+          colour = `rgba(255, 255, 255, ${fadeOutGradient[i]})`;
+          // colour = `rgba(255, 255, 255, 0.7)`;
+        }
       }
 
-      ctx.fillText(char, xCoord, yCoord - fontSize * i);
+      ctx.shadowColor = colour;
+      ctx.fillStyle = colour;
+      ctx.font = `${fontSize}px "Matrix", sans-serif`;
+      ctx.shadowBlur = fontSize * 0.75;
+      ctx.fillText(char, xCoord, yCoord + fontSize * i);
     }
   }
 
@@ -79,43 +119,50 @@
     }
 
     context.clearRect(0, 0, canvas.width, canvas.height);
-    context.font = `${fontSize}px "Jost", sans-serif`;
-    context.shadowBlur = 10;
     context.textAlign = "center";
     const now = window.performance.now();
-    const newLetters: Column[] = [];
+    const newColumns: Column[] = [];
+
+    if (columns.length < totalPossibleColumns) {
+      const numberOfNewColumns = generateRandomNumber(1, 5);
+      for (let i = 0; i < numberOfNewColumns; i++) {
+        generateColumn();
+      }
+    }
 
     for (const column of columns) {
-      const { chars, currentChar, xCoord, yCoord, prevRender } = column;
+      const { chars, currentChar, charsRemaining, prevRender } = column;
 
       if (now - prevRender < 250) {
-        renderColumn(context, { chars, currentChar, xCoord, yCoord });
-        newLetters.push(column);
+        renderColumn(context, column);
+        newColumns.push(column);
       } else {
-        renderColumn(context, { chars, currentChar, xCoord, yCoord });
+        renderColumn(context, column);
 
-        if (yCoord - fontSize * chars.length < canvasHeight) {
-          newLetters.push({
-            chars,
-            currentChar: currentChar + 1,
-            xCoord,
-            yCoord: yCoord + fontSize,
-            prevRender: window.performance.now(),
-          });
+        const newColumn = {
+          ...column,
+          prevRender: window.performance.now(),
+        };
+
+        if (currentChar < chars.length) {
+          newColumn.currentChar = newColumn.currentChar + 1;
+          newColumns.push(newColumn);
+        } else if (charsRemaining > 0) {
+          newColumn.charsRemaining = newColumn.charsRemaining - 1;
+          newColumns.push(newColumn);
         }
       }
     }
 
-    columns = newLetters;
+    columns = newColumns;
     window.requestAnimationFrame(animate);
   }
 
   generateColumn();
-  animate();
-</script>
 
-<style lang="scss">
-  canvas {
-    position: absolute;
-  }
-</style>
+  const matrixFont = new FontFace("Matrix", "url(fonts/matrix.otf)");
+  matrixFont.load().then((font) => {
+    document.fonts.add(font);
+    animate();
+  });
+</script>
