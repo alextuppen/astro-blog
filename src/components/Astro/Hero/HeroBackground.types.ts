@@ -7,4 +7,5 @@ export interface Column {
   xCoord: number;
   yCoord: number;
   prevRender: number;
+  timeBetweenRenders: number;
 }

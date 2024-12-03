@@ -1,13 +1,6 @@
 ---
 import { Root } from "../layouts";
-import {
-  BlogRecipeItem,
-  Button,
-  Hero,
-  HorizontalSeperator,
-  Job,
-  Section,
-} from "../components";
+import { BlogRecipeItem, Button, Hero, Job, Section } from "../components";
 
 import { SITE_DESCRIPTION } from "../consts";
 import { getCollection } from "astro:content";
@@ -80,7 +73,6 @@ const latestExperience = experiences[latestExperienceIndex]?.data;
 
 <Root title={"Alex Tuppen"} description={SITE_DESCRIPTION}>
   <Hero />
-  <HorizontalSeperator variant="text" />
   <Section>
     <p>Welcome to my website, I'm a full stack developer</p>
   </Section>
