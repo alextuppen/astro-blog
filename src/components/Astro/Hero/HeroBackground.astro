@@ -1,6 +1,8 @@
 <canvas id="hero-background-canvas"></canvas>
 
 <script>
+  import debounce from "lodash.debounce";
+
   import type { Column } from "./HeroBackground.types";
 
   const rootStyle = getComputedStyle(document.body);
@@ -8,16 +10,11 @@
   const parsedPadding = parseFloat(paddingValue.replace("rem", ""));
   const rootFontSize = parseFloat(rootStyle.fontSize);
   const headerHeight = parsedPadding * rootFontSize * 3;
-  const canvasWidth = document.body.clientWidth;
-  const canvasHeight = document.body.clientHeight - headerHeight;
 
   const canvas = document.getElementById("hero-background-canvas");
   if (canvas == null || !(canvas instanceof HTMLCanvasElement)) {
     throw new Error("Canvas not found");
   }
-
-  canvas.width = canvasWidth;
-  canvas.height = canvasHeight;
 
   const context = canvas.getContext("2d", { alpha: false });
 
@@ -25,10 +22,26 @@
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
+  let canvasWidth: number;
+  let canvasHeight: number;
   let columns: Column[] = [];
-  const totalPossibleColumns = Math.floor(canvasWidth / rootFontSize);
+  let totalPossibleColumns: number;
 
-  function generateColumn() {
+  function setCanvasSize() {
+    canvasWidth = document.body.clientWidth;
+    canvasHeight = document.body.clientHeight - headerHeight;
+
+    totalPossibleColumns = Math.floor((canvasWidth / rootFontSize) * 1.5);
+    refreshAllColunns();
+
+    if (canvas == null || !(canvas instanceof HTMLCanvasElement)) {
+      throw new Error("Canvas not found");
+    }
+    canvas.width = canvasWidth;
+    canvas.height = canvasHeight;
+  }
+
+  function generateColumn(pageLoad: boolean) {
     const columnLength = generateRandomNumber(20, 50);
     const columnChars = [];
 
@@ -43,6 +56,18 @@
       gradient.push(alphaIncrement * i);
     }
 
+    let currentChar = 0;
+    let charsRemaining = columnLength;
+    if (pageLoad) {
+      const columnProgress = generateRandomNumber(0, columnLength);
+      if (Math.random() < 0.5) {
+        currentChar = columnProgress;
+      } else {
+        currentChar = columnLength;
+        charsRemaining = columnProgress;
+      }
+    }
+
     const fontSize = generateRandomNumber(
       0.75 * rootFontSize,
       1.25 * rootFontSize,
@@ -53,8 +78,8 @@
 
     columns.push({
       chars: columnChars,
-      currentChar: 0,
-      charsRemaining: columnLength,
+      currentChar,
+      charsRemaining,
       gradient,
       fontSize,
       xCoord,
@@ -110,6 +135,13 @@
     }
   }
 
+  function refreshAllColunns() {
+    columns = [];
+    for (let i = 0; i < totalPossibleColumns; i++) {
+      generateColumn(true);
+    }
+  }
+
   function animate() {
     if (canvas == null || !(canvas instanceof HTMLCanvasElement)) {
       throw new Error("Canvas not found");
@@ -124,10 +156,7 @@
     const newColumns: Column[] = [];
 
     if (columns.length < totalPossibleColumns) {
-      const numberOfNewColumns = generateRandomNumber(1, 3);
-      for (let i = 0; i < numberOfNewColumns; i++) {
-        generateColumn();
-      }
+      generateColumn(false);
     }
 
     for (const column of columns) {
@@ -164,10 +193,14 @@
     window.requestAnimationFrame(animate);
   }
 
-  generateColumn();
+  setCanvasSize();
+
+  window.addEventListener("resize", debounce(setCanvasSize, 150));
 
   const matrixFont = new FontFace("Matrix", "url(fonts/matrix.otf)");
   matrixFont.load().then((font) => {
+    refreshAllColunns();
+
     document.fonts.add(font);
     animate();
   });
