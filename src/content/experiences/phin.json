@@ -24,5 +24,32 @@
     "bicep",
     "yaml"
   ],
-  "description": []
+  "description": [
+    "Lead application engineer on a small team building web applications enabling the entire UK private healthcare ",
+    "industry to submit data for reporting. This role has afforded me the opportunity to significantly improve my ",
+    "DevOps skills with responsibility for all Azure DevOps pipelines. Both the maintenance of existing GUI pipelines ",
+    "and the design of new pipelines using YAML to allow for shared components between pipelines and the benefits of ",
+    "source control. Microsoft Bicep Infrastructure as Code was also used to create and configure Azure Resource Groups, ",
+    "App Service Plans, App Services, Storage Accounts and a Container Registry. Projects included the creation of a ",
+    "new REST API based on Fastify, chosen for its performance and encapsulation, offering secured endpoints that ",
+    "included fetching reports from PowerBI and Azure Storage Account Shared Access Signature token generation. As ",
+    "well as customised login pages for Azure Active Directory B2C and extensive frontend work with React and Material UI.",
+    "Day to day tasks involved solving the most challenging technical problems faced by the team in frontend and backend ",
+    "code as well as in infrastructure and ensuring everyone maintained a high standard of code with a special emphasis on ",
+    "security and confidentiality due to the pseudonymised healthcare data the company handles. Duties also included managing ",
+    "technical debt, working with the infrastructure team to manage new and existing infrastructure, and assisting with external ",
+    "penetration testing.Lead application engineer on a small team building web applications enabling the entire UK private ",
+    "healthcare industry to submit data for reporting. This role has afforded me the opportunity to significantly improve my ",
+    "DevOps skills with responsibility for all Azure DevOps pipelines. Both the maintenance of existing GUI pipelines and ",
+    "the design of new pipelines using YAML to allow for shared components between pipelines and the benefits of source control. ",
+    "Microsoft Bicep Infrastructure as Code was also used to create and configure Azure Resource Groups, App Service Plans, ",
+    "App Services, Storage Accounts and a Container Registry. Projects included the creation of a new REST API based on Fastify, ",
+    "chosen for its performance and encapsulation, offering secured endpoints that included fetching reports from PowerBI ",
+    "and Azure Storage Account Shared Access Signature token generation. As well as customised login pages for Azure Active ",
+    "Directory B2C and extensive frontend work with React and Material UI. Day to day tasks involved solving the most ",
+    "challenging technical problems faced by the team in frontend and backend code as well as in infrastructure and ensuring ",
+    "everyone maintained a high standard of code with a special emphasis on security and confidentiality due to the ",
+    "pseudonymised healthcare data the company handles. Duties also included managing technical debt, working with the ",
+    "infrastructure team to manage new and existing infrastructure, and assisting with external penetration testing."
+  ]
 }
