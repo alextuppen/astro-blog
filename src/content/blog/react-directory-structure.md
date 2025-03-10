@@ -6,9 +6,11 @@ heroImage: "/blog/fraught_stickman_overwhelmed_by_multiple_giant_piles_of_paper.
 heroImageText: "An image generated using DALL.E with the prompt: fraught stickman overwhelmed by multiple giant piles of paper"
 ---
 
+When working on a React project, organizing your files might seem like an afterthought. But as your code base grows, a messy directory structure at best wastes time and frustrates developers, and at worst creates bugs and unnecessary technical debt. Fortunately, if you understand the basic principles of writing React components, you already have the mental framework to organize them effectively. In this post we will explore how.
+
 ## Why does directory structure matter?
 
-For the computer’s ability to interpret code it doesn’t, but a well organised code base makes it much easier for a human to understand where the code they need is in a repository. In a small individual project this might not be that important. But in a large commercial project with multiple teams working in parallel and regular changes in developers, any small increase in productivity or reduction in on-boarding time provides cheap and fast value to the organisation.
+While directory structure doesn't affect how a computer interprets code, it significantly impacts a developer’s ability to navigate and maintain a project. In a small individual project this might not be that important. But in a large commercial project with multiple teams working in parallel and regular changes in developers, any small increase in productivity or reduction in on-boarding time provides cheap and fast value to the organisation and the developer.
 
 ## What is a component?
 
@@ -19,7 +21,7 @@ If the goal of component organisation is to improve developer productivity by ma
 
 [^1]: [React documentation: components and props](https://reactjs.org/docs/components-and-props.html)
 
-If this is how any developer working with components understands them then the most intuitive way to organise them is in such a way that the properties of isolated, independent and reusable are implemented in how the code is organised as well as written.
+If developers understand components as isolated, independent, and reusable; then the most intuitive directory structure is one that reflects those same principles. This allows the developer to view the entire code base with a single mental model of how both the files and the code within are organised.
 
 ## Simple component directory
 
@@ -59,11 +61,11 @@ The styles file could be styled components, CSS in JS, SASS, CSS etc, but it is 
 
 #### ComponentName.test.tsx
 
-The test file contains the unit tests for the component, some people prefer to group their test files together away from the code being tested, but that breaks the rule that a component is an object that is isolated and independent; everything about the component should be grouped together in one place.
+The test file contains the unit tests for the component, some people prefer to group their test files together away from the code being tested, but that breaks the principle that a component is isolated and independent; everything about the component should be grouped together in one place.
 
 ## Parents and children
 
-Sometimes you need to break the rule that a component must be independent. When creating a complex component, especially one with a repeating element, it is often good practice to create a tightly coupled child component. As our previously described directory structure pattern is intended to describe what everything in the directory does at a glance we need a way to show the tightly coupled relationship between a parent and a child component. Fortunately the existing pattern is recursive.
+While the principle of independence is a good guide the real world is not always so neat and tidy, sometimes a component is so unweildy that creating a tightly coupled child component is the cleanest solution. This pattern is often useful for components that can have multiple different states or repeating elements like tables or a settings page. As our previously described directory structure pattern is intended to describe what everything in the directory does at a glance we need a way to show the tightly coupled relationship between a parent and a child component. Fortunately the existing pattern is recursive.
 
 ```
 Components
@@ -95,12 +97,13 @@ Should a component become more complex or have additional dependencies this patt
 ComponentName.hooks.ts
 ```
 
-Alternatively if a hook is more complex it may make more sense to create a dedicated directory for it, so that any tests, types, etc are self contained and the hook can be moved about the code base as required.
+Alternatively if a hook is more complex then it often makes sense to apply the same principles of isolation, independence and reusability to it and provide some separation from the original component. This is particularly valuable for files that can grow large easily like unit tests. Fortunately the existing directory structure works equally well for hooks as it does for components with all the same benefits.
 
 ```
 ComponentName
 ├── index.ts
 ├── ComponentName.tsx
+├── ComponentName.test.tsx
 └── useCustomHook
     ├── index.ts
     ├── useCustomHook.ts
@@ -121,4 +124,4 @@ ComponentName
 
 ## Conclusion
 
-Between styles, types, tests, logic, hooks, and child components a React component can easily become a large amount of code, in any code base this complexity is multiplied by all of the components in the application which can easily become confusing. But if you organise your directories with the same mindset as you organise your logic, using the principles of isolated, independent and reusable, you can always know which file contains the code you need to work.
+Between styles, types, tests, logic, hooks, and child components, a React component can quickly grow into a large amount of code. In a complex codebase, this can easily become overwhelming. However, by applying the same principles of isolation, independence, and reusability to your directory structure, you ensure that every file is exactly where you expect it to be — making your project easier to maintain, scale, and collaborate on.
