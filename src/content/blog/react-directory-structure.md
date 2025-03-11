@@ -39,13 +39,13 @@ ComponentName
 
 The index file is how the component interacts with the outside world, often the only export from this file will be the component itself but it could also include things like a type describing the components props. Using an index file reduces the length of the import when the component is used from:
 
-```TypeScript
+```typescript
 import { ComponentName } from ../../ComponentName/ComponentName
 ```
 
 To:
 
-```TypeScript
+```typescript
 import { ComponentName } from ../../ComponentName
 ```
 

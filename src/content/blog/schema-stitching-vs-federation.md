@@ -12,7 +12,12 @@ HeadBox is a small event tech startup with multiple micro front and back end ser
 
 To avoid this problem some of the back end services evolved from being a micro service, to being a micro service and a back end for front end service. When a front end (A) required some data that was not held by the back end service it was tightly coupled with (B), that back end would make a GraphQL request to the back end service that did hold the data (C), the initial back end service (B) would then return that data to the front end (A) in its own graph.
 
-<!-- <diagram of the above here> -->
+```d2
+shape: sequence_diagram
+A -> B: Front end requests data from its backend service
+B <-> C: Backend service B requests data from backend service C
+B -> A: Data is returned to frontend
+```
 
 Over time technical debt built up as some services were accessed directly while others were accessed by proxy with different front ends all adopting their own unique behaviours. Because of the lack of cohesion across services a number of undesirable behaviours developed.
 

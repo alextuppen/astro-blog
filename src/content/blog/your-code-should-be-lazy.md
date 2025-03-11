@@ -1,9 +1,9 @@
 ---
 title: "Your code should be lazy"
-description: "Advocating for the benefits of the return early pattern through the analogy of code refusing to anything which isn't it's job."
+description: "Advocating for the benefits of the return early and separation of concerns patterns through the analogy of code being lazy and not wanting to do any more work than absolutely necessary."
 pubDate: "2025/03/11"
-heroImage: "/blog/large_clusters_of_bright_dots_and_connecting_lines_on_a_field_of_inky_black.webp"
-heroImageText: "An image generated using DALL.E with the prompt: large clusters of bright dots and connecting lines on a field of inky black"
+heroImage: "/blog/lazy-computer.webp"
+heroImageText: "An image generated using DeepAI with the prompt: a cartoon drawing of a very lazy computer that doesn't want to do any work"
 ---
 
 It is very easy when coding to inadvertently write spaghetti, you start with the best of intentions and a nice clean file. But then some bugs are fixed, a deadline gets crunched and that one lazy developer mangles your beautiful code; before long, you’ve got the digital equivalent of a carbonara. Many words have been written about the best ways to prevent this, code should be clean, or atomic or domain driven etc, but I think one of the simplest ways is to make your code as lazy as possible.
