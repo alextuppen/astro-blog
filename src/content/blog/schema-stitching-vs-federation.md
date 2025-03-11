@@ -14,9 +14,14 @@ To avoid this problem some of the back end services evolved from being a micro s
 
 ```d2
 shape: sequence_diagram
-A -> B: Front end requests data from its backend service
-B <-> C: Backend service B requests data from backend service C
-B -> A: Data is returned to frontend
+a: Frontend service A
+b: Backend service B
+c: Backend service C
+
+a -> b: Front end requests data from its backend service
+b -> c: Backend service B requests data from backend service C
+c -> b
+b -> A
 ```
 
 Over time technical debt built up as some services were accessed directly while others were accessed by proxy with different front ends all adopting their own unique behaviours. Because of the lack of cohesion across services a number of undesirable behaviours developed.
