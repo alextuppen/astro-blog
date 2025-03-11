@@ -16,6 +16,8 @@ export default defineConfig({
       layout: "elk",
       inline: true,
       pad: 25,
+      // Disable generating diagrams when deploying on Cloudflare pages.
+      skipGeneration: !!process.env["CF_PAGES"],
     }),
   ],
 });
