@@ -68,45 +68,45 @@ The next problem to solve is how to consolidate the inconsistent naming of types
 
 Filtering out anything marked as GATEWAY_EXCLUDED can be done with the below function, anything the function returns true for will be included in the schema:
 
-```TypeScript
-import { FilterObjectFields, FilterRootFields } from '@graphql-tools/wrap'
-import { GraphQLFieldConfig } from 'graphql'
+```typescript
+import { FilterObjectFields, FilterRootFields } from "@graphql-tools/wrap";
+import { GraphQLFieldConfig } from "graphql";
 
 const filterGatewayExcluded = (
   _: any,
   __: any,
-  fieldConfig: GraphQLFieldConfig<any, any, any>
+  fieldConfig: GraphQLFieldConfig<any, any, any>,
 ) =>
   fieldConfig.deprecationReason == null
-	? true
-	: !fieldConfig.deprecationReason.includes('GATEWAY_EXCLUDED')
+    ? true
+    : !fieldConfig.deprecationReason.includes("GATEWAY_EXCLUDED");
 
 export const filterGatewayExcludedTransforms = [
   new FilterObjectFields(filterGatewayExcluded),
   new FilterRootFields(filterGatewayExcluded),
-]
+];
 ```
 
 First we make sure that all fields without the @deprecated directive are included in the schema:
 
-```TypeScript
+```typescript
 fieldConfig.deprecationReason == null
 	? true
 ```
 
 We then remove only the deprecated fields where the reason includes GATEWAY_EXCLUDED:
 
-```TypeScript
+```typescript
 : !fieldConfig.deprecationReason.includes('GATEWAY_EXCLUDED')
 ```
 
 Finally we export the two filter functions to cover all field types in the schema in an array, this array can then be spread into the transforms property on each subschema https://the-guild.dev/graphql/stitching/docs/transforms/filtering#filtering-root-fields:
 
-```TypeScript
+```typescript
 export const filterGatewayExcludedTransforms = [
   new FilterObjectFields(filterGatewayExcluded),
   new FilterRootFields(filterGatewayExcluded),
-]
+];
 ```
 
 This allows a gradual migration path, when a front end micro-site requires a large piece of product work the gateway can be updated to stitch any required back ends into the gateway schema. As new back end services are integrated into the gateway naming inconsistencies are ideally resolved by the complete retirement of any incorrect names across all services. Where this is not possible, types can be duplicated in the micro-service’s schema with a shared resolver for both fields to prevent code duplication, the old name can then be marked with GATEWAY_EXCLUDED to prevent its use by any service pointed to the gateway.
