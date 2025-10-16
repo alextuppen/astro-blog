@@ -88,7 +88,7 @@
     },
     {
       "@type": "HowToStep",
-      "name": "Grate carrot, chop peas and coriander and heat rice",
+      "name": "Grate carrot, chop peas and coriander",
       "itemListElement": [
         {
           "@type": "HowToDirection",
